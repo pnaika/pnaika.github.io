@@ -37,3 +37,7 @@ div > img {
 h4>a{
   color: #000011;
 }
+
+footer{
+  min-height: calc(50vh - 120px);
+}
