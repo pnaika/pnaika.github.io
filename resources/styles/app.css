@@ -41,3 +41,48 @@ h4>a{
 footer{
   min-height: calc(50vh - 120px);
 }
+
+@media (max-width: 1000px){
+
+  #wrapper{
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header {
+    font-size: smaller;
+  }
+
+  header > h4 {
+    text-transform: uppercase;
+    font-size: medium;
+    padding-top: 10%;
+    font-style: italic;
+  }
+
+  .custom-text > h3 {
+    font-size: medium;
+    color: #005fb3;
+    padding-left: 3%;
+    text-transform: uppercase;
+    padding-top: 0;
+  }
+
+  .custom-text > h4 {
+    font-size: smaller;
+    color: #005fb3;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  div > img {
+    width: 106%;
+    float: left;
+    padding-bottom: 0;
+  }
+
+  h5 {
+    font-size: smaller;
+  }
+}
