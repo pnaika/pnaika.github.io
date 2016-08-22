@@ -77,12 +77,14 @@ footer{
   }
 
   div > img {
-    width: 106%;
-    float: left;
-    padding-bottom: 0;
+    width: 23%;
   }
 
   h5 {
     font-size: smaller;
+  }
+
+  footer{
+    min-height: calc(20vh - 50px);
   }
 }
