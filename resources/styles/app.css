@@ -39,7 +39,7 @@ h4>a{
 }
 
 footer{
-  min-height: calc(50vh - 120px);
+  min-height: calc(20vh - 50px);
 }
 
 @media (max-width: 1000px){
