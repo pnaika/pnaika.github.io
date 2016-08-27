@@ -1,5 +1,5 @@
 /* app css stylesheet */
-body{
+body {
   width: auto;
   height: auto;
   opacity: 1;
@@ -7,7 +7,7 @@ body{
   background-size: cover;
 }
 
-body:after{
+body:after {
   opacity: 0.4;
 }
 
@@ -34,12 +34,16 @@ div > img {
   padding-top: 7%;
 }
 
-h4>a{
+h4 > a {
   color: #000011;
 }
 
-footer{
+footer {
   min-height: calc(20vh - 50px);
+}
+
+.hobbies {
+  padding-bottom: 3%;
 }
 
 @media (max-width: 1000px){
@@ -50,11 +54,11 @@ footer{
     margin-right: auto;
   }
 
-  header {
+  .career-objective {
     font-size: smaller;
   }
 
-  header > h4 {
+  .career-objective > h4 {
     text-transform: uppercase;
     font-size: medium;
     padding-top: 10%;
@@ -80,11 +84,16 @@ footer{
     width: 23%;
   }
 
-  h5 {
-    font-size: smaller;
-  }
-
   footer{
     min-height: calc(20vh - 50px);
   }
+
+  .hobbies {
+    padding-bottom: 1%;
+  }
+
+  .hobbies > h5 {
+    font-size: smaller;
+  }
+
 }
