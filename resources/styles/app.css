@@ -3,12 +3,14 @@ body {
   width: auto;
   height: auto;
   opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   background-color: floralwhite;
   background-size: cover;
 }
 
 body:after {
   opacity: 0.4;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
 }
 
 .wrapper {
