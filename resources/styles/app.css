@@ -83,6 +83,7 @@ footer {
 
   div > img {
     width: 23%;
+    background-size: auto auto;
   }
 
   footer{
