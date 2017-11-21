@@ -67,6 +67,15 @@ footer {
   padding-bottom: 10px;
 }
 
+.icons-footer {
+  margin-left: 95%;
+}
+
+.copyright-footer {
+  top: 16px;
+  margin-left: 2%;
+}
+
 @media (max-width: 1000px){
 
   #wrapper{
@@ -123,4 +132,7 @@ footer {
     font-size: smaller;
   }
 
+  .icons-footer {
+    margin-left: 85%;
+  }
 }
