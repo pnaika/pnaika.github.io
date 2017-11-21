@@ -13,6 +13,13 @@ body:after {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
 }
 
+.pro-pic {
+  width: auto;
+  height: auto;
+  margin-top: 18%;
+  padding-right: 16%;
+}
+
 .wrapper {
   width: 90%;
   min-height: 100%;
