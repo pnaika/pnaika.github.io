@@ -95,7 +95,6 @@ footer {
 }
 
 @media (max-width: 1000px){
-
   #wrapper{
     width: 960px;
     margin-left: auto;
@@ -108,18 +107,18 @@ footer {
   }
 
   .career-objective {
-    font-size: smaller;
+    font-size: medium;
+    font-weight: 400;
   }
 
   .career-objective > h4 {
     text-transform: uppercase;
     font-size: medium;
-    padding-top: 10%;
-    font-style: italic;
+    padding-top: 5px;
   }
 
-  .custom-text > h3 {
-    font-size: medium;
+  .custom-text > h2 {
+    font-size: large;
     color: black;
     padding-left: 3%;
     text-transform: uppercase;
@@ -127,7 +126,14 @@ footer {
   }
 
   .custom-text > h4 {
-    font-size: smaller;
+    font-size: medium;
+    color: black;
+    padding-left: 3%;
+    padding-top: 0;
+  }
+
+  .custom-text > h5 {
+    font-size: small;
     color: black;
     padding-left: 5%;
     padding-right: 5%;
@@ -143,11 +149,11 @@ footer {
   }
 
   .hobbies {
-    padding-bottom: 1%;
+    padding-bottom: 1px;
   }
 
   .hobbies > h5 {
-    font-size: smaller;
+    font-size: medium;
   }
 
   .icons-footer {
