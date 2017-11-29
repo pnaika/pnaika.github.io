@@ -53,6 +53,9 @@ h2 {
   font-weight: 600;
   text-transform: uppercase; }
 
+.resume-pdf {
+  color: white; }
+
 @media (min-width: 992px) {
   #sideNav {
     text-align: center;
