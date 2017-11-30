@@ -95,6 +95,9 @@ section.resume-section {
 .subheading-pics {
   font-size: 18px; }
 
+.my-auto p {
+  text-align: justify; }
+
 @media (min-width: 768px) {
   section.resume-section {
     min-height: 100vh; }
