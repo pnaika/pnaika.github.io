@@ -75,12 +75,12 @@ $(function () {
                 $.each(stories, (index) => {
                     if (stories[index].categories && stories[index].categories.length > 0) {
                         outhtml = outhtml +
-                            '<div class="card" style="margin: 5px;padding: 15px;"' +
+                            '<div class="card" style="margin: 5px 0 20px 0;padding: 15px;"' +
                             '    <div class="card-body">\n' +
                             '        <h4 class="card-title">' + stories[index].title + '</h4>\n' +
                             '        <div style="height: 80px; width: auto;overflow: hidden"> ' + stories[index].content  + '</div>' +
                             '        <p> <span style="font-size: 12px;font-weight: 900;">CATEGORIES: </span>' + stories[index].categories.join(', ') + '</p>'+
-                            '        <a href="'+ stories[index].link +'" class="card-link" target="_blank">Read More..</a>\n' +
+                            '        <a href="'+ stories[index].link +'" class="card-link" target="_blank">Read More...</a>\n' +
                             '    </div>' +
                             '</div>';
                     }
