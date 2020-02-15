@@ -48,7 +48,7 @@ $(function () {
                         if (!repositories[index].fork) {
                             outhtml = outhtml +
                                 '<tr>\n' +
-                                '        <td><a href="' + repositories[index].url +'" target="_blank">' + repositories[index].name + '</a></td>\n' +
+                                '        <td><a href="' + repositories[index].svn_url +'" target="_blank">' + repositories[index].name + '</a></td>\n' +
                                 '        <td>' +  repositories[index].description  + '</td>\n' +
                                 '        <td>' + repositories[index].language  + '</td>\n' +
                                 '    </tr>';
