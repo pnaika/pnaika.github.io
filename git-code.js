@@ -21,7 +21,7 @@ $(function () {
 
             let outhtml = '<h3>' + fullname + ' <span class="smallname">(@<a href="' + profileurl + '" target="_blank">' + username + '</a>)</span></h3>';
             outhtml = outhtml + '<p>Followers: ' + followersnum + '; Following: ' + followingnum + '; Total Repositories: ' + reposnum + '; Gists ' + reposGists + '</p></div>';
-            outhtml = outhtml + '<div class="repolist clearfix">';
+            outhtml = outhtml + '<div class="repolist clearfix" style="width: 100%;overflow: auto;">';
 
             let repositories;
             $.getJSON(repouri, function (json) {
