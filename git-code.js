@@ -31,7 +31,7 @@ $(function () {
                 if (repositories.length == 0) {
                     outhtml = outhtml + '<p>No repos!</p></div>';
                 } else {
-                    repositories = repositories.sort((a, b) => b.size - a.size);
+                    repositories = repositories.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 
                     outhtml = outhtml + '<table class="table">\n' +
                         '    <thead>\n' +
