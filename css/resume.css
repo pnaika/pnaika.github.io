@@ -22,7 +22,7 @@ h6 {
   font-family: 'Saira Extra Condensed', serif;
   font-weight: 700;
   text-transform: uppercase;
-  color: #343a40; }
+  color: #1F2834 !important; }
 
 h1 {
   font-size: 6rem;
@@ -38,16 +38,16 @@ h2 {
   font-size: 1.35rem; }
 
 .list-social-icons a {
-  color: #495057; }
+  color: #E27B35; }
   .list-social-icons a:hover {
-    color: #6f42c1; }
+    color: #313E53; }
   .list-social-icons a .fa-lg {
     font-size: 1.75rem; }
 
 .list-icons {
   font-size: 3rem; }
   .list-icons .list-inline-item i:hover {
-    color: #6f42c1; }
+    color: #2E3A4C; }
 
 #sideNav .navbar-nav .nav-item .nav-link {
   font-weight: 600;
@@ -102,7 +102,7 @@ section.resume-section {
   section.resume-section {
     min-height: 100vh; }
     section.resume-section .resume-item .resume-date {
-      min-width: 18rem; } }
+      min-width: 18rem; } }F
 
 @media (min-width: 992px) {
   section.resume-section {
@@ -110,12 +110,13 @@ section.resume-section {
     padding-bottom: 3rem !important; } }
 
 .bg-primary {
-  background-color: #6f42c1 !important; }
+  background-color: #1F2834 !important; }
 
 .text-primary {
-  color: #6f42c1 !important; }
+  color: #E27B35 !important; }
 
 a {
-  color: #6f42c1; }
+  color: #E27B35; }
   a:hover, a:focus, a:active {
-    color: #4e2d89; }
+    color: #313E53;
+  }
