@@ -66,15 +66,11 @@ var portfolioData = {
       logoAlt: 'DriveTime',
       period: 'Sep 2018 – Mar 2020',
       bullets: [
-        'Web and Mobile application development using Ionic 3+, Angular 5, TypeScript and SCSS',
-        'Feature flag based development to continuously deploy code, empowering business teams with control over features for better customer experience',
-        'Cordova plugins for advanced features in mobile development',
-        'Deployed code using VSTS',
-        'Project implementations using Agile SCRUM methodology',
-        'Used Target Process for creating stories and implementation descriptions',
-        'Unit testing using Jasmine and Protractor',
-        'Active interaction with business team and product for coming up with better solutions to improve user experience',
-        'Gathered key customer feedback in sprint demos and actively participated with team in solving problems'
+        'Developed and maintained customer-facing web and mobile applications using Ionic 3+, Angular 5, TypeScript, and SCSS',
+        'Implemented feature flag–based continuous delivery using LaunchDarkly, enabling business teams to independently control feature rollouts and reduce deployment risk',
+        'Extended mobile application capabilities with Cordova plugins, enhancing native device functionality within the hybrid platform',
+        'Maintained code quality through unit testing with Jasmine and Protractor and active participation in code reviews',
+        'Partnered with product and business stakeholders to gather sprint feedback and translate customer insights into UX improvements'
       ]
     },
     {
@@ -94,38 +90,21 @@ var portfolioData = {
             {
               title: 'Senior Web Application Developer',
               bullets: [
-                'Web application development for geo-tab data using <i>VueJS</i> and <i>HapiJS</i>',
-                'Key front-end developer who delivered a highly reliable predictive analytic software',
-                'Front-end leadership and management contribution on a cross-disciplinary team',
-                '<i>CSS/SASS/LESS</i> expertise to bring design to life',
-                'Active involvement in development of Uptake\'s predictive analytics platform in <i>AngularJS</i> with the main motto of <strong>Transform data into business value</strong>',
-                'Developed a Single Page Application in React-Redux and tested in JEST',
-                'Strong interaction with UX to create a cleaner and more meaningful data analytic platform',
-                'Project implementations using <i>Agile SCRUM</i> methodology',
-                'Active participation in bi-weekly sprint demos with all stakeholders',
-                'Design and development of UI using VueJS, ReactJS, HTML5, CSS, pre-processors, AngularJS, lodash, Gulp, Webpack, HighCharts, etc.',
-                'Backend support with Spring MVC',
-                'Used JIRA for logging defects and issue tickets',
-                'Used <i>geo-tab</i> APIs for creating a dashboard to analyze trip, hours of service, DVIR and IFTA data',
-                'Experience working with <i>Leaflet</i> for map view and route details on geo-tab APIs',
-                'Worked closely with data scientists to prove schema and data concepts through visualization',
-                'Implemented many POCs and participated in many hackathons'
+                'Key front-end developer on Uptake\'s predictive analytics platform, transforming industrial IoT data into actionable business intelligence for fleet and asset management customers',
+                'Built geo-tab data dashboards using VueJS and HapiJS to visualize trip records, hours of service, DVIR, and IFTA reporting; integrated Leaflet for interactive map and route views',
+                'Developed a Single Page Application in React-Redux, covering the full front-end lifecycle from architecture design to Jest unit testing',
+                'Led UX collaboration and front-end decision-making on a cross-disciplinary team, driving a cleaner and more meaningful data visualization experience',
+                'Applied CSS/Sass expertise to translate design specs into pixel-perfect, responsive interfaces across the platform',
+                'Collaborated closely with data scientists to validate schemas and prove data concepts through interactive visualization prototypes'
               ]
             },
             {
               title: 'Mobile Application Developer',
               bullets: [
-                'Developed a mobile application for IoT domain using Ionic and Angular',
-                'Implemented project using Agile SCRUM — daily stand-ups, sprint showcases and retrospectives',
-                'Design and development of UI using HTML5, CSS, AngularJS and Ionic',
-                'Design and development of UI using HTML5, CSS, Webpack and ReactJS',
-                'Backend support with Spring MVC',
-                'Implemented Crashlytics for Crash Reporting',
-                'Implemented Piwik for analytics',
-                'Conducted code reviews to maintain best practices in the development process',
-                'Used JIRA for tracking errors and debugging the code',
-                'Implemented LESS styles and used Gulp for task completion',
-                'Used Elastic Search for NoSQL operations'
+                'Developed a cross-platform IoT mobile application using Ionic and Angular, compatible with both Android and iOS',
+                'Integrated Crashlytics for real-time crash reporting and Piwik for user interaction analytics, improving product observability',
+                'Conducted code reviews and established front-end best practices to maintain consistent quality across the team',
+                'Leveraged Elastic Search for NoSQL data operations and Jenkins for CI/CD build and deployment pipelines'
               ]
             }
           ]
@@ -139,13 +118,10 @@ var portfolioData = {
             {
               title: 'Web Application Developer',
               bullets: [
-                'Developed a physician portal using AngularJS, HTML5, CSS3, and JavaScript',
-                'Used SVN for version control',
-                'Unit tests in Jasmine',
-                'Active involvement in technical decisions',
-                'Quick implementation of project setup maintaining quality with test frameworks and test rules',
-                'Involvement in UI/UX discussions',
-                'Supporting automation testing team'
+                'Developed a physician portal using AngularJS, HTML5, CSS3, and JavaScript to streamline healthcare provider workflows',
+                'Established the project test framework from the ground up using Jasmine, ensuring quality standards were built in from day one',
+                'Participated in UI/UX discussions and technical decision-making, contributing to design and architecture choices',
+                'Collaborated with the automation testing team to align manual and automated test coverage'
               ]
             }
           ]
@@ -161,17 +137,11 @@ var portfolioData = {
       logoStyle: 'long',
       period: 'Jun 2012 – Jul 2014',
       bullets: [
-        'Developed front end for the entire website using AngularJS, HTML5, CSS3, and JavaScript',
-        'Converted raw images and layouts from a graphic designer into CSS/HTML themes',
-        'Followed Web Accessibility Guidelines while coding the website',
-        'Implemented client-side validations in registration, login and logout forms using JavaScript',
-        'Extensively used jQuery, JSON, AJAX and DOM scripting to create interactive web applications',
-        'Worked with the design of templates and skins in CSS',
-        'Used Firebug and IE developer toolbar for debugging and browser compatibility',
-        'Adopted a cross-browser and cross-platform approach to make the website more versatile and supportive',
-        'Active team player — helped in fixing bugs and carried out troubleshooting',
-        'Adhered to corporate standards with respect to problem, change and configuration management',
-        'Worked on Responsive Design for tablets and mobiles for the Expressionery site'
+        'Developed the front end for SunTrust Bank\'s online banking platform using AngularJS, HTML5, CSS3, and JavaScript, supporting millions of customers with account management, fund transfers, and check ordering',
+        'Translated graphic designer mockups into responsive, accessible CSS/HTML themes following Web Accessibility Guidelines',
+        'Implemented client-side validations and interactive features using JavaScript, jQuery, AJAX, and DOM scripting',
+        'Ensured cross-browser and cross-platform compatibility through systematic debugging and testing across major browsers',
+        'Delivered responsive layouts optimized for tablet and mobile as part of the Expressionery site redesign'
       ]
     },
     {
@@ -183,11 +153,10 @@ var portfolioData = {
       logoStyle: 'long',
       period: 'Jun 2011 – Jun 2012',
       bullets: [
-        'Performed Requirement Analysis',
-        'Developed online screens in Mainframes using IMSDC, CICS, JCL and DB2',
-        'Performed Abend analysis during production issues and monitored jobs',
-        'Involved in SDLC cycle and participated in all steps of the Global Delivery Model',
-        'Managed SSCR (Small Change Request) single-handed and implemented the module successfully into production'
+        'Developed online screens for WellPoint\'s provider portal on mainframe systems using IMSDC, CICS, JCL, and DB2',
+        'Performed requirement analysis, abend analysis, and production job monitoring to ensure system stability',
+        'Independently managed and delivered Small Change Requests (SCRs) end-to-end into production',
+        'Participated in all phases of the SDLC following the Infosys Global Delivery Model'
       ]
     }
   ],
