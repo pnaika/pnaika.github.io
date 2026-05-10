@@ -7,6 +7,12 @@ var portfolioData = {
     phone: '+1-312-647-8554',
     careerStartYear: 2011,
     resumeUrl: 'resume.html',
+    taglines: [
+      'Software Development Manager',
+      'Engineering Leader',
+      'Front-End Architect',
+      'Builder of High-Performance Teams'
+    ],
     resumeSummary: 'Software Development Manager at Amazon.com Services with 15+ years of experience spanning software engineering and technical leadership. Specialized in web and mobile application development using React, Angular, TypeScript, and AWS. Proven track record of delivering high-impact, customer-facing products at scale while growing and mentoring engineering teams.',
     profileImage: 'https://s3-us-west-2.amazonaws.com/prashanth-resume/resources/images/PrashanthPNaika.jpg',
     bio: [
