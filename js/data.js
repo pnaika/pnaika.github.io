@@ -35,7 +35,13 @@ var portfolioData = {
       logo: 'img/aws.png',
       logoAlt: 'Amazon',
       period: 'Aug 2025 – Present',
-      bullets: []
+      bullets: [
+        'Lead a team of 10–12 engineers owning Amazon\'s Tier 0 internal ticketing, paging, and on-call platform — mission-critical infrastructure relied on by every engineering team across the company',
+        'Drive technical roadmap, headcount planning, and delivery for a zero-downtime system that underpins Amazon\'s global operational response',
+        'Partner with senior leadership and cross-org stakeholders to align on reliability, scalability, and feature investments for the platform',
+        'Champion engineering culture and operational excellence — bar raising, on-call health, and incident response standards — to maintain the highest service bar',
+        'Mentor and develop engineers across multiple levels, fostering career growth and building a high-performing, ownership-driven team'
+      ]
     },
     {
       title: 'Senior Front End Engineer',
@@ -44,7 +50,13 @@ var portfolioData = {
       logo: 'img/aws.png',
       logoAlt: 'Amazon',
       period: 'Mar 2020 – Aug 2025',
-      bullets: []
+      bullets: [
+        'Served as front-end tech lead for the Tier 0 ticketing, paging, and on-call platform, guiding architecture decisions and setting code quality standards across the team',
+        'Designed and built customer-facing UI workflows used by Amazon engineers globally for incident management, paging, and operational response',
+        'Mentored junior and mid-level engineers through code reviews, pair programming, and front-end best practice guidance',
+        'Drove modernization of the front-end stack with React and TypeScript, improving developer velocity and long-term maintainability',
+        'Collaborated cross-functionally with PMs, designers, and back-end engineers to ship high-quality, high-reliability releases'
+      ]
     },
     {
       title: 'Application Developer III',
