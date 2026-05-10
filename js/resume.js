@@ -31,6 +31,7 @@
   }
 
   function companyLogo(job) {
+    if (!job.logo) return '';
     var cls = job.logoStyle === 'long' ? 'company-avtar-long' : 'company-avtar';
     return tag('img', { class: cls, src: job.logo, alt: job.logoAlt });
   }
@@ -71,9 +72,9 @@
       ) +
       bio +
       tag('h6', {},
-        tag('i', { class: 'fas fa-cloud-arrow-down' }) + ' ' +
-        tag('a', { class: 'resume-pdf', href: data.resumePdf, target: '_blank', rel: 'noopener noreferrer' },
-          'Download Resume in PDF format'
+        tag('i', { class: 'fas fa-file-lines' }) + ' ' +
+        tag('a', { class: 'resume-pdf', href: data.resumeUrl, target: '_blank', rel: 'noopener noreferrer' },
+          'View / Download Resume'
         )
       ) +
       '<br>' +

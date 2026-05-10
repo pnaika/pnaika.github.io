@@ -1,0 +1,174 @@
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Screen wrapper ──────────────────────────────────────────────────────── */
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10.5pt;
+  color: #1a1a1a;
+  background: #e4e4e4;
+  padding: 1.5rem 1rem;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+.toolbar {
+  max-width: 840px;
+  margin: 0 auto 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar a {
+  color: #1F2834;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.toolbar a:hover { text-decoration: underline; }
+
+.toolbar button {
+  background: #E27B35;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.4rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.toolbar button:hover { background: #c96a28; }
+
+/* ── Resume sheet ────────────────────────────────────────────────────────── */
+#resume {
+  background: #fff;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 2.4rem 2.8rem;
+  box-shadow: 0 4px 28px rgba(0,0,0,.16);
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+header {
+  text-align: center;
+  border-bottom: 2px solid #1F2834;
+  padding-bottom: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-size: 20pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1F2834;
+}
+
+.contact {
+  margin-top: 0.35rem;
+  font-size: 8.5pt;
+  color: #444;
+}
+
+.contact a { color: #444; text-decoration: none; }
+.contact a:hover { color: #E27B35; }
+
+/* ── Sections ────────────────────────────────────────────────────────────── */
+section { margin-bottom: 0.9rem; }
+
+h2 {
+  font-size: 9.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #1F2834;
+  border-bottom: 1.5px solid #1F2834;
+  padding-bottom: 0.15rem;
+  margin-bottom: 0.55rem;
+}
+
+p { font-size: 9.5pt; line-height: 1.55; color: #333; }
+
+/* ── Jobs ────────────────────────────────────────────────────────────────── */
+.job { margin-bottom: 0.7rem; }
+
+.job-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.job-title { font-weight: 700; font-size: 10pt; }
+
+.job-company {
+  color: #E27B35;
+  font-weight: 600;
+  font-size: 9.5pt;
+  flex: 1;
+}
+
+.job-company::before { content: '\00B7\0020'; }
+
+.job-period {
+  font-size: 8.5pt;
+  color: #666;
+  white-space: nowrap;
+}
+
+ul { padding-left: 1.15rem; margin-top: 0.25rem; }
+
+li {
+  font-size: 9pt;
+  line-height: 1.45;
+  margin-bottom: 0.1rem;
+  color: #333;
+}
+
+/* ── Clients / roles ─────────────────────────────────────────────────────── */
+.client { margin: 0.3rem 0 0.3rem 0.6rem; }
+
+.client-name {
+  font-weight: 600;
+  font-size: 9pt;
+  color: #333;
+  margin-bottom: 0.15rem;
+}
+
+.role { margin-top: 0.2rem; }
+
+.role-title {
+  font-style: italic;
+  font-size: 8.5pt;
+  color: #555;
+}
+
+/* ── Education ───────────────────────────────────────────────────────────── */
+.edu-item { margin-bottom: 0.55rem; }
+
+.edu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.edu-school { font-weight: 700; font-size: 9.5pt; }
+.edu-period { font-size: 8.5pt; color: #666; }
+.edu-degree { font-size: 9pt; color: #444; margin-top: 0.1rem; }
+.edu-gpa    { font-size: 8.5pt; color: #666; }
+
+/* ── Skills ──────────────────────────────────────────────────────────────── */
+.workflow { margin-top: 0.3rem; }
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  body        { background: #fff; padding: 0; }
+  #resume     { box-shadow: none; padding: 0; max-width: 100%; }
+  .no-print   { display: none !important; }
+  .job, .edu-item { page-break-inside: avoid; }
+  @page { margin: 0.5in; size: letter portrait; }
+}

@@ -4,12 +4,14 @@ var portfolioData = {
     name: { first: 'Prashanth', last: 'Naika' },
     location: 'Seattle, Washington',
     email: 'prashanthpnaika@gmail.com',
+    phone: '+1-312-647-8554',
     careerStartYear: 2011,
-    resumePdf: 'https://prashanth-resume.s3-us-west-2.amazonaws.com/resources/documents/PrashanthNaika11132019.pdf',
+    resumeUrl: 'resume.html',
+    resumeSummary: 'Software Development Manager at Amazon.com Services with 15+ years of experience spanning software engineering and technical leadership. Specialized in web and mobile application development using React, Angular, TypeScript, and AWS. Proven track record of delivering high-impact, customer-facing products at scale while growing and mentoring engineering teams.',
     profileImage: 'https://s3-us-west-2.amazonaws.com/prashanth-resume/resources/images/PrashanthPNaika.jpg',
     bio: [
       'I am a results-driven IT professional with over <strong class="years-exp"></strong> years of experience in software engineering, specializing in web and mobile application development. My career has been shaped by a passion for emerging technologies, and I am always eager to explore innovative solutions that drive business success.',
-      'With expertise in technologies such as ReactJS, VueJS, Angular, TypeScript, JavaScript, Java, SQL, NoSQL, Ionic, C#, .NET MVC, and more, I have successfully delivered high-impact solutions for major clients like SunTrust Bank, WellPoint, CVS Health, and Uptake, working with teams at <a href="https://www.infosys.com/" target="_blank" rel="noopener noreferrer">Infosys</a> and <a href="https://egen.solutions/" target="_blank" rel="noopener noreferrer">Egen Solutions</a>. My professional journey also includes valuable contributions at DriveTime, and I am currently applying my skills at <a href="https://www.aws.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon.com Services</a>.',
+      'Currently serving as a Software Development Manager at <a href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon.com Services</a>, leading cross-functional engineering teams to deliver scalable, customer-facing products. Prior to this, I delivered high-impact solutions for major clients including SunTrust Bank, WellPoint, CVS Health, and Uptake, working with teams at <a href="https://www.infosys.com/" target="_blank" rel="noopener noreferrer">Infosys</a>, <a href="https://egen.solutions/" target="_blank" rel="noopener noreferrer">Egen Solutions</a>, and DriveTime.',
       'As a leader, I am passionate about mentoring and supporting the growth of new engineers, empowering them to advance in their careers and contribute to team success. My goal is to continue taking on leadership roles, foster innovation, and drive the development of cutting-edge technologies while advancing both professionally and personally.',
       'I hold a Master\'s degree in Information Technology and Management from the <a href="https://web.iit.edu/" target="_blank" rel="noopener noreferrer"><i>Illinois Institute of Technology</i></a>, with a GPA of 3.9 out of 4.0, which further reinforces my commitment to excellence in both technical and managerial domains.'
     ],
@@ -204,36 +206,34 @@ var portfolioData = {
   skills: {
     icons: [
       [
-        { label: 'Angular',     icon: 'devicon-angularjs-plain colored',        url: 'https://angular.io/'                                                },
-        { label: 'Ionic',       icon: 'devicon-ionic-original colored',         url: 'https://ionicframework.com/'                                        },
-        { label: 'ReactJS',     icon: 'devicon-react-original colored',         url: 'https://reactjs.org/'                                               },
-        { label: 'HTML5',       icon: 'devicon-html5-plain colored',            url: 'https://developer.mozilla.org/en-US/docs/Web/HTML'                  },
-        { label: 'CSS3',        icon: 'devicon-css3-plain colored',             url: 'https://developer.mozilla.org/en-US/docs/Web/CSS'                   },
-        { label: 'JavaScript',  icon: 'devicon-javascript-plain colored',       url: 'https://www.javascript.com/'                                        },
-        { label: 'jQuery',      icon: 'devicon-jquery-plain colored',           url: 'https://jquery.com/'                                                },
-        { label: 'Sass',        icon: 'devicon-sass-original colored',          url: 'https://sass-lang.com/'                                             },
-        { label: 'Less',        icon: 'devicon-less-plain-wordmark colored',    url: 'http://lesscss.org/'                                                },
-        { label: 'Android',     icon: 'devicon-android-plain colored',          url: 'https://www.android.com/'                                           }
+        { label: 'Angular',     icon: 'devicon-angularjs-plain colored',              url: 'https://angular.io/'                                          },
+        { label: 'Ionic',       icon: 'devicon-ionic-original colored',               url: 'https://ionicframework.com/'                                  },
+        { label: 'ReactJS',     icon: 'devicon-react-original colored',               url: 'https://reactjs.org/'                                         },
+        { label: 'TypeScript',  icon: 'devicon-typescript-plain colored',             url: 'https://www.typescriptlang.org/'                              },
+        { label: 'JavaScript',  icon: 'devicon-javascript-plain colored',             url: 'https://www.javascript.com/'                                  },
+        { label: 'HTML5',       icon: 'devicon-html5-plain colored',                  url: 'https://developer.mozilla.org/en-US/docs/Web/HTML'            },
+        { label: 'CSS3',        icon: 'devicon-css3-plain colored',                   url: 'https://developer.mozilla.org/en-US/docs/Web/CSS'             },
+        { label: 'Sass',        icon: 'devicon-sass-original colored',                url: 'https://sass-lang.com/'                                       },
+        { label: 'Node.js',     icon: 'devicon-nodejs-plain colored',                 url: 'https://nodejs.org/en/'                                       },
+        { label: 'Android',     icon: 'devicon-android-plain colored',                url: 'https://www.android.com/'                                     }
       ],
       [
-        { label: 'Bootstrap',   icon: 'devicon-bootstrap-plain colored',        url: 'https://getbootstrap.com/'                                          },
-        { label: 'Grunt',       icon: 'devicon-grunt-plain colored',            url: 'https://gruntjs.com/'                                               },
-        { label: 'Gulp',        icon: 'devicon-gulp-plain colored',             url: 'https://gulpjs.com/'                                                },
-        { label: 'npm',         icon: 'devicon-npm-original-wordmark colored',  url: 'https://www.npmjs.com/'                                             },
-        { label: 'Node.js',     icon: 'devicon-nodejs-plain colored',           url: 'https://nodejs.org/en/'                                             },
-        { label: 'Drupal',      icon: 'devicon-drupal-plain colored',           url: 'https://www.drupal.org/'                                            },
-        { label: 'Firebase',    icon: 'devicon-firebase-plain colored',         url: 'https://firebase.google.com/'                                       },
-        { label: 'MySQL',       icon: 'devicon-mysql-plain colored',            url: 'https://www.mysql.com/'                                             }
+        { label: 'AWS',         icon: 'devicon-amazonwebservices-plain-wordmark colored', url: 'https://aws.amazon.com/'                                  },
+        { label: 'Bootstrap',   icon: 'devicon-bootstrap-plain colored',              url: 'https://getbootstrap.com/'                                    },
+        { label: 'Webpack',     icon: 'devicon-webpack-plain colored',                url: 'https://webpack.js.org/'                                      },
+        { label: 'Gulp',        icon: 'devicon-gulp-plain colored',                   url: 'https://gulpjs.com/'                                          },
+        { label: 'npm',         icon: 'devicon-npm-original-wordmark colored',        url: 'https://www.npmjs.com/'                                       },
+        { label: 'Firebase',    icon: 'devicon-firebase-plain colored',               url: 'https://firebase.google.com/'                                 },
+        { label: 'MySQL',       icon: 'devicon-mysql-plain colored',                  url: 'https://www.mysql.com/'                                       }
       ],
       [
-        { label: 'Trello',          icon: 'devicon-trello-plain colored',       url: 'https://trello.com/'                                                },
-        { label: 'Jira',            icon: 'devicon-jira-plain colored',         url: 'https://www.atlassian.com/software/jira'                            },
-        { label: 'GitHub',          icon: 'devicon-github-original',            url: 'https://github.com/pnaika'                                          },
-        { label: 'Bitbucket',       icon: 'devicon-bitbucket-original colored', url: 'https://bitbucket.org/'                                             },
-        { label: 'Google Analytics',icon: 'fas fa-chart-bar',                   url: 'https://analytics.google.com/analytics/web/'                        }
+        { label: 'Jira',            icon: 'devicon-jira-plain colored',           url: 'https://www.atlassian.com/software/jira'                          },
+        { label: 'GitHub',          icon: 'devicon-github-original',              url: 'https://github.com/pnaika'                                        },
+        { label: 'Bitbucket',       icon: 'devicon-bitbucket-original colored',   url: 'https://bitbucket.org/'                                           },
+        { label: 'Google Analytics',icon: 'fas fa-chart-bar',                     url: 'https://analytics.google.com/analytics/web/'                      }
       ]
     ],
-    other: ['VueJS', 'HapiJS', 'Webpack', 'Elastic Search', 'Selenium', 'QTP'],
+    other: ['VueJS', 'HapiJS', 'Elastic Search', 'Selenium', 'C#', '.NET MVC'],
     workflow: [
       'Mobile-First, Responsive Design',
       'Cross Browser Testing & Debugging',
