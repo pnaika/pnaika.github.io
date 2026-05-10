@@ -374,7 +374,7 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   cursor: pointer;
   font-size: 0.75rem;
   font-family: var(--font-body);
-  margin: 0.75rem 1rem 0.5rem;
+  margin: 0.75rem auto 0.5rem;
   white-space: nowrap;
   transition: border-color var(--transition), color var(--transition);
   display: inline-flex;
