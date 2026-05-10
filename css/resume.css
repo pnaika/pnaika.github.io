@@ -91,8 +91,11 @@ a:hover, a:focus, a:active {
 #sideNav .navbar-nav .nav-item .nav-link {
   font-weight: 600;
   text-transform: uppercase;
+  padding-left: 1rem;
   transition: color var(--transition);
 }
+
+#sideNav .navbar-collapse { padding: 0.5rem 0; }
 
 @media (min-width: 992px) {
   body {
