@@ -153,17 +153,6 @@ section.resume-section {
   padding-bottom: 5rem !important;
 }
 
-/* Fade-in animation — JS adds .will-animate then .is-visible */
-section.resume-section.will-animate {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-section.resume-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 section.resume-section .resume-item .resume-date { min-width: 0; }
 

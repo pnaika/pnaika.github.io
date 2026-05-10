@@ -351,20 +351,5 @@
     sections.forEach(function (section) { navObserver.observe(section); });
   }
 
-  // ─── Fade-in sections on scroll ──────────────────────────────────────────────
-
-  var fadeObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        fadeObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.05 });
-
-  document.querySelectorAll('section.resume-section').forEach(function (section) {
-    section.classList.add('will-animate');
-    fadeObserver.observe(section);
-  });
 
 })();
