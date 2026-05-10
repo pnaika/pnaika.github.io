@@ -85,10 +85,12 @@
   function renderExperience(jobs) {
     var items = jobs.map(function (job) {
       var logoHtml = companyLogo(job);
-      var companyLink = tag('a', { href: job.companyUrl, target: '_blank', rel: 'noopener noreferrer' }, job.company);
+      var companyHtml = job.logoStyle === 'long'
+        ? tag('a', { href: job.companyUrl, target: '_blank', rel: 'noopener noreferrer' }, logoHtml)
+        : logoHtml + tag('a', { href: job.companyUrl, target: '_blank', rel: 'noopener noreferrer' }, job.company);
 
       var content = tag('h3', { class: 'mb-0' }, job.title) +
-        tag('div', { class: 'subheading mb-3' }, logoHtml + companyLink);
+        tag('div', { class: 'subheading mb-3' }, companyHtml);
 
       if (job.clients) {
         content += job.clients.map(function (client) {
