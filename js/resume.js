@@ -396,22 +396,30 @@
 
   // ─── Dark mode toggle ────────────────────────────────────────────────────────
 
-  var themeBtn  = document.getElementById('theme-toggle');
-  if (themeBtn) {
-    var themeIcon  = themeBtn.querySelector('i');
-    var themeLabel = themeBtn.querySelector('span');
-    function applyTheme(dark) {
-      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-      themeIcon.className  = dark ? 'fas fa-sun' : 'fas fa-moon';
-      themeLabel.textContent = dark ? 'Light mode' : 'Dark mode';
+  var themeBtn       = document.getElementById('theme-toggle');
+  var themeBtnMobile = document.getElementById('theme-toggle-mobile');
+
+  function applyTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    if (themeBtn) {
+      themeBtn.querySelector('i').className = dark ? 'fas fa-sun' : 'fas fa-moon';
+      themeBtn.querySelector('span').textContent = dark ? 'Light mode' : 'Dark mode';
     }
-    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark');
-    themeBtn.addEventListener('click', function () {
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-      applyTheme(!isDark);
-    });
+    if (themeBtnMobile) {
+      themeBtnMobile.querySelector('i').className = dark ? 'fas fa-sun' : 'fas fa-moon';
+    }
   }
+
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark');
+
+  function onThemeClick() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    applyTheme(!isDark);
+  }
+
+  if (themeBtn)       themeBtn.addEventListener('click', onThemeClick);
+  if (themeBtnMobile) themeBtnMobile.addEventListener('click', onThemeClick);
 
   // ─── Active nav link via Intersection Observer ───────────────────────────────
 
