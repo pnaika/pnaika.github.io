@@ -26,6 +26,8 @@
 
   <!-- Site styles -->
   <link href="css/resume.css" rel="stylesheet">
+  <!-- Apply saved theme before paint to avoid flash -->
+  <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
 
   <!--
     Google Analytics — replace G-XXXXXXXXXX with your GA4 Measurement ID
@@ -68,6 +70,9 @@
       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests and Hobbies</a></li>
     </ul>
+    <button id="theme-toggle" class="theme-toggle-btn">
+      <i class="fas fa-moon"></i> <span>Dark mode</span>
+    </button>
   </div>
 </nav>
 

@@ -5,10 +5,19 @@
   --color-accent-dark: #313E53;
   --color-muted:       #868e96;
   --color-border:      #dee2e6;
+  --color-heading:     #1F2834;
+  --color-bg:          #ffffff;
   --nav-width:         17rem;
   --font-heading:      'Saira Extra Condensed', sans-serif;
   --font-body:         'Open Sans', sans-serif;
   --transition:        0.22s ease;
+}
+
+[data-theme="dark"] {
+  --color-muted:   #94A3B8;
+  --color-border:  #2D3748;
+  --color-heading: #E2E8F0;
+  --color-bg:      #0F172A;
 }
 
 html {
@@ -20,13 +29,16 @@ body {
   font-family: var(--font-body);
   padding-top: 54px;
   color: var(--color-muted);
+  background-color: var(--color-bg);
+  transition: background-color var(--transition), color var(--transition);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--color-dark) !important;
+  color: var(--color-heading) !important;
+  transition: color var(--transition);
 }
 
 h1 {
@@ -183,14 +195,30 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
 }
 
 /* ── Social icons ────────────────────────────────────────────────────────── */
-.list-social-icons a {
-  color: var(--color-accent);
-  transition: color var(--transition);
+.list-social-icons .list-inline-item { margin: 0 0.2rem 0.4rem; }
+
+.list-social-icons .list-inline-item a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  font-size: 1rem;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
 }
 
-.list-social-icons a:hover { color: var(--color-accent-dark); }
+.list-social-icons .list-inline-item a:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  opacity: 0.85;
+  color: inherit;
+}
 
-.list-social-icons a .fa-lg { font-size: 1.75rem; }
+[data-theme="dark"] .list-social-icons .list-inline-item a {
+  color: var(--color-accent) !important;
+}
 
 /* ── Skill icon grid ─────────────────────────────────────────────────────── */
 .list-icons { font-size: 2rem; }
@@ -241,4 +269,55 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   margin: 1rem;
   text-align: center;
   font-size: 12px;
+}
+
+/* ── Theme toggle button ─────────────────────────────────────────────────── */
+.theme-toggle-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.65);
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-family: var(--font-body);
+  margin: 0.75rem 1rem 0.5rem;
+  transition: border-color var(--transition), color var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ── Dark mode overrides ─────────────────────────────────────────────────── */
+[data-theme="dark"] section.resume-section {
+  border-bottom-color: var(--color-border);
+}
+
+[data-theme="dark"] .resume-item:hover {
+  background: rgba(226, 123, 53, 0.08);
+  box-shadow: 0 2px 14px rgba(0,0,0,.35);
+}
+
+[data-theme="dark"] .recommendation-item {
+  border-bottom-color: var(--color-border);
+}
+
+[data-theme="dark"] .card {
+  background-color: #1E293B;
+  border-color: var(--color-border);
+  color: var(--color-muted);
+}
+
+[data-theme="dark"] .table {
+  color: var(--color-muted);
+}
+
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th {
+  border-color: var(--color-border);
 }

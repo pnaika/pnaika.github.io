@@ -15,14 +15,14 @@ var portfolioData = {
       'I\'m passionate about mentoring engineers, fostering a culture of ownership and innovation, and building high-performing teams. I hold a Master\'s in Information Technology and Management from the <a href="https://web.iit.edu/" target="_blank" rel="noopener noreferrer"><i>Illinois Institute of Technology</i></a> (GPA 3.9/4.0).'
     ],
     social: [
-      { icon: 'fab fa-linkedin-in',  url: 'https://www.linkedin.com/in/prashanthnaika',       label: 'LinkedIn',  external: true  },
-      { icon: 'fab fa-github',        url: '#github',                                            label: 'GitHub',    external: false },
-      { icon: 'fab fa-facebook-f',    url: 'https://www.facebook.com/prashanthpnaik17',         label: 'Facebook',  external: true  },
-      { icon: 'fab fa-x-twitter',      url: 'https://twitter.com/prashanth17naik',               label: 'X',         external: true  },
-      { icon: 'fab fa-medium',        url: '#blogs',                                             label: 'Medium',    external: false },
-      { icon: 'fab fa-500px',         url: 'https://500px.com/prashanth17naik',                 label: '500px',     external: true  },
-      { icon: 'fab fa-instagram',     url: 'https://www.instagram.com/iamprashanthnaik/',       label: 'Instagram', external: true  },
-      { icon: 'fab fa-behance',       url: 'https://www.behance.net/prashanthpnaik17',          label: 'Behance',   external: true  }
+      { icon: 'fab fa-linkedin-in', url: 'https://www.linkedin.com/in/prashanthnaika',    label: 'LinkedIn',  external: true,  brandColor: '#0A66C2' },
+      { icon: 'fab fa-github',      url: '#github',                                         label: 'GitHub',    external: false, brandColor: '#333333' },
+      { icon: 'fab fa-facebook-f',  url: 'https://www.facebook.com/prashanthpnaik17',      label: 'Facebook',  external: true,  brandColor: '#1877F2' },
+      { icon: 'fab fa-x-twitter',   url: 'https://twitter.com/prashanth17naik',            label: 'X',         external: true,  brandColor: '#14171A' },
+      { icon: 'fab fa-medium',      url: '#blogs',                                          label: 'Medium',    external: false, brandColor: '#12100E' },
+      { icon: 'fab fa-500px',       url: 'https://500px.com/prashanth17naik',              label: '500px',     external: true,  brandColor: '#0099E5' },
+      { icon: 'fab fa-instagram',   url: 'https://www.instagram.com/iamprashanthnaika/',    label: 'Instagram', external: true,  brandColor: '#E1306C' },
+      { icon: 'fab fa-behance',     url: 'https://www.behance.net/prashanthpnaik17',       label: 'Behance',   external: true,  brandColor: '#1769FF' }
     ]
   },
 

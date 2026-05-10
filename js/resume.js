@@ -51,15 +51,10 @@
     }).join('');
 
     var socialLinks = data.social.map(function (s) {
-      var attrs = { href: s.url };
+      var attrs = { href: s.url, style: 'color:' + (s.brandColor || 'var(--color-accent)'), title: s.label };
       if (s.external) { attrs.target = '_blank'; attrs.rel = 'noopener noreferrer'; }
       return tag('li', { class: 'list-inline-item' },
-        tag('a', attrs,
-          tag('span', { class: 'fa-stack fa-lg' },
-            tag('i', { class: 'fas fa-circle fa-stack-2x' }) +
-            tag('i', { class: s.icon + ' fa-stack-1x fa-inverse' })
-          )
-        )
+        tag('a', attrs, tag('i', { class: s.icon }))
       );
     }).join('');
 
@@ -333,6 +328,25 @@
       if (bsCollapse) bsCollapse.hide();
     }
   });
+
+  // ─── Dark mode toggle ────────────────────────────────────────────────────────
+
+  var themeBtn  = document.getElementById('theme-toggle');
+  if (themeBtn) {
+    var themeIcon  = themeBtn.querySelector('i');
+    var themeLabel = themeBtn.querySelector('span');
+    function applyTheme(dark) {
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      themeIcon.className  = dark ? 'fas fa-sun' : 'fas fa-moon';
+      themeLabel.textContent = dark ? 'Light mode' : 'Dark mode';
+    }
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark');
+    themeBtn.addEventListener('click', function () {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      applyTheme(!isDark);
+    });
+  }
 
   // ─── Active nav link via Intersection Observer ───────────────────────────────
 
