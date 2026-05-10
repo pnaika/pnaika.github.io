@@ -1,120 +1,103 @@
-$(function () {
-    window.onload = function (e) {
-        e.preventDefault();
-        $('#ghapidata').html('<div id="loader"><img  width="80" height="80" src="css/loader.gif" alt="loading..."></div>');
-        $('#mediumApiData').html('<div id="loader"><img  width="80" height="80" src="css/loader.gif" alt="loading..."></div>');
+(function () {
 
-        let requri = 'https://api.github.com/users/pnaika';
-        let repouri = 'https://api.github.com/users/pnaika/repos';
-        let mediumUri = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@prashanth17.naik';
+  function loadGitHub() {
+    var container = document.getElementById('ghapidata');
+    if (!container) return;
 
-        requestGitJSON(requri,  (json) => {
-            let fullname = json.name;
-            let username = json.login;
-            let profileurl = json.html_url;
-            let followersnum = json.followers;
-            let followingnum = json.following;
-            let reposnum = json.public_repos;
-            let reposGists = json.public_gists;
+    container.innerHTML = '<div id="loader"><img width="80" height="80" src="css/loader.gif" alt="loading..."></div>';
 
-            let outhtml = '<h3>' + fullname + ' <span class="smallname">(@<a href="' + profileurl + '" target="_blank">' + username + '</a>)</span></h3>';
-            outhtml = outhtml + '<p>Followers: ' + followersnum + '; Following: ' + followingnum + '; Total Repositories: ' + reposnum + '; Gists ' + reposGists + '</p></div>';
-            outhtml = outhtml + '<div class="repolist clearfix" style="width: 100%;overflow: auto;">';
+    var userUrl  = 'https://api.github.com/users/pnaika';
+    var reposUrl = 'https://api.github.com/users/pnaika/repos?per_page=100';
 
-            let repositories;
-            $.getJSON(repouri, function (json) {
-                repositories = json;
-                outputPageContent();
-            });
+    Promise.all([
+      fetch(userUrl).then(function (r) { return r.json(); }),
+      fetch(reposUrl).then(function (r) { return r.json(); })
+    ]).then(function (results) {
+      var user  = results[0];
+      var repos = results[1];
 
-            function outputPageContent() {
-                if (repositories.length == 0) {
-                    outhtml = outhtml + '<p>No repos!</p></div>';
-                } else {
-                    repositories = repositories.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+      var out = '<h3>' + user.name +
+        ' <span class="smallname">(@<a href="' + user.html_url + '" target="_blank" rel="noopener noreferrer">' + user.login + '</a>)</span></h3>' +
+        '<p>Followers: ' + user.followers +
+        ' &nbsp;|&nbsp; Following: ' + user.following +
+        ' &nbsp;|&nbsp; Public Repos: ' + user.public_repos +
+        ' &nbsp;|&nbsp; Gists: ' + user.public_gists + '</p>';
 
-                    outhtml = outhtml + '<table class="table">\n' +
-                        '    <thead>\n' +
-                        '    <tr>\n' +
-                        '        <th scope="col">Repo Name</th>\n' +
-                        '        <th scope="col">Description</th>\n' +
-                        '        <th scope="col">Language</th>\n' +
-                        '    </tr>\n' +
-                        '    </thead>\n' +
-                        '    <tbody>';
-                    $.each(repositories, function (index) {
-                        if (!repositories[index].fork) {
-                            outhtml = outhtml +
-                                '<tr>\n' +
-                                '        <td><a href="' + repositories[index].svn_url +'" target="_blank">' + repositories[index].name + '</a></td>\n' +
-                                '        <td>' +  repositories[index].description  + '</td>\n' +
-                                '        <td>' + repositories[index].language  + '</td>\n' +
-                                '    </tr>';
-                        }
-                    });
-                    outhtml = outhtml + '</tbody>\n' +
-                        '</table>';
-                }
-                $('#ghapidata').html(outhtml);
-            } // end outputPageContent()
-        }); // end requestJSON Ajax call
+      if (!Array.isArray(repos) || repos.length === 0) {
+        out += '<p>No repositories found.</p>';
+      } else {
+        repos = repos
+          .filter(function (r) { return !r.fork; })
+          .sort(function (a, b) { return new Date(b.updated_at) - new Date(a.updated_at); });
 
-        requestMediumJSON(mediumUri, (json) => {
-            console.log('Medium Data', json);
+        out += '<div style="width:100%;overflow:auto;">' +
+          '<table class="table table-sm">' +
+          '<thead><tr><th>Repo</th><th>Description</th><th>Language</th></tr></thead>' +
+          '<tbody>';
 
-            let stories = json.items;
-
-            let outhtml = '<h3>' + json.feed.title + ' <span class="smallname">(@<a href="' + json.feed.link + '" target="_blank">prashanth17.naik</a>)</span></h3>';
-
-            if (stories.length == 0) {
-                outhtml = outhtml + '<p>Api Failed! <a target="_blank" href="https://medium.com/@prashanth17.naik">Click here</a>' +
-                    'to read medium articles</p></div>';
-            } else {
-                stories = stories.sort((a, b) => b.pubDate - a.pubDate);
-
-                $.each(stories, (index) => {
-                    if (stories[index].categories && stories[index].categories.length > 0) {
-                        outhtml = outhtml +
-                            '<div class="card" style="margin: 5px 0 20px 0;padding: 15px;"' +
-                            '    <div class="card-body">\n' +
-                            '        <h4 class="card-title">' + stories[index].title + '</h4>\n' +
-                            '        <div style="height: 80px; width: auto;overflow: hidden"> ' + stories[index].content  + '</div>' +
-                            '        <p> <span style="font-size: 12px;font-weight: 900;">CATEGORIES: </span>' + stories[index].categories.join(', ') + '</p>'+
-                            '        <a href="'+ stories[index].link +'" class="card-link" target="_blank">Read More...</a>\n' +
-                            '    </div>' +
-                            '</div>';
-                    }
-
-                });
-
-                $('#mediumApiData').html(outhtml);
-            }
-        })
-    }; // end click event handler
-
-    function requestGitJSON(url, callback) {
-        $.ajax({
-            url: url,
-            complete: function (xhr) {
-                callback.call(null, xhr.responseJSON);
-            }
-        }).catch((err) => {
-            console.log('Error in git stuff', err)
+        repos.forEach(function (repo) {
+          out += '<tr>' +
+            '<td><a href="' + repo.svn_url + '" target="_blank" rel="noopener noreferrer">' + repo.name + '</a></td>' +
+            '<td>' + (repo.description || '—') + '</td>' +
+            '<td>' + (repo.language   || '—') + '</td>' +
+            '</tr>';
         });
-    }
 
-    function requestMediumJSON(url, callback) {
-        $.ajax({
-            type: "GET",
-            url: url,
-            xhrFields: {
-                withCredentials: false
-            },
-            complete: function (xhr) {
-                callback.call(null, xhr.responseJSON);
-            }
-        }).catch((err) => {
-            console.log('Error in medium stuff', err)
-        });
-    }
-});
+        out += '</tbody></table></div>';
+      }
+
+      container.innerHTML = out;
+    }).catch(function (err) {
+      console.warn('GitHub API error:', err);
+      container.innerHTML = '<p>Unable to load GitHub data. <a href="https://github.com/pnaika" target="_blank" rel="noopener noreferrer">View on GitHub</a>.</p>';
+    });
+  }
+
+  function loadMedium() {
+    var container = document.getElementById('mediumApiData');
+    if (!container) return;
+
+    container.innerHTML = '<div id="loader"><img width="80" height="80" src="css/loader.gif" alt="loading..."></div>';
+
+    var url = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@prashanth17.naik';
+
+    fetch(url)
+      .then(function (r) { return r.json(); })
+      .then(function (json) {
+        var stories = json.items || [];
+        var out = '<h3>' + json.feed.title +
+          ' <span class="smallname">(@<a href="' + json.feed.link + '" target="_blank" rel="noopener noreferrer">prashanth17.naik</a>)</span></h3>';
+
+        var filtered = stories
+          .filter(function (s) { return s.categories && s.categories.length > 0; })
+          .sort(function (a, b) { return new Date(b.pubDate) - new Date(a.pubDate); });
+
+        if (filtered.length === 0) {
+          out += '<p>No articles found. <a href="https://medium.com/@prashanth17.naik" target="_blank" rel="noopener noreferrer">Read on Medium</a>.</p>';
+        } else {
+          filtered.forEach(function (story) {
+            out += '<div class="card" style="margin:5px 0 20px;padding:15px;">' +
+              '<div class="card-body">' +
+              '<h4 class="card-title">' + story.title + '</h4>' +
+              '<div style="height:80px;overflow:hidden;">' + story.content + '</div>' +
+              '<p style="margin-top:8px;"><span style="font-size:12px;font-weight:900;">CATEGORIES: </span>' +
+              story.categories.join(', ') + '</p>' +
+              '<a href="' + story.link + '" class="card-link" target="_blank" rel="noopener noreferrer">Read More…</a>' +
+              '</div></div>';
+          });
+        }
+
+        container.innerHTML = out;
+      })
+      .catch(function (err) {
+        console.warn('Medium API error:', err);
+        container.innerHTML = '<p>Unable to load articles. <a href="https://medium.com/@prashanth17.naik" target="_blank" rel="noopener noreferrer">Read on Medium</a>.</p>';
+      });
+  }
+
+  // resume.js populates #ghapidata and #mediumApiData synchronously before
+  // this async script runs, so the elements are guaranteed to be in the DOM.
+  loadGitHub();
+  loadMedium();
+
+})();

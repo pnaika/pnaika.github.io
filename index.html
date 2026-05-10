@@ -2,872 +2,104 @@
 <html lang="en">
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Portfolio of Prashanth Naika — Software Development Manager at Amazon, Seattle WA. 14+ years in software engineering, web and mobile development.">
+  <meta name="author" content="Prashanth P Naika">
+  <meta name="keywords" content="ReactJS, Angular, TypeScript, JavaScript, Web Development, Frontend, Software Development Manager, Amazon, Seattle">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description"
-          content="Web portfolio of Prashanth P Naika, working as Web Developer in Seattle Washington, United States">
-    <meta name="author" content="Prashanth P Naika">
-    <meta name="keywords"
-          content="ReactJS, Angular, HTML,CSS,Photography,Javascript,Web Development, Frontend development, graphql, ionic, nestjs">
+  <title>Prashanth Naika</title>
 
-    <title>Prashanth Naika</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
-          rel="stylesheet">
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="vendor/devicons/css/devicons.min.css" rel="stylesheet">
-    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/resume.css" rel="stylesheet">
+  <!-- Devicons v2 -->
+  <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" rel="stylesheet">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110368694-1"></script>
+  <!-- Site styles -->
+  <link href="css/resume.css" rel="stylesheet">
+
+  <!--
+    Google Analytics — replace G-XXXXXXXXXX with your GA4 Measurement ID
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-110368694-1');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
     </script>
-
+  -->
 </head>
+
 <body id="page-top">
+
+<!-- ── Side navigation ──────────────────────────────────────────────────── -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-none d-lg-block">
-          <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
-               src="https://s3-us-west-2.amazonaws.com/prashanth-resume/resources/images/PrashanthPNaika.jpg" alt="">
-        </span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#sideProjects">Side Projects</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#blogs">Blogs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#github">Github</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#recommendations">LinkedIn Recommendations</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#interests">Interests and Hobbies</a>
-            </li>
-        </ul>
-    </div>
+  <a class="navbar-brand js-scroll-trigger" href="#page-top">
+    <span class="d-none d-lg-block">
+      <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+           src="https://s3-us-west-2.amazonaws.com/prashanth-resume/resources/images/PrashanthPNaika.jpg"
+           alt="Prashanth Naika">
+    </span>
+  </a>
+  <button class="navbar-toggler" type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#sideProjects">Side Projects</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#blogs">Blogs</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#github">Github</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#recommendations">LinkedIn Recommendations</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
+      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests and Hobbies</a></li>
+    </ul>
+  </div>
 </nav>
+
+<!-- ── Page content ─────────────────────────────────────────────────────── -->
 <div class="container-fluid p-0">
 
-    <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-        <div class="my-auto">
-            <h1 class="mb-0">Prashanth
-                <span class="text-primary">Naika</span>
-            </h1>
-            <div class="subheading mb-5">Seattle Washington - 98012 |
-                <a href="mailto:prashanthpnaika@gmail.com">prashanthpnaika@gmail.com</a>
-            </div>
-            <p class="mb-5">
-                I am a results-driven IT professional with over <script>document.write(new Date().getFullYear() - 2011)</script> years of experience in software engineering, specializing in
-                web and mobile application development. My career has been shaped by a passion for emerging technologies, and 
-                I am always eager to explore innovative solutions that drive business success.
-            </p>
-            <p>
-                With expertise in technologies such as ReactJS, VueJS, Angular, TypeScript, JavaScript, Java, SQL, NoSQL, Ionic, 
-                C#, .NET MVC, and more, I have successfully delivered high-impact solutions for major clients like SunTrust Bank, 
-                WellPoint, CVS Health, and Uptake, working with teams at <a href="https://www.infosys.com/"
-                target="_blank">Infosys </a> and <a href="https://egen.solutions/"
-                target="_blank"> Egen Solutions</a>. My professional journey also 
-                includes valuable contributions at DriveTime, and I am currently applying my skills 
-                at <a href="https://www.aws.amazon.com/" target="_blank"> Amazon.com Services</a>.
-            </p>
-            <p class="mb-5">
-                As a leader, I am passionate about mentoring and supporting the growth of new engineers, empowering them to advance 
-                in their careers and contribute to team success. My goal is to continue taking on leadership roles, foster innovation, 
-                and drive the development of cutting-edge technologies while advancing both professionally and personally.
-            </p>
-            <p class="mb-5">
-                I hold a Master’s degree in Information Technology and Management from 
-                the <a href="https://web.iit.edu/" target="_blank"> <i>Illinois Institute of Technology</i> </a>, 
-                with a GPA of 3.9 out of 4.0, which further reinforces my commitment to excellence in both technical and managerial domains.
-            </p>
-            <h6>
-                <i class="fa fa-cloud-download"></i>
-                <a class="resume-pdf"
-                   href="https://prashanth-resume.s3-us-west-2.amazonaws.com/resources/documents/PrashanthNaika11132019.pdf"
-                   target="_blank">Download Resume in PDF format </a>
-            </h6>
-            <br/>
-            <ul class="list-inline list-social-icons mb-0">
-                <li class="list-inline-item">
-                    <a href="https://www.linkedin.com/in/prashanthnaika" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.prashanthpnaika.com/#github">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.facebook.com/prashanthpnaik17" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://twitter.com/prashanth17naik" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.prashanthpnaika.com/#blogs">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
-                </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://500px.com/prashanth17naik" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-500px fa-stack-1x fa-inverse"></i>
-                </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.instagram.com/iamprashanthnaik/" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.behance.net/prashanthpnaik17" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-behance fa-stack-1x fa-inverse"></i>
-                </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </section>
+  <!-- Content is rendered by js/resume.js from js/data.js -->
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="about"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="sideProjects"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="blogs"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="github"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="recommendations"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards"></section>
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests"></section>
 
-    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
-        <div class="my-auto">
-            <h2 class="mb-5">Experience</h2>
-            <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                <div class="resume-content mr-auto">
-                    <h3 class="mb-0">Software Development Manager</h3>
-                    <div class="subheading mb-3"><img class="company-avtar" src="img/aws.png"><a href="https://www.amazon.com/">Amazon.com Services</a></div>
-                    <div data-type="web-app">
-                    </div>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">Aug 2025 - Present</span>
-                </div>
-            </div>
-
-            <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                <div class="resume-content mr-auto">
-                    <h3 class="mb-0">Senior Front End Engineer</h3>
-                    <div class="subheading mb-3"><img class="company-avtar" src="img/aws.png"><a href="https://www.amazon.com/">Amazon.com Services</a></div>
-                    <div data-type="web-app">
-                    </div>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">Mar 2020 - Aug 2025</span>
-                </div>
-            </div>
-
-            <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                <div class="resume-content mr-auto">
-                    <h3 class="mb-0">Application Developer III</h3>
-                    <div class="subheading mb-3"><img class="company-avtar" src="img/drivetime.jpg"><a href="https://www.drivetime.com/">DriveTime</a></div>
-                    <div data-type="web-app">
-                        <ul>
-                            <li>Web and Mobile application development using Ionic 3+, Angular 5, Typescript and SCSS</li>
-                            <li>Feature flag based development to continuously deploy code which empowers business teams with control over features for better customers experience</li>
-                            <li>Cordova plugins for good and advanced features in mobile development</li>
-                            <li>Responsible to deploy code using VSTS</li>
-                            <li>Project implementations using Agile SCRUM methodology</li>
-                            <li>Used Target Process for creating stories and implementation descriptions</li>
-                            <li>Unit testing using Jasmin and Protractor</li>
-                            <li>Active interaction with business team and product for coming up with better solutions to improve the user experience</li>
-                            <li>Responsible to gather key customer feedback in sprint demo and actively participating with team in solving problems</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">Sep 2018 - Mar 2020</span>
-                </div>
-            </div>
-
-            <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                <div class="resume-content mr-auto">
-                    <h3 class="mb-0">Senior Web Developer</h3>
-                    <div class="subheading mb-3"><img class="company-avtar" src="img/egen.jpeg"><a href="https://egen.solutions/">Egen Solutions</a></div>
-
-                    <h5 class="mb-3">Client: <a href="https://www.uptake.com/"><img class="company-avtar-long" src="img/uptake.png"></a></h5>
-                    <div data-type="web-app">
-                        <h6>Senior Web Application Developer</h6>
-                        <ul>
-                            <li> Web application development for geo-tab data using <i> VueJS </i> and <i>HapiJS </i>
-                            </li>
-                            <li> Key front-end developer of team that deliver a highly reliable predictive analytic
-                                software
-                            </li>
-                            <li> Front-end leadership and management contribution on a cross-disciplinary team</li>
-                            <li><i>CSS/SASS/LESS</i> expertise to bring design to life</li>
-                            <li> Active Involvement in the Development of web application for Uptake's predictive
-                                analytics platform in <i>Angular JS</i> with the main motto of <strong>Transform data
-                                    into business value</strong></li>
-                            <li> Involvement in developing a Single Page Application in React-Redux and testing the same
-                                in JEST
-                            </li>
-                            <li> Good amount of Interaction with UX in making a decision to create data analytic
-                                platform look cleaner and meaningful
-                            </li>
-                            <li> Project implementations using <i>Agile SCRUM </i> methodology</li>
-                            <li> Active participation in bi-weekly sprint demos with all the stakeholders</li>
-                            <li> Design and development of User Interface are implemented using VueJS, ReactJS, HTML5,
-                                CSS, pre-processors, Angular JS, lodash, Gulp, Webpack, HighCharts etc.
-                            </li>
-                            <li> Backend support with Spring MVC</li>
-                            <li> Used JIRA for logging the defects and issue tickets</li>
-                            <li> Used <i>geo-tab</i> APIs for creating a dashboard to analyze trip, hours of service,
-                                DVIR (Driver Vehicle Inspection Report) and IFTA (International Fuel Tax Agreement)
-                            </li>
-                            <li> Experience working with the <i>leaflet </i> for creating map view and route details on
-                                geo tab APIs
-                            </li>
-                            <li> Worked closely with data scientist to prove schema and data concepts by creating a
-                                relevant web application with good visualization.
-                            </li>
-                            <li> Implemented many POCs and participated in many hackathon.</li>
-                        </ul>
-                    </div>
-
-                    <div data-type="mobile">
-                        <h6>Mobile Application Developer</h6>
-                        <ul>
-                            <li>Developed a mobile application for IOT domain using Ionic and Angular</li>
-                            <li>Implemented project using Agile SCRUM methodology. Involved in daily stand up meetings,
-                                sprint showcase and sprint retrospective.
-                            </li>
-                            <li>Design and development of User Interface using HTML5, CSS , Angular JS and Ionic</li>
-                            <li>Design and development of User Interface using HTML5, CSS , Webpack and ReactJS</li>
-                            <li>Backend support with Spring MVC</li>
-                            <li>Implemented Crashlytics for Crash Reporting</li>
-                            <li>Implemented piwik for analytics.</li>
-                            <li>Conducted code reviews against company standards and made sure the best practices are
-                                maintained in development process.
-                            </li>
-                            <li>Used JIRA for tracking errors and debugging the code.</li>
-                            <li>Implemented LESS styles and Used Gulp for task completion</li>
-                            <li>Used Elastic search for No SQL operations</li>
-                        </ul>
-                    </div>
-                    <h5 class="mb-3">Client: <a href="https://cvshealth.com/"><img class="company-avtar-long" src="img/cvs.png"></a></h5>
-                    <div data-type="web-app">
-                        <h6>Web Application Developer</h6>
-                        <ul>
-                            <li>Developed a physician portal using Angular JS, HTML5, CSS3, and JavaScript</li>
-                            <li>Used SVN for Version control</li>
-                            <li>Unit tests in Jasmine</li>
-                            <li>Active involvement in technical decision</li>
-                            <li>Quick implementation of Project setup and maintain quality with test frameworks and test
-                                rules
-                            </li>
-                            <li>Involvement in UI UX discussion</li>
-                            <li>Supporting automation testing team</li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">May 2015 - Aug 2018</span>
-                </div>
-            </div>
-
-            <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                <div class="resume-content mr-auto">
-                    <h3 class="mb-0">Web Developer</h3>
-                    <div class="subheading mb-3"><a href="https://www.infosys.com/"><img class="company-avtar-long" src="img/infosys.png"></a></div>
-                    <div data-type="mobile">
-                        <ul>
-                            <li>Developed front end for the entire website using Angular JS, HTML5, CSS3, and
-                                JavaScript.
-                            </li>
-                            <li>Converted raw images and layouts from a graphic designer into CSS/HTML themes.</li>
-                            <li>Followed Web Accessibility Guidelines while coding the website.</li>
-                            <li>Implemented client side validations in registration forms, login and logout forms using
-                                Java Script.
-                            </li>
-                            <li>Extensively used JQUERY, JSON, AJAX and DOM scripting to create interactive web
-                                applications like message posting and auto complete form validations.
-                            </li>
-                            <li>Used JQuery for interaction between JavaScript and HTML.</li>
-                            <li>Worked with the design of the templates and skins in CSS.</li>
-                            <li>Used Web Developer, Firebug, and IE developer toolbar for debugging and browser
-                                compatibility
-                            </li>
-                            <li>Adopted a cross browser and cross platform approach to make the website more versatile
-                                and Supportive.
-                            </li>
-                            <li>Been an active team player, helped in fixing bugs and also carried out troubleshooting
-                            </li>
-                            <li>Adhered to corporate standards with respect to problem, change and configuration
-                                management
-                            </li>
-                            <li>Worked on Responsive Designing for websites for Tablets and Mobiles for Expressionery
-                                site.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">June 2012 to Jul 2014</span>
-                </div>
-            </div>
-
-            <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                <div class="resume-content mr-auto">
-                    <h3 class="mb-0">Mainframe Developer</h3>
-                    <div class="subheading mb-3"><a href="https://www.infosys.com/"><img class="company-avtar-long" src="img/infosys.png"></a></div>
-                    <div data-type="mobile">
-                        <ul>
-                            <li>Performed Requirement Analysis</li>
-                            <li>Developed online screens in Mainframes using IMSDC, CICS, JCL and DB2</li>
-                            <li>Performed Abend analysis during production issue and monitoring jobs</li>
-                            <li>Involved in SDLC cycle and also Participated completely in all the steps of Global
-                                Delivery Model
-                            </li>
-                            <li>Managed SSCR (Small Change Request) single handed and implemented the module
-                                successfully into production
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">June 2011 - June 2012</span>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
-        <div class="my-auto">
-            <h2 class="mb-5">Education</h2>
-            <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                <div class="resume-content mr-auto">
-                    <h3 class="mb-0"><img class="uni-avtar-long" src="img/IIT.gif"></h3>
-                    <div class="subheading mb-3">Information Technology and Management</div>
-                    <div>Information Technology - Web Development Track</div>
-                    <p>GPA : 3.9/4.0</p>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">Aug 2014 to May 2016</span>
-                </div>
-            </div>
-
-            <div class="resume-item d-flex flex-column flex-md-row">
-                <div class="resume-content mr-auto">
-                    <h3 class="mb-0"><img class="company-avtar" src="img/rnsit.jpeg">RNS Institute of Technology</h3>
-                    <div class="subheading mb-3">Electroics and Communication Engineering</div>
-                    <p>GPA : 3.8/4.0 (75%)</p>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">June 2007 to June 2011</span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
-        <div class="my-auto">
-            <h2 class="mb-5">Skills</h2>
-
-            <div class="subheading mb-3">Programming Languages &amp; Tools</div>
-            <ul class="list-inline list-icons">
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="Angular"
-                       target="_blank" href="https://angular.io/"><i class="devicons devicons-angular"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="Ionic"
-                       target="_blank" href="https://ionicframework.com/"><i class="devicons devicons-ionic"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="ReactJS"
-                       target="_blank" href="https://reactjs.org/">
-                        <i class="devicons devicons-react"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="HTML5"
-                       target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">
-                        <i class="devicons devicons-html5"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="CSS3"
-                       target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3">
-                        <i class="devicons devicons-css3"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="JavaScript"
-                       target="_blank" href="https://www.javascript.com/">
-                        <i class="devicons devicons-javascript"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="jQuery"
-                       target="_blank" href="https://jquery.com/">
-                        <i class="devicons devicons-jquery"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="sass"
-                       target="_blank" href="https://sass-lang.com/">
-                        <i class="devicons devicons-sass"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="less"
-                       target="_blank" href="http://lesscss.org/">
-                        <i class="devicons devicons-less"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="Android"
-                       target="_blank" href="https://www.android.com/">
-                        <i class="devicons devicons-android"></i></a>
-                </li>
-            </ul>
-            <ul class="list-inline list-icons">
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="bootstrap"
-                       target="_blank" href="https://getbootstrap.com/">
-                        <i class="devicons devicons-bootstrap"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="Grunt"
-                       target="_blank" href="https://gruntjs.com/">
-                        <i class="devicons devicons-grunt"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="Gulp"
-                       target="_blank" href="https://gulpjs.com/">
-                        <i class="devicons devicons-gulp"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="npm"
-                       target="_blank" href="https://www.npmjs.com/">
-                        <i class="devicons devicons-npm"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="node"
-                       target="_blank" href="https://nodejs.org/en/">
-                        <i class="devicons devicons-nodejs"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="drupal"
-                       target="_blank" href="https://www.drupal.org/">
-                        <i class="devicons devicons-drupal"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="Responsive Web Dev"
-                       target="_blank" href="https://en.wikipedia.org/wiki/Responsive_web_design">
-                        <i class="devicons devicons-responsive"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="firebase"
-                       target="_blank" href="https://firebase.google.com/">
-                        <i class="devicons devicons-firebase"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="mysql"
-                       target="_blank" href="https://www.mysql.com/">
-                        <i class="devicons devicons-mysql"></i></a>
-                </li>
-            </ul>
-            <ul class="list-inline list-icons">
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="trello"
-                       target="_blank" href="https://trello.com/">
-                        <i class="devicons devicons-trello"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="Scrum"
-                       target="_blank" href="https://www.scrum.org/">
-                        <i class="devicons devicons-scrum"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="atlassian"
-                       target="_blank" href="https://www.atlassian.com/">
-                        <i class="devicons devicons-atlassian"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="jira"
-                       target="_blank" href="https://www.atlassian.com/software/jira">
-                        <i class="devicons devicons-jira"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="github"
-                       target="_blank" href="https://github.com/pnaika">
-                        <i class="devicons devicons-github_badge"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="bitbucket"
-                       target="_blank" href="https://bitbucket.org/">
-                        <i class="devicons devicons-bitbucket"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="alert-link" data-toggle="tooltip" data-placement="top" title="Google Analytics"
-                       target="_blank" href="https://analytics.google.com/analytics/web/">
-                        <i class="devicons devicons-google_analytics"></i></a>
-                </li>
-            </ul>
-
-            <div class="subheading mb-3">Others tools includes</div>
-            <ul class="fa-ul mb-0">
-                <li><i class="fa-li fa fa-star"></i>VueJS</li>
-                <li><i class="fa-li fa fa-star"></i>HapiJS</li>
-                <li><i class="fa-li fa fa-star"></i>Webpack</li>
-                <li><i class="fa-li fa fa-star"></i>Elastic Search</li>
-                <li><i class="fa-li fa fa-star"></i>Selenium</li>
-                <li><i class="fa-li fa fa-star"></i>QTP</li>
-            </ul>
-            <br/>
-            <div class="subheading mb-3">Workflow</div>
-            <ul class="fa-ul mb-0">
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Mobile-First, Responsive Design
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Cross Browser Testing &amp; Debugging
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Cross Functional Teams
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Agile Development &amp; Scrum
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="sideProjects">
-        <div class="my-auto">
-            <h2 class="mb-5">Side Projects</h2>
-            <ol class="fa-ul mb-0">
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Active Developer and Creator of <a target="_blank" href="https://www.thescrummish.com"> The Scrummish! </a>,
-                    an application which helps you make your sprint planning a better experience,
-                    This application is also available as a desktop app.
-                    <div style="font-size: 12px"><h6>Tech Stack: </h6> Angular 9, FireBase, Typescript.</div>
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Writing  <a target="_blank" href="https://medium.com/@prashanth17.naik"> medium </a> articles. For better learning and sharing experience
-                    to tech community.
-                </li>
-            </ol>
-        </div>
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="blogs">
-        <div class="my-auto">
-            <h2 class="mb-5">Blogs</h2>
-            <div class="fa-ul mb-0">
-                <div id="mediumApiData" class="clearfix"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="github">
-        <div class="my-auto">
-            <h2 class="mb-5">Git Hub</h2>
-            <div id="w">
-                <div id="ghapidata" class="clearfix"></div>
-            </div>
-            <div>
-                <h6 class="mb-2">Public npm libraries</h6>
-                <p>Contribution to <a href="https://github.com/azizali/react-super-treeview/blob/master/readme.md"
-                                      target="_blank">react-super-treeview</a>.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex d-column" id="recommendations">
-        <div class="my-auto">
-            <h2 class="mb-5">What do my coworkers have to say?</h2>
-            <div>
-                <a class="subheading" target="_blank" href="https://www.linkedin.com/in/chrispaskvan">Chris Paskvan
-                    <span class="fa-stack">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                </a>
-                <p>I had the opportunity to manage Prashanth on a couple of different teams. He is the kind of developer
-                    I always seek out. He enjoys learning new technology, delivers consistently, and demonstrates the
-                    level of commitment above what is expected. In addition, his ability to collaborate with others
-                    makes him someone I trust to get the job done.</p>
-            </div>
-            <div>
-                <a class="subheading" target="_blank" href="https://www.linkedin.com/in/sri-konduru-63134b76">Sri
-                    Konduru
-                    <span class="fa-stack">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                </a>
-                <p>Prashanth is an experienced and reliable front-end software engineer who keeps himself up to date on
-                    the latest technologies and good practices in front-end software practices. He has an outstanding
-                    work ethic and is open, quick learner, and very professional. While always being positive and
-                    helpful, he never hesitates to provide support when apparent.</p>
-                <p>It's a pleasure and an honor to recommend Prashanth to anyone who wants to hire him as a Software
-                    Engineer. </p>
-            </div>
-            <div>
-                <a class="subheading" target="_blank" href="https://www.linkedin.com/in/kenperera">Ken Perera
-                    <span class="fa-stack">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                </a>
-                <p>Prashanth is a capable, friendly and professional individual who was an asset as a member of the
-                    Fleet team, and a pleasure to work with. As a Senior Developer on a key customer-facing product, he
-                    helped our team bring to market a number of essential features that directly supported our customers
-                    and their operations.</p>
-            </div>
-            <div>
-                <a class="subheading" target="_blank" href="https://www.linkedin.com/in/azizali/">Aziz Ali
-                    <span class="fa-stack">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                </a>
-                <p>There are two things I look for in people I am working with: (1) Constructive & progressive attitude
-                    (2) Relevant technical skills. And I must say that Prashanth excels in both categories.</p>
-                <p>Prashanth joined my team at Uptake and early on I noticed that he was friendly, approachable and
-                    genuine. That is great but with that he had a keen interest in making the project good. (Technically
-                    and from a user experience stand point as well.) </p>
-                <p>Prashanth would proactively make suggestions for improvement in our project and would even volunteer
-                    to take up the implementation of those tasks.</p>
-                <p>When Prashanth started on our project, he didn't have experience on our technology stack. I'll be
-                    honest, I was surprised how fast he got up to speed with our tech-stack without much input from me.
-                    This shows that he is a self-starter and quick learner.</p>
-                <p>Besides being a great co-worker, and a great employee to have (for companies), Prashanth has a rear
-                    knack for entrepreneurship. I believe this enterprising attitude makes him a great employee as well
-                    - Since he is not just taking instructions, he is solving problems.</p>
-                <p>I wish you well my man @prashanth</p>
-            </div>
-
-            <div>
-                <a class="subheading" target="_blank" href="https://www.linkedin.com/in/sunilkavalisreenivasamurthy">Sunil
-                    Kavali
-                    <span class="fa-stack">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                </a>
-                <p>
-                    I had worked with Prashanth Naika for close to 3 years. In this time he was an integral part of all
-                    the teams that he had worked for. He was fun to be around with and has an equally exceptional
-                    passion for coding. He will be an indispensable resource for any company.
-                </p>
-            </div>
-
-
-            <div>
-                <a class="subheading" target="_blank" href="https://www.linkedin.com/in/yjdigge">Yashraj Jayaraj
-                    <span class="fa-stack">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                </a>
-                <p>I got to learn a lot from Prashanth when I had the pleasure of working with him at Egen Inc. IMHO he
-                    is one of those developers who's in love with the project and technologies used therein. I look
-                    forward to working with him in the future.</p>
-            </div>
-
-            <div>
-                <a class="subheading" target="_blank" href="https://www.linkedin.com/in/tintu-pathrose-29658a2">Tintu
-                    Pathrose
-                    <span class="fa-stack">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                </a>
-                <p>Prasanth and I worked together on a recent project. Prasanth is a detail oriented, innovative and
-                    careful perfectionist . He has an extensive knowledge and strong experience in UI and that immensely
-                    helped our deadline. He always tried to see the big picture which helped us plan better . I would
-                    definitely opt to work with him again .</p>
-            </div>
-
-            <div>
-                <a class="subheading" target="_blank" href="https://www.linkedin.com/in/vincent-porcelli-38376914">Vincent
-                    Porcelli
-                    <span class="fa-stack">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-                </a>
-                <p>I worked with Prashanth as a Technical lead on an Angular project. I enjoyed working with him. He dug
-                    in and got the job done. He would not hesitate to ask questions or offer ideas. I always knew that I
-                    did not have to worry about any assignment that he had, it would be done correctly. In the midst of
-                    the craziness of delivering a large project in a new technology, he never wavered and always had a
-                    great can do attitude. I would without hesitation love to work with him again. That is the best
-                    recommendation that anyone can give.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards">
-        <div class="my-auto">
-            <h2 class="mb-5">Awards &amp; Certifications</h2>
-            <ul class="fa-ul mb-0">
-                <li>
-                    <i class="fa-li fa fa-trophy text-warning"></i>
-                    <p>Published a paper in Infosys &#45; &#34;DL/I Status codes&#34;, which got huge response and very
-                        good comments at Infosys KSHOP
-                        (Knowledge Portal) portal. This document has helped many employees of Infosys when they faced
-                        similar problems while
-                        coding in IMSDC.</p>
-                </li>
-                <li>
-                    <i class="fa-li fa fa-trophy text-warning"></i>
-                    <p>
-                        Awarded Best performer award (INSTA Award) for three consecutive quarters for my best
-                        performance in Designing,
-                        Scripting and executing Test cases with proper deadline and quality. This award boosted my
-                        confidence as this
-                        recognition is awarded to only outstanding performers among the 150000-odd employees of
-                        Infosys.</p>
-                </li>
-                <li>
-                    <i class="fa-li fa fa-trophy text-warning"></i>
-                    <p>
-                        Did a course in HTG on basics of Hardware and Networking in 2005 and secured &#34;A &#34; grade
-                        in that institutional test.
-                        This motivated me to start an Information Technology Services startup &#34;P S Computers &#34;
-                        where we were able to win many clients.
-                    </p>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
-        <div class="my-auto">
-            <h2 class="mb-5">Interests and Hobbies</h2>
-            <h4>Big fan of Cameras </h4>
-            <p> Photography remains my biggest Interest and Hobby</p>
-            <h5>Devices Used</h5>
-            <ul>
-                <li>Canon T5i</li>
-                <li>Canon 80D</li>
-                <li>Canon 5D Mark VI</li>
-                <li>10- 24 mm wide angle lens</li>
-                <li>Zoom Lens: 18-135mm, 70-300mm, 70-200mm, 18-55mm</li>
-                <li>Studio Environment Photography</li>
-            </ul>
-            <div>
-                <ul class="list-inline list-icons subheading-pics">
-                    <li class="list-inline-item">
-                        <a href="https://pnaika.myportfolio.com/" target="_blank">
-                            <i class="fa fa-camera"></i> My Photography Website
-                        </a> |
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://500px.com/prashanth17naik" target="_blank">
-                            <i class="fa fa-500px"></i> 500px
-                        </a> |
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://www.facebook.com/iamphotophile17/" target="_blank">
-                            <i class="fa fa-facebook"></i> Facebook Page
-                        </a> |
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://www.instagram.com/iamprashanthnaik/" target="_blank">
-                            <i class="fa fa-instagram"></i> Instagram
-                        </a> |
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://www.behance.net/prashanthpnaik17" target="_blank">
-                            <i class="fa fa-behance"></i> Behance
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </section>
-    <div style="margin: 1rem;text-align: center;font-size: 12px;">
-        <i class="fa fa-copyright"></i>
-        Prashanth Naika <script>document.write( new Date().getFullYear().toString() );</script>
-    </div>
+  <div class="site-footer">
+    <i class="far fa-copyright"></i>
+    Prashanth Naika <script>document.write(new Date().getFullYear());</script>
+  </div>
 </div>
 
-</div>
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<!-- Custom scripts for this template -->
-<script src="js/resume.min.js"></script>
+<!-- Bootstrap 5 bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Portfolio data — edit js/data.js to update content -->
+<script src="js/data.js"></script>
+<!-- Renderer + behavior -->
+<script src="js/resume.js"></script>
+<!-- GitHub / Medium API integration -->
 <script async src="git-code.js"></script>
+
 </body>
 </html>
