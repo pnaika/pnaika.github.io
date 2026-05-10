@@ -433,5 +433,17 @@
     sections.forEach(function (section) { navObserver.observe(section); });
   }
 
+  // Visitor counter
+  var vcEl = document.getElementById('visitor-count');
+  if (vcEl) {
+    fetch('visitor-count.json?v=' + Date.now())
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data || !data.total_uniques) return;
+        var n = data.total_uniques.toLocaleString();
+        vcEl.innerHTML = '<i class="far fa-eye"></i> ' + n + ' visitors';
+      })
+      .catch(function () {});
+  }
 
 })();

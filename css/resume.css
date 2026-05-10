@@ -272,6 +272,16 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   font-size: 12px;
 }
 
+.visitor-divider { margin: 0 0.4rem; opacity: 0.4; }
+
+.visitor-count {
+  color: var(--color-accent);
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.visitor-count i { margin-right: 3px; }
+
 /* ── Typewriter tagline ──────────────────────────────────────────────────── */
 .tagline-wrapper {
   font-family: var(--font-heading);
