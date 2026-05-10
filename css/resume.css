@@ -131,6 +131,7 @@ a:hover, a:focus, a:active {
 
   #sideNav .navbar-collapse {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     flex-grow: 0;
     width: 100%;
