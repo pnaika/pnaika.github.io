@@ -409,11 +409,16 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
 
 [data-theme="dark"] .table {
   color: var(--color-muted);
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: rgba(255,255,255,.03);
+  --bs-table-hover-bg: rgba(255,255,255,.05);
+  background-color: transparent;
 }
 
 [data-theme="dark"] .table td,
 [data-theme="dark"] .table th {
   border-color: var(--color-border);
+  background-color: transparent;
 }
 
 [data-theme="dark"] .uni-avtar-long {
