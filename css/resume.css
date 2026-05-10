@@ -415,3 +415,9 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
 [data-theme="dark"] .table th {
   border-color: var(--color-border);
 }
+
+[data-theme="dark"] .uni-avtar-long {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
