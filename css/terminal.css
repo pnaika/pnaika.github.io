@@ -172,13 +172,13 @@
   background: rgba(0, 229, 51, 0.08);
   border: 1px solid rgba(0, 229, 51, 0.55);
   color: #00e533;
-  border-radius: 5px;
-  padding: 0.18rem 0.55rem;
-  font-size: 0.78rem;
+  border-radius: 20px;
+  padding: 0.28rem 0.85rem;
+  font-size: 0.75rem;
   cursor: pointer;
   font-family: 'SFMono-Regular', Consolas, monospace;
-  line-height: 1.5;
-  letter-spacing: 0.03em;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
   transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
   animation: term-btn-pulse 2.8s ease-in-out infinite;
 }

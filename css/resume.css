@@ -401,6 +401,14 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
 }
 
 /* ── Theme toggle button ─────────────────────────────────────────────────── */
+.nav-btn-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0.75rem auto 0.5rem;
+}
+
 .theme-toggle-btn {
   background: none;
   border: 1px solid rgba(255,255,255,.25);
@@ -410,7 +418,6 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   cursor: pointer;
   font-size: 0.75rem;
   font-family: var(--font-body);
-  margin: 0.75rem auto 0.5rem;
   white-space: nowrap;
   transition: border-color var(--transition), color var(--transition);
   display: inline-flex;
