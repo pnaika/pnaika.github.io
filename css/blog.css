@@ -250,7 +250,26 @@ body { padding-top: 0; padding-left: 0; }
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--color-muted);
+  /* Prevent any element inside from blowing out the layout */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
 }
+
+/* Clamp ALL child elements — catches inline width/height from Medium HTML */
+.bp-content * {
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* Scrollable containers for wide content */
+.bp-content pre,
+.bp-content table,
+.bp-content .graf--iframe { overflow-x: auto; }
+
+/* Figures often carry fixed px widths from Medium's editor */
+.bp-content figure { width: auto !important; margin: 1.5rem 0; }
+.bp-content figure img { width: 100% !important; height: auto !important; }
 
 .bp-content h1, .bp-content h2, .bp-content h3, .bp-content h4 {
   font-family: var(--font-heading);
