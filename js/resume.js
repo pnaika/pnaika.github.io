@@ -394,28 +394,42 @@
     });
   }
 
-  // ─── Dark mode toggle ────────────────────────────────────────────────────────
+  // ─── Theme toggle (light → dark → retro → light) ─────────────────────────
+
+  var THEMES = ['light', 'dark', 'retro'];
+  var THEME_CFG = {
+    light: { icon: 'fas fa-moon',       label: 'Dark mode',   mobileIcon: 'fas fa-moon'  },
+    dark:  { icon: 'fas fa-tv',         label: 'Retro mode',  mobileIcon: 'fas fa-sun'   },
+    retro: { icon: 'fas fa-sun',        label: 'Light mode',  mobileIcon: 'fas fa-sun'   },
+  };
 
   var themeBtn       = document.getElementById('theme-toggle');
   var themeBtnMobile = document.getElementById('theme-toggle-mobile');
 
-  function applyTheme(dark) {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  function applyTheme(theme) {
+    if (THEMES.indexOf(theme) === -1) theme = 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    var cfg = THEME_CFG[theme];
     if (themeBtn) {
-      themeBtn.querySelector('i').className = dark ? 'fas fa-sun' : 'fas fa-moon';
-      themeBtn.querySelector('span').textContent = dark ? 'Light mode' : 'Dark mode';
+      themeBtn.querySelector('i').className = cfg.icon;
+      themeBtn.querySelector('span').textContent = cfg.label;
     }
     if (themeBtnMobile) {
-      themeBtnMobile.querySelector('i').className = dark ? 'fas fa-sun' : 'fas fa-moon';
+      themeBtnMobile.querySelector('i').className = cfg.mobileIcon;
+    }
+    if (window.Achievement) {
+      if (theme === 'dark')  window.Achievement.unlock('dark');
+      if (theme === 'retro') window.Achievement.unlock('retro');
     }
   }
 
-  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark');
+  applyTheme(localStorage.getItem('theme') || document.documentElement.getAttribute('data-theme') || 'light');
 
   function onThemeClick() {
-    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    applyTheme(!isDark);
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
+    localStorage.setItem('theme', next);
+    applyTheme(next);
   }
 
   if (themeBtn)       themeBtn.addEventListener('click', onThemeClick);

@@ -470,3 +470,76 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   border-radius: 4px;
   padding: 4px 8px;
 }
+
+/* ── Achievement toasts ──────────────────────────────────────────────────── */
+.ach-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--color-dark);
+  border: 1px solid var(--color-accent);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,.35);
+  max-width: 300px;
+  transform: translateX(calc(100% + 2rem));
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(.22,1,.36,1), opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.ach-toast.ach-show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.ach-emoji {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.ach-body { min-width: 0; }
+
+.ach-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  margin-bottom: 0.1rem;
+}
+
+.ach-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ach-desc {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,.55);
+  font-family: var(--font-body);
+  margin-top: 0.1rem;
+}
+
+/* Retro mode: green achievement toast */
+html[data-theme="retro"] .ach-toast {
+  background: #050a05;
+  border-color: #00e533;
+  box-shadow: 0 0 20px rgba(0,229,51,.3);
+}
+
+html[data-theme="retro"] .ach-label { color: #00e533; }
+html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(0,255,65,.7); }

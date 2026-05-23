@@ -13,6 +13,7 @@
 
   var cmdHistory = [];
   var histIdx    = -1;
+  var cmdRunCount = 0;
 
   var PS1 = '<span class="p-user">prashanth</span>' +
             '<span class="p-at">@</span>' +
@@ -24,6 +25,7 @@
   function openTerm() {
     overlay.classList.add('is-open');
     setTimeout(function () { inputEl.focus(); }, 50);
+    if (window.Achievement) window.Achievement.unlock('terminal');
   }
 
   function closeTerm() {
@@ -275,6 +277,8 @@
     if (!input) return;
 
     echo(input);
+    cmdRunCount++;
+    if (window.Achievement && cmdRunCount === 5) window.Achievement.unlock('cmd5');
 
     var lower = input.toLowerCase();
     if (CMDS[lower]) {
