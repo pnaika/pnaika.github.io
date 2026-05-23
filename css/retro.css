@@ -1,0 +1,198 @@
+/* ── Retro / CRT mode ─────────────────────────────────────────────────────── */
+
+html[data-theme="retro"] {
+  --color-dark:        #050a05;
+  --color-accent:      #00e533;
+  --color-accent-dark: #0d1a0d;
+  --color-muted:       #39d353;
+  --color-border:      #1a3a1a;
+  --color-heading:     #00ff41;
+  --color-bg:          #050a05;
+}
+
+/* Monospace font everywhere */
+html[data-theme="retro"],
+html[data-theme="retro"] * {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+}
+
+/* CRT scanlines */
+html[data-theme="retro"]::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+}
+
+/* Vignette */
+html[data-theme="retro"]::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9989;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+/* CRT flicker */
+@keyframes crt-flicker {
+  0%, 93%, 100% { opacity: 1; }
+  94%  { opacity: 0.90; }
+  95%  { opacity: 0.98; }
+  96%  { opacity: 0.85; }
+  97%  { opacity: 0.97; }
+  98%  { opacity: 0.91; }
+  99%  { opacity: 0.99; }
+}
+
+html[data-theme="retro"] body {
+  background-color: #050a05 !important;
+  animation: crt-flicker 9s infinite;
+}
+
+/* ── Navigation ──────────────────────────────────────────────────────────── */
+html[data-theme="retro"] #sideNav {
+  background-color: #050a05 !important;
+  border-right: 1px solid #1a3a1a;
+}
+
+html[data-theme="retro"] #sideNav .navbar-brand {
+  border-bottom: 1px solid #1a3a1a;
+}
+
+html[data-theme="retro"] #sideNav .nav-link {
+  color: rgba(0, 229, 51, 0.6) !important;
+  letter-spacing: 0.08em;
+}
+
+html[data-theme="retro"] #sideNav .nav-link.active,
+html[data-theme="retro"] #sideNav .nav-link:hover {
+  color: #00ff41 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.9);
+}
+
+/* ── Typography & glow ───────────────────────────────────────────────────── */
+html[data-theme="retro"] h1,
+html[data-theme="retro"] h2,
+html[data-theme="retro"] h3,
+html[data-theme="retro"] h4,
+html[data-theme="retro"] h5,
+html[data-theme="retro"] h6 {
+  text-shadow: 0 0 10px rgba(0, 229, 51, 0.7), 0 0 25px rgba(0, 229, 51, 0.25);
+  color: #00ff41 !important;
+}
+
+html[data-theme="retro"] .text-primary {
+  color: #00e533 !important;
+  text-shadow: 0 0 10px rgba(0, 229, 51, 0.95);
+}
+
+html[data-theme="retro"] a {
+  color: #00e533;
+}
+
+html[data-theme="retro"] a:hover {
+  color: #00ff41;
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.8);
+}
+
+/* ── Profile image: phosphor green tint ──────────────────────────────────── */
+html[data-theme="retro"] .img-profile {
+  border: 2px solid #00e533;
+  box-shadow: 0 0 24px rgba(0, 229, 51, 0.45);
+  filter: grayscale(100%) sepia(100%) hue-rotate(85deg) saturate(2.5) brightness(0.75);
+}
+
+/* ── Progress bar ────────────────────────────────────────────────────────── */
+html[data-theme="retro"] #progress-bar {
+  background: #00e533;
+  box-shadow: 0 0 6px rgba(0, 229, 51, 0.8);
+}
+
+/* ── Scroll-to-top ───────────────────────────────────────────────────────── */
+html[data-theme="retro"] #scroll-top {
+  background: #050a05;
+  border: 1px solid #1a3a1a;
+  color: #00e533;
+  box-shadow: 0 0 10px rgba(0, 229, 51, 0.3);
+}
+
+html[data-theme="retro"] #scroll-top:hover {
+  background: #0d1a0d;
+  box-shadow: 0 0 14px rgba(0, 229, 51, 0.6);
+}
+
+/* ── Sections & borders ──────────────────────────────────────────────────── */
+html[data-theme="retro"] section.resume-section {
+  border-bottom: 1px solid #1a3a1a;
+}
+
+/* ── Social icons ────────────────────────────────────────────────────────── */
+html[data-theme="retro"] .list-social-icons a {
+  color: #00e533 !important;
+}
+
+html[data-theme="retro"] .list-social-icons a:hover {
+  color: #00ff41 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.9);
+}
+
+/* ── Blog cards ──────────────────────────────────────────────────────────── */
+html[data-theme="retro"] .card {
+  border-color: #1a3a1a;
+  background: rgba(0, 229, 51, 0.03);
+}
+
+/* ── Mode dropdown ───────────────────────────────────────────────────────── */
+html[data-theme="retro"] .mode-panel {
+  background: #050a05;
+  border-color: #1a3a1a;
+}
+html[data-theme="retro"] .mode-list li { color: rgba(0,229,51,.6); }
+html[data-theme="retro"] .mode-list li:hover { background: rgba(0,229,51,.09); color: #00ff41; }
+html[data-theme="retro"] .mode-list li.is-active { color: #00e533; }
+html[data-theme="retro"] .mode-item-term { border-top-color: #1a3a1a; }
+html[data-theme="retro"] .mode-dd-nav-btn {
+  border-color: rgba(0,229,51,.4);
+  color: rgba(0,229,51,.7);
+}
+html[data-theme="retro"] .mode-dd-nav-btn:hover,
+html[data-theme="retro"] .mode-dd.is-open .mode-dd-nav-btn { border-color: #00e533; color: #00e533; }
+html[data-theme="retro"] .mode-dd-mob-btn {
+  border-color: rgba(0,229,51,.4);
+  color: rgba(0,229,51,.7);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+html[data-theme="retro"] .site-footer {
+  border-top-color: #1a3a1a;
+  color: #39d353;
+}
+
+/* ── Tables (GitHub section) ─────────────────────────────────────────────── */
+html[data-theme="retro"] .table {
+  --bs-table-color: #39d353;
+  --bs-table-bg: transparent;
+  color: #39d353;
+}
+
+html[data-theme="retro"] .table td,
+html[data-theme="retro"] .table th {
+  border-color: #1a3a1a;
+  background-color: transparent;
+  color: #39d353;
+}
+
+/* ── Subheading ──────────────────────────────────────────────────────────── */
+html[data-theme="retro"] .subheading {
+  color: #00e533 !important;
+  text-shadow: 0 0 6px rgba(0, 229, 51, 0.6);
+}

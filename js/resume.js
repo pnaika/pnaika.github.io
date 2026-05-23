@@ -62,8 +62,18 @@
       tag('h1', { class: 'mb-0' },
         data.name.first + ' ' + tag('span', { class: 'text-primary' }, data.name.last)
       ) +
+      (data.taglines && data.taglines.length
+        ? tag('div', { class: 'tagline-wrapper mb-3' },
+            tag('span', { id: 'tagline', class: 'text-primary tagline-text' }) +
+            tag('span', { class: 'tagline-cursor' }, '|')
+          )
+        : '') +
       tag('div', { class: 'subheading mb-5' },
-        data.location + ' &nbsp;·&nbsp; ' + tag('a', { href: 'mailto:' + data.email }, data.email)
+        data.location + ' &nbsp;·&nbsp; ' +
+        tag('a', { href: 'mailto:' + data.email }, data.email) + ' ' +
+        tag('button', { class: 'copy-email-btn', 'data-email': data.email, title: 'Copy email address' },
+          tag('i', { class: 'far fa-copy' })
+        )
       ) +
       bio +
       tag('h6', {},
@@ -329,24 +339,120 @@
     }
   });
 
-  // ─── Dark mode toggle ────────────────────────────────────────────────────────
+  // ─── Typewriter animation ────────────────────────────────────────────────────
 
-  var themeBtn  = document.getElementById('theme-toggle');
-  if (themeBtn) {
-    var themeIcon  = themeBtn.querySelector('i');
-    var themeLabel = themeBtn.querySelector('span');
-    function applyTheme(dark) {
-      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-      themeIcon.className  = dark ? 'fas fa-sun' : 'fas fa-moon';
-      themeLabel.textContent = dark ? 'Light mode' : 'Dark mode';
+  var taglineEl = document.getElementById('tagline');
+  if (taglineEl && d.about.taglines && d.about.taglines.length) {
+    var twTexts = d.about.taglines, twIdx = 0, twChar = 0, twDeleting = false;
+    function twTick() {
+      var text = twTexts[twIdx];
+      taglineEl.textContent = text.slice(0, twChar);
+      if (!twDeleting) {
+        if (++twChar > text.length) { twDeleting = true; setTimeout(twTick, 1800); return; }
+        setTimeout(twTick, 75);
+      } else {
+        if (--twChar === 0) { twDeleting = false; twIdx = (twIdx + 1) % twTexts.length; }
+        setTimeout(twTick, 40);
+      }
     }
-    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark');
-    themeBtn.addEventListener('click', function () {
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-      applyTheme(!isDark);
+    twTick();
+  }
+
+  // ─── Copy email ───────────────────────────────────────────────────────────────
+
+  var copyBtn = document.querySelector('.copy-email-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var email = this.getAttribute('data-email');
+      navigator.clipboard.writeText(email).then(function () {
+        var toast = document.getElementById('copy-toast');
+        if (toast) { toast.classList.add('show'); setTimeout(function () { toast.classList.remove('show'); }, 2200); }
+      });
     });
   }
+
+  // ─── Reading progress bar ────────────────────────────────────────────────────
+
+  var progressBar = document.getElementById('progress-bar');
+  if (progressBar) {
+    window.addEventListener('scroll', function () {
+      var scrolled = window.scrollY;
+      var total    = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    }, { passive: true });
+  }
+
+  // ─── Scroll-to-top button ────────────────────────────────────────────────────
+
+  var scrollTopBtn = document.getElementById('scroll-top');
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', function () {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    scrollTopBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ─── Mode dropdown ────────────────────────────────────────────────────────
+
+  var THEME_ICONS  = { light: 'fas fa-sun', dark: 'fas fa-moon', retro: 'fas fa-tv' };
+  var THEME_LABELS = { light: 'Light', dark: 'Dark', retro: 'Retro / CRT' };
+
+  var modeNavIcon   = document.getElementById('mode-nav-icon');
+  var modeNavLabel  = document.getElementById('mode-nav-label');
+  var modeMobBtn    = document.getElementById('mode-btn-mob');
+  var modeDropdowns = document.querySelectorAll('.mode-dd');
+  var modeItems     = document.querySelectorAll('.mode-list li');
+
+  function applyTheme(theme) {
+    if (!THEME_ICONS[theme]) theme = 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    if (modeNavIcon)  modeNavIcon.className           = THEME_ICONS[theme];
+    if (modeNavLabel) modeNavLabel.textContent         = THEME_LABELS[theme];
+    if (modeMobBtn)   modeMobBtn.querySelector('i').className = THEME_ICONS[theme];
+    modeItems.forEach(function (item) {
+      item.classList.toggle('is-active', item.getAttribute('data-mode') === theme);
+    });
+    if (window.Achievement) {
+      if (theme === 'dark')  window.Achievement.unlock('dark');
+      if (theme === 'retro') window.Achievement.unlock('retro');
+    }
+  }
+
+  function closeAllDropdowns() {
+    modeDropdowns.forEach(function (dd) { dd.classList.remove('is-open'); });
+  }
+
+  modeDropdowns.forEach(function (dd) {
+    var btn = dd.querySelector('button');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var wasOpen = dd.classList.contains('is-open');
+      closeAllDropdowns();
+      if (!wasOpen) dd.classList.add('is-open');
+    });
+  });
+
+  modeItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      var mode = item.getAttribute('data-mode');
+      closeAllDropdowns();
+      if (mode === 'terminal') {
+        document.dispatchEvent(new CustomEvent('open-terminal'));
+      } else if (mode === 'snake') {
+        document.dispatchEvent(new CustomEvent('open-snake'));
+      } else {
+        localStorage.setItem('theme', mode);
+        applyTheme(mode);
+      }
+    });
+  });
+
+  document.addEventListener('click', closeAllDropdowns);
+
+  applyTheme(localStorage.getItem('theme') || document.documentElement.getAttribute('data-theme') || 'light');
 
   // ─── Active nav link via Intersection Observer ───────────────────────────────
 
@@ -368,5 +474,17 @@
     sections.forEach(function (section) { navObserver.observe(section); });
   }
 
+  // Visitor counter
+  var vcEl = document.getElementById('visitor-count');
+  if (vcEl) {
+    fetch('visitor-count.json?v=' + Date.now())
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data || !data.total_uniques) return;
+        var n = data.total_uniques.toLocaleString();
+        vcEl.innerHTML = '<i class="far fa-eye"></i> ' + n + ' visitors';
+      })
+      .catch(function () {});
+  }
 
 })();

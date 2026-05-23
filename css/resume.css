@@ -91,8 +91,11 @@ a:hover, a:focus, a:active {
 #sideNav .navbar-nav .nav-item .nav-link {
   font-weight: 600;
   text-transform: uppercase;
+  padding-left: 1rem;
   transition: color var(--transition);
 }
+
+#sideNav .navbar-collapse { padding: 0.5rem 0; }
 
 @media (min-width: 992px) {
   body {
@@ -272,27 +275,239 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   font-size: 12px;
 }
 
-/* ── Theme toggle button ─────────────────────────────────────────────────── */
-.theme-toggle-btn {
-  background: none;
-  border: 1px solid rgba(255,255,255,.25);
-  color: rgba(255,255,255,.65);
-  border-radius: 20px;
-  padding: 0.28rem 0.85rem;
-  cursor: pointer;
-  font-size: 0.75rem;
-  font-family: var(--font-body);
-  margin: 0.75rem 1rem 0.5rem;
-  white-space: nowrap;
-  transition: border-color var(--transition), color var(--transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
+.visitor-divider { margin: 0 0.4rem; opacity: 0.4; }
+
+.visitor-count {
+  color: var(--color-accent);
+  font-size: 11px;
+  opacity: 0.75;
 }
 
-.theme-toggle-btn:hover {
+.visitor-count i { margin-right: 3px; }
+
+/* ── Typewriter tagline ──────────────────────────────────────────────────── */
+.tagline-wrapper {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-height: 2rem;
+}
+
+.tagline-cursor {
+  display: inline-block;
+  color: var(--color-accent);
+  animation: blink 0.75s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── Copy email button ───────────────────────────────────────────────────── */
+.copy-email-btn {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  cursor: pointer;
+  padding: 0 0.2rem;
+  font-size: 0.85rem;
+  vertical-align: middle;
+  opacity: 0.6;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.copy-email-btn:hover { opacity: 1; transform: scale(1.2); }
+
+#copy-toast {
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  background: var(--color-dark);
+  color: #fff;
+  padding: 0.5rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 9999;
+}
+
+#copy-toast.show { opacity: 1; }
+
+/* ── Reading progress bar ────────────────────────────────────────────────── */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--color-accent);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ── Scroll-to-top button ────────────────────────────────────────────────── */
+#scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,.22);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+#scroll-top.visible { display: flex; }
+
+#scroll-top:hover {
+  background: var(--color-accent-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.28);
+}
+
+/* ── Mode dropdown ───────────────────────────────────────────────────────── */
+
+/* Sidebar wrapper */
+.mode-dd-nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0.75rem 0 0.5rem;
+  position: relative;
+}
+
+/* Mobile wrapper */
+.mode-dd {
+  position: relative;
+}
+
+/* Sidebar trigger */
+.mode-dd-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: none;
+  border: 1px solid rgba(255,255,255,.22);
+  color: rgba(255,255,255,.65);
+  border-radius: 20px;
+  padding: 0.28rem 0.9rem;
+  font-size: 0.75rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--transition), color var(--transition);
+}
+.mode-dd-nav-btn:hover,
+.mode-dd.is-open .mode-dd-nav-btn {
   border-color: var(--color-accent);
   color: var(--color-accent);
+}
+
+/* Mobile trigger (circle icon) */
+.mode-dd-mob-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,.35);
+  color: rgba(255,255,255,.8);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-right: 0.4rem;
+  transition: border-color var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+.mode-dd-mob-btn:hover,
+.mode-dd.is-open .mode-dd-mob-btn {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Chevron rotation */
+.mode-chev {
+  font-size: 0.6rem;
+  transition: transform 0.2s ease;
+}
+.mode-dd.is-open .mode-chev { transform: rotate(180deg); }
+
+/* Shared panel */
+.mode-panel {
+  display: none;
+  position: absolute;
+  background: #1F2834;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  padding: 0.35rem;
+  min-width: 168px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.45);
+  z-index: 500;
+}
+.mode-dd.is-open .mode-panel { display: block; }
+
+/* Opens upward (sidebar — button is at bottom) */
+.mode-panel-up {
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Opens downward (mobile top bar) */
+.mode-panel-down {
+  top: calc(100% + 0.5rem);
+  right: 0;
+}
+
+/* Mode list items */
+.mode-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mode-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: var(--font-body);
+  color: rgba(255,255,255,.6);
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.mode-list li:hover { background: rgba(255,255,255,.09); color: #fff; }
+.mode-list li.is-active { color: var(--color-accent); }
+.mode-list li.is-active::after { content: '✓'; margin-left: auto; padding-left: 0.6rem; font-size: 0.7rem; }
+
+/* Terminal item styling */
+.mode-item-term {
+  margin-top: 0.2rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 0.6rem !important;
+}
+.mode-item-term:hover { background: rgba(0,229,51,.1) !important; color: #00e533 !important; }
+
+.mode-mono {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  color: #00e533;
+  font-size: 0.8rem;
 }
 
 /* ── Dark mode overrides ─────────────────────────────────────────────────── */
@@ -317,9 +532,94 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
 
 [data-theme="dark"] .table {
   color: var(--color-muted);
+  --bs-table-color: var(--color-muted);
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: rgba(255,255,255,.03);
+  --bs-table-hover-bg: rgba(255,255,255,.05);
+  background-color: transparent;
 }
 
 [data-theme="dark"] .table td,
 [data-theme="dark"] .table th {
   border-color: var(--color-border);
+  background-color: transparent;
 }
+
+[data-theme="dark"] .uni-avtar-long {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* ── Achievement toasts ──────────────────────────────────────────────────── */
+.ach-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--color-dark);
+  border: 1px solid var(--color-accent);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,.35);
+  max-width: 300px;
+  transform: translateX(calc(100% + 2rem));
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(.22,1,.36,1), opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.ach-toast.ach-show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.ach-emoji {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.ach-body { min-width: 0; }
+
+.ach-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  margin-bottom: 0.1rem;
+}
+
+.ach-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ach-desc {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,.55);
+  font-family: var(--font-body);
+  margin-top: 0.1rem;
+}
+
+/* Retro mode: green achievement toast */
+html[data-theme="retro"] .ach-toast {
+  background: #050a05;
+  border-color: #00e533;
+  box-shadow: 0 0 20px rgba(0,229,51,.3);
+}
+
+html[data-theme="retro"] .ach-label { color: #00e533; }
+html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(0,255,65,.7); }

@@ -26,8 +26,11 @@
 
   <!-- Site styles -->
   <link href="css/resume.css" rel="stylesheet">
+  <link href="css/retro.css" rel="stylesheet">
+  <link href="css/terminal.css" rel="stylesheet">
+  <link href="css/snake.css" rel="stylesheet">
   <!-- Apply saved theme before paint to avoid flash -->
-  <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
+  <script>var _t=localStorage.getItem('theme');if(_t==='dark'||_t==='retro')document.documentElement.setAttribute('data-theme',_t);</script>
 
   <!--
     Google Analytics — replace G-XXXXXXXXXX with your GA4 Measurement ID
@@ -52,6 +55,21 @@
            alt="Prashanth Naika">
     </span>
   </a>
+  <!-- Mobile: modes dropdown in top bar -->
+  <div class="mode-dd d-lg-none ms-auto" id="mode-dd-mob">
+    <button class="mode-dd-mob-btn" id="mode-btn-mob" aria-label="Switch mode">
+      <i class="fas fa-moon"></i>
+    </button>
+    <div class="mode-panel mode-panel-down">
+      <ul class="mode-list">
+        <li data-mode="light"><i class="fas fa-sun"></i> Light</li>
+        <li data-mode="dark"><i class="fas fa-moon"></i> Dark</li>
+        <li data-mode="retro"><i class="fas fa-tv"></i> Retro / CRT</li>
+        <li data-mode="terminal" class="mode-item-term"><span class="mode-mono">&gt;_</span> Terminal</li>
+        <li data-mode="snake" class="mode-item-term"><span class="mode-mono">🐍</span> Snake</li>
+      </ul>
+    </div>
+  </div>
   <button class="navbar-toggler" type="button"
           data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,9 +88,23 @@
       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests and Hobbies</a></li>
     </ul>
-    <button id="theme-toggle" class="theme-toggle-btn">
-      <i class="fas fa-moon"></i> <span>Dark mode</span>
-    </button>
+    <!-- Sidebar: modes dropdown -->
+    <div class="mode-dd mode-dd-nav" id="mode-dd-nav">
+      <button class="mode-dd-nav-btn" id="mode-btn-nav">
+        <i class="fas fa-moon" id="mode-nav-icon"></i>
+        <span id="mode-nav-label">Dark</span>
+        <i class="fas fa-chevron-up mode-chev"></i>
+      </button>
+      <div class="mode-panel mode-panel-up">
+        <ul class="mode-list">
+          <li data-mode="light"><i class="fas fa-sun"></i> Light</li>
+          <li data-mode="dark"><i class="fas fa-moon"></i> Dark</li>
+          <li data-mode="retro"><i class="fas fa-tv"></i> Retro / CRT</li>
+          <li data-mode="terminal" class="mode-item-term"><span class="mode-mono">&gt;_</span> Terminal</li>
+          <li data-mode="snake" class="mode-item-term"><span class="mode-mono">🐍</span> Snake</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -91,20 +123,80 @@
   <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards"></section>
   <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests"></section>
 
+  <div id="progress-bar"></div>
+  <button id="scroll-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+  <div id="copy-toast">Email copied!</div>
+
   <div class="site-footer">
     <i class="far fa-copyright"></i>
     Prashanth Naika <script>document.write(new Date().getFullYear());</script>
+    <span class="visitor-divider">·</span>
+    <span id="visitor-count" class="visitor-count" title="Unique visitors tracked via GitHub API"></span>
+  </div>
+</div>
+
+<!-- Snake game overlay -->
+<div id="snake-overlay">
+  <div class="snake-header">
+    <div class="term-dots">
+      <span class="term-dot red"></span>
+      <span class="term-dot yellow"></span>
+      <span class="term-dot green"></span>
+    </div>
+    <span class="snake-title">🐍 SNAKE</span>
+    <button id="snake-close" class="term-close">✕ close</button>
+  </div>
+  <div class="snake-body">
+    <div class="snake-stats">
+      <div>SCORE <span class="snake-stat-val" id="snake-score">0</span></div>
+      <div>BEST <span class="snake-stat-val" id="snake-hi">0</span></div>
+    </div>
+    <div class="snake-canvas-wrap">
+      <canvas id="snake-canvas"></canvas>
+      <div id="snake-msg" class="snake-msg">
+        <div class="snake-msg-title">GAME OVER</div>
+        <div class="snake-msg-score" id="snake-msg-score"></div>
+        <button id="snake-restart" class="snake-restart-btn">↩ Play again</button>
+      </div>
+    </div>
+    <div class="snake-hint">Arrow keys / WASD · swipe on mobile · Esc to close</div>
+  </div>
+</div>
+
+<!-- Terminal overlay -->
+<div id="terminal-overlay">
+  <div class="term-header">
+    <div class="term-dots">
+      <span class="term-dot red"></span>
+      <span class="term-dot yellow"></span>
+      <span class="term-dot green"></span>
+    </div>
+    <span class="term-title">pnaika.sh — bash — 80×24</span>
+    <button id="term-close" class="term-close">✕ close</button>
+  </div>
+  <div id="term-output" class="term-output"></div>
+  <div class="term-input-row">
+    <span class="term-ps1">
+      <span class="p-user">prashanth</span><span class="p-at">@</span><span class="p-host">portfolio</span><span class="p-sym">:~$ </span>
+    </span>
+    <input id="term-input" class="term-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="" aria-label="Terminal input">
   </div>
 </div>
 
 <!-- Bootstrap 5 bundle (includes Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Achievements -->
+<script src="js/achievements.js"></script>
 <!-- Portfolio data — edit js/data.js to update content -->
 <script src="js/data.js"></script>
 <!-- Renderer + behavior -->
 <script src="js/resume.js"></script>
 <!-- GitHub / Medium API integration -->
-<script async src="git-code.js?v=2"></script>
+<script async src="js/github.js"></script>
+<!-- Terminal fun mode -->
+<script src="js/terminal.js"></script>
+<!-- Snake easter egg -->
+<script src="js/snake.js"></script>
 
 </body>
 </html>
