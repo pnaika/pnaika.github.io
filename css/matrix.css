@@ -1,9 +1,21 @@
 /* ── Matrix mode ──────────────────────────────────────────────────────────── */
 
+/* Override all CSS variables so cards, tables, etc. go dark automatically */
+html[data-theme="matrix"] {
+  --color-bg:          #000a00;
+  --color-surface:     #001200;
+  --color-text:        #a0ffa0;
+  --color-text-muted:  #267326;
+  --color-accent:      #00ff41;
+  --color-accent-dark: #007a1f;
+  --color-dark:        #000d00;
+  --color-border:      #0a3a0a;
+}
+
+/* Rain canvas — sits above content as a subtle overlay */
 #matrix-canvas {
   position: fixed;
   inset: 0;
-  /* Sits above page content, below overlays */
   z-index: 500;
   pointer-events: none;
   opacity: 0;
@@ -19,9 +31,9 @@ html[data-theme="matrix"] body {
   background: #000;
 }
 
-/* Nav sits above rain */
+/* Nav sits well above rain */
 html[data-theme="matrix"] #sideNav {
-  background: rgba(0, 10, 0, 0.95) !important;
+  background: rgba(0, 10, 0, 0.97) !important;
   border-right: 1px solid #0a3a0a;
   z-index: 1040;
 }
@@ -33,10 +45,29 @@ html[data-theme="matrix"] #sideNav .nav-link {
 html[data-theme="matrix"] #sideNav .nav-link:hover,
 html[data-theme="matrix"] #sideNav .nav-link.active {
   color: #00ff41 !important;
+  border-left-color: #00ff41 !important;
 }
 
+/* Sections */
 html[data-theme="matrix"] .resume-section {
-  background: rgba(0, 5, 0, 0.92);
+  background: rgba(0, 8, 0, 0.93);
+}
+
+/* Cards — use var(--color-bg) which is now dark, but force just in case */
+html[data-theme="matrix"] .card,
+html[data-theme="matrix"] .blog-card,
+html[data-theme="matrix"] .recommendation-item {
+  background: #000d00 !important;
+  border-color: #0a3a0a !important;
+}
+
+/* Tables */
+html[data-theme="matrix"] .table,
+html[data-theme="matrix"] .table td,
+html[data-theme="matrix"] .table th {
+  background-color: transparent !important;
+  color: #a0ffa0 !important;
+  border-color: #0a3a0a !important;
 }
 
 /* Terminal / snake overlays always on top */
@@ -49,7 +80,7 @@ html[data-theme="matrix"] .resume-section {
 html[data-theme="matrix"] h1,
 html[data-theme="matrix"] h2 {
   color: #00ff41;
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
 }
 
 html[data-theme="matrix"] .subheading {
@@ -61,10 +92,7 @@ html[data-theme="matrix"] .text-primary {
 }
 
 html[data-theme="matrix"] p,
-html[data-theme="matrix"] li,
-html[data-theme="matrix"] span,
-html[data-theme="matrix"] td,
-html[data-theme="matrix"] th {
+html[data-theme="matrix"] li {
   color: #a0ffa0;
 }
 
@@ -74,7 +102,7 @@ html[data-theme="matrix"] a {
 
 html[data-theme="matrix"] a:hover {
   color: #c8ffc8;
-  text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
 }
 
 html[data-theme="matrix"] .resume-item-title,
@@ -86,13 +114,19 @@ html[data-theme="matrix"] hr {
   border-color: #0a3a0a;
 }
 
-/* Mode dropdown */
+/* Blog post content */
+html[data-theme="matrix"] .bp-content,
+html[data-theme="matrix"] .bp-content p,
+html[data-theme="matrix"] .bp-content li {
+  color: #a0ffa0;
+}
+
+/* Mode dropdown — above rain */
 html[data-theme="matrix"] .mode-dd-nav-btn,
 html[data-theme="matrix"] .mode-panel {
-  background: rgba(0, 10, 0, 0.97);
+  background: rgba(0, 10, 0, 0.98);
   border-color: #0a3a0a;
   color: #00cc33;
-  /* above rain canvas */
   position: relative;
   z-index: 600;
 }
@@ -102,12 +136,7 @@ html[data-theme="matrix"] .mode-list li:hover {
   color: #00ff41 !important;
 }
 
-/* Footer */
-html[data-theme="matrix"] .site-footer {
-  color: #267326;
-}
-
-/* Scroll-to-top & progress bar above rain */
+/* UI chrome above rain */
 html[data-theme="matrix"] #scroll-top {
   background: #001a00;
   color: #00ff41;
@@ -117,4 +146,8 @@ html[data-theme="matrix"] #scroll-top {
 
 html[data-theme="matrix"] #progress-bar {
   z-index: 600;
+}
+
+html[data-theme="matrix"] .site-footer {
+  color: #267326;
 }
