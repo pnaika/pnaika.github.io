@@ -77,7 +77,7 @@
         } else {
           filtered.forEach(function (story) {
             var slug = story.link.split('/').pop().split('?')[0];
-            var internalUrl = 'blog-post.html?slug=' + slug;
+            var internalUrl = 'blog.html?slug=' + slug;
             var snippet = story.content
               .replace(/^<h[1-6][^>]*>.*?<\/h[1-6]>\s*/i, '')
               .replace(/<figure[\s\S]*?<\/figure>/gi, '');

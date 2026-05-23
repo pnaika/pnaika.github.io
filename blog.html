@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title id="page-title">Blog — Prashanth Naika</title>
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+  <link href="css/resume.css" rel="stylesheet">
+  <link href="css/blog.css" rel="stylesheet">
+
+  <!-- Apply saved theme before paint to avoid flash -->
+  <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
+</head>
+<body>
+
+<!-- ── Top bar ────────────────────────────────────────────────────────────── -->
+<div class="bp-topbar">
+  <a href="index.html#blogs" class="bp-back">
+    <i class="fas fa-arrow-left"></i> Portfolio
+  </a>
+  <span class="bp-topbar-title">Blog</span>
+  <div class="bp-topbar-right">
+    <a href="https://medium.com/@prashanth17.naik" target="_blank" rel="noopener noreferrer" class="bp-medium-link">
+      <i class="fab fa-medium"></i> Medium
+    </a>
+    <button id="bp-theme-toggle" class="bp-theme-btn" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ── Shared loading state ───────────────────────────────────────────────── -->
+<div id="bp-loading" class="bp-loading">
+  <i class="fas fa-circle-notch fa-spin"></i>
+</div>
+
+<!-- ── Blog list (no slug) ────────────────────────────────────────────────── -->
+<section id="bl-list" style="display:none">
+  <div class="bl-header">
+    <h1 class="bl-heading">Writing</h1>
+    <p class="bl-sub">Articles on engineering, leadership, and web development.</p>
+  </div>
+  <div id="bl-grid" class="bl-grid"></div>
+</section>
+
+<!-- ── Blog post (slug present) ──────────────────────────────────────────── -->
+<article id="bp-article" style="display:none">
+  <div class="bp-container">
+    <header class="bp-header">
+      <div id="bp-categories" class="bp-categories"></div>
+      <h1 id="bp-title" class="bp-title"></h1>
+      <div class="bp-meta">
+        <span id="bp-date"></span>
+        <span class="bp-meta-sep">·</span>
+        <span id="bp-read-time"></span>
+        <span class="bp-meta-sep">·</span>
+        <a id="bp-medium-link" href="#" target="_blank" rel="noopener noreferrer">
+          Read on Medium <i class="fas fa-arrow-up-right-from-square" style="font-size:.7em"></i>
+        </a>
+      </div>
+    </header>
+
+    <div id="bp-content" class="bp-content"></div>
+
+    <!-- Next / Previous navigation -->
+    <nav id="bp-post-nav" class="bp-post-nav" aria-label="Post navigation"></nav>
+
+    <footer class="bp-footer">
+      <a href="blog.html" class="bp-back-footer">← All posts</a>
+    </footer>
+  </div>
+</article>
+
+<!-- ── Error state ────────────────────────────────────────────────────────── -->
+<div id="bp-error" class="bp-error" style="display:none">
+  <i class="fas fa-triangle-exclamation"></i>
+  <p>Could not load this article.</p>
+  <a href="blog.html">← Back to all posts</a>
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/blog.js"></script>
+</body>
+</html>
