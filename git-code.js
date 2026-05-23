@@ -76,16 +76,18 @@
           out += '<p>No articles found. <a href="https://medium.com/@prashanth17.naik" target="_blank" rel="noopener noreferrer">Read on Medium</a>.</p>';
         } else {
           filtered.forEach(function (story) {
+            var slug = story.link.split('/').pop().split('?')[0];
+            var internalUrl = 'blog-post.html?slug=' + slug;
             var snippet = story.content
               .replace(/^<h[1-6][^>]*>.*?<\/h[1-6]>\s*/i, '')
               .replace(/<figure[\s\S]*?<\/figure>/gi, '');
             out += '<div class="card" style="margin:5px 0 20px;padding:15px;">' +
               '<div class="card-body">' +
-              '<h4 class="card-title">' + story.title + '</h4>' +
+              '<h4 class="card-title"><a href="' + internalUrl + '" style="color:inherit;text-decoration:none;">' + story.title + '</a></h4>' +
               '<div style="height:80px;overflow:hidden;">' + snippet + '</div>' +
               '<p style="margin-top:8px;"><span style="font-size:12px;font-weight:900;">CATEGORIES: </span>' +
               story.categories.join(', ') + '</p>' +
-              '<a href="' + story.link + '" class="card-link" target="_blank" rel="noopener noreferrer">Read More…</a>' +
+              '<a href="' + internalUrl + '" class="card-link">Read More…</a>' +
               '</div></div>';
           });
         }
