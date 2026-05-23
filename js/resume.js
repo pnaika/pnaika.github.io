@@ -396,8 +396,8 @@
 
   // ─── Mode dropdown ────────────────────────────────────────────────────────
 
-  var THEME_ICONS  = { light: 'fas fa-sun', dark: 'fas fa-moon', retro: 'fas fa-tv' };
-  var THEME_LABELS = { light: 'Light', dark: 'Dark', retro: 'Retro / CRT' };
+  var THEME_ICONS  = { light: 'fas fa-sun', dark: 'fas fa-moon', retro: 'fas fa-tv', matrix: 'fas fa-code' };
+  var THEME_LABELS = { light: 'Light', dark: 'Dark', retro: 'Retro / CRT', matrix: 'Matrix' };
 
   var modeNavIcon   = document.getElementById('mode-nav-icon');
   var modeNavLabel  = document.getElementById('mode-nav-label');
@@ -405,8 +405,14 @@
   var modeDropdowns = document.querySelectorAll('.mode-dd');
   var modeItems     = document.querySelectorAll('.mode-list li');
 
+  var currentTheme = null;
+
   function applyTheme(theme) {
     if (!THEME_ICONS[theme]) theme = 'light';
+    if (currentTheme === 'matrix' && theme !== 'matrix') {
+      document.dispatchEvent(new CustomEvent('matrix-stop'));
+    }
+    currentTheme = theme;
     document.documentElement.setAttribute('data-theme', theme);
     if (modeNavIcon)  modeNavIcon.className           = THEME_ICONS[theme];
     if (modeNavLabel) modeNavLabel.textContent         = THEME_LABELS[theme];
@@ -414,9 +420,11 @@
     modeItems.forEach(function (item) {
       item.classList.toggle('is-active', item.getAttribute('data-mode') === theme);
     });
+    if (theme === 'matrix') document.dispatchEvent(new CustomEvent('matrix-start'));
     if (window.Achievement) {
-      if (theme === 'dark')  window.Achievement.unlock('dark');
-      if (theme === 'retro') window.Achievement.unlock('retro');
+      if (theme === 'dark')   window.Achievement.unlock('dark');
+      if (theme === 'retro')  window.Achievement.unlock('retro');
+      if (theme === 'matrix') window.Achievement.unlock('matrix');
     }
   }
 

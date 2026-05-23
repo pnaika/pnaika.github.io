@@ -29,8 +29,9 @@
   <link href="css/retro.css" rel="stylesheet">
   <link href="css/terminal.css" rel="stylesheet">
   <link href="css/snake.css" rel="stylesheet">
+  <link href="css/matrix.css" rel="stylesheet">
   <!-- Apply saved theme before paint to avoid flash -->
-  <script>var _t=localStorage.getItem('theme');if(_t==='dark'||_t==='retro')document.documentElement.setAttribute('data-theme',_t);</script>
+  <script>var _t=localStorage.getItem('theme');if(_t==='dark'||_t==='retro'||_t==='matrix')document.documentElement.setAttribute('data-theme',_t);</script>
 
   <!--
     Google Analytics — replace G-XXXXXXXXXX with your GA4 Measurement ID
@@ -67,6 +68,7 @@
         <li data-mode="retro"><i class="fas fa-tv"></i> Retro / CRT</li>
         <li data-mode="terminal" class="mode-item-term"><span class="mode-mono">&gt;_</span> Terminal</li>
         <li data-mode="snake" class="mode-item-term"><span class="mode-mono">🐍</span> Snake</li>
+        <li data-mode="matrix" class="mode-item-term"><span class="mode-mono">01</span> Matrix</li>
       </ul>
     </div>
   </div>
@@ -102,6 +104,7 @@
           <li data-mode="retro"><i class="fas fa-tv"></i> Retro / CRT</li>
           <li data-mode="terminal" class="mode-item-term"><span class="mode-mono">&gt;_</span> Terminal</li>
           <li data-mode="snake" class="mode-item-term"><span class="mode-mono">🐍</span> Snake</li>
+          <li data-mode="matrix" class="mode-item-term"><span class="mode-mono">01</span> Matrix</li>
         </ul>
       </div>
     </div>
@@ -134,6 +137,9 @@
     <span id="visitor-count" class="visitor-count" title="Unique visitors tracked via GitHub API"></span>
   </div>
 </div>
+
+<!-- Matrix rain canvas -->
+<canvas id="matrix-canvas"></canvas>
 
 <!-- Snake game overlay -->
 <div id="snake-overlay">
@@ -197,6 +203,8 @@
 <script src="js/terminal.js"></script>
 <!-- Snake easter egg -->
 <script src="js/snake.js"></script>
+<!-- Matrix rain -->
+<script src="js/matrix.js"></script>
 
 </body>
 </html>

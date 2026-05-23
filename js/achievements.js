@@ -15,6 +15,7 @@
     { id: 'email',      emoji: '📋', title: 'Copy Cat',          desc: 'Copied the email address'         },
     { id: 'snake',      emoji: '🐍', title: 'Easter Egg Hunter', desc: 'Found the hidden snake game!'     },
     { id: 'snake10',    emoji: '🎮', title: 'Snake Master',      desc: 'Scored 10+ in the snake game'    },
+    { id: 'matrix',    emoji: '🟩', title: 'Follow the White Rabbit', desc: 'Entered the Matrix'          },
   ];
 
   var unlocked = [];

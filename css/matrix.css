@@ -1,0 +1,112 @@
+/* ── Matrix mode ──────────────────────────────────────────────────────────── */
+
+#matrix-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  display: none;
+}
+
+html[data-theme="matrix"] #matrix-canvas {
+  display: block;
+}
+
+html[data-theme="matrix"] body {
+  background: #000;
+}
+
+/* Nav stays on top */
+html[data-theme="matrix"] #sideNav {
+  background: rgba(0, 10, 0, 0.92) !important;
+  border-right: 1px solid #0a3a0a;
+  position: relative;
+  z-index: 1040;
+}
+
+html[data-theme="matrix"] #sideNav .nav-link {
+  color: #00cc33 !important;
+}
+
+html[data-theme="matrix"] #sideNav .nav-link:hover,
+html[data-theme="matrix"] #sideNav .nav-link.active {
+  color: #00ff41 !important;
+}
+
+/* Page content floats above canvas */
+html[data-theme="matrix"] .container-fluid {
+  position: relative;
+  z-index: 2;
+}
+
+html[data-theme="matrix"] .resume-section {
+  background: rgba(0, 6, 0, 0.86);
+}
+
+/* Typography */
+html[data-theme="matrix"] h1,
+html[data-theme="matrix"] h2 {
+  color: #00ff41;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+html[data-theme="matrix"] .subheading {
+  color: #00cc33 !important;
+}
+
+html[data-theme="matrix"] .text-primary {
+  color: #00ff41 !important;
+}
+
+html[data-theme="matrix"] p,
+html[data-theme="matrix"] li,
+html[data-theme="matrix"] span,
+html[data-theme="matrix"] td,
+html[data-theme="matrix"] th {
+  color: #a0ffa0;
+}
+
+html[data-theme="matrix"] a {
+  color: #00ff41;
+}
+
+html[data-theme="matrix"] a:hover {
+  color: #c8ffc8;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+
+html[data-theme="matrix"] .resume-item-title,
+html[data-theme="matrix"] .resume-item .subheading {
+  color: #00e533 !important;
+}
+
+html[data-theme="matrix"] hr {
+  border-color: #0a3a0a;
+}
+
+/* Mode dropdown in matrix */
+html[data-theme="matrix"] .mode-dd-nav-btn,
+html[data-theme="matrix"] .mode-panel {
+  background: rgba(0, 10, 0, 0.95);
+  border-color: #0a3a0a;
+  color: #00cc33;
+}
+
+html[data-theme="matrix"] .mode-list li:hover {
+  background: rgba(0, 255, 65, 0.1) !important;
+  color: #00ff41 !important;
+}
+
+/* Footer */
+html[data-theme="matrix"] .site-footer {
+  color: #267326;
+  position: relative;
+  z-index: 2;
+}
+
+/* Scroll-to-top button */
+html[data-theme="matrix"] #scroll-top {
+  background: #001a00;
+  color: #00ff41;
+  border: 1px solid #0a3a0a;
+}
