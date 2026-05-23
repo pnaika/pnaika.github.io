@@ -441,6 +441,8 @@
       closeAllDropdowns();
       if (mode === 'terminal') {
         document.dispatchEvent(new CustomEvent('open-terminal'));
+      } else if (mode === 'snake') {
+        document.dispatchEvent(new CustomEvent('open-snake'));
       } else {
         localStorage.setItem('theme', mode);
         applyTheme(mode);
