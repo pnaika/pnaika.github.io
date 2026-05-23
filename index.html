@@ -26,6 +26,7 @@
 
   <!-- Site styles -->
   <link href="css/resume.css" rel="stylesheet">
+  <link href="css/terminal.css" rel="stylesheet">
   <!-- Apply saved theme before paint to avoid flash -->
   <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
 
@@ -73,6 +74,9 @@
       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests and Hobbies</a></li>
     </ul>
+    <button id="term-toggle" class="term-toggle-btn" title="Open terminal (` key)">
+      &gt;_
+    </button>
     <button id="theme-toggle" class="theme-toggle-btn">
       <i class="fas fa-moon"></i> <span>Dark mode</span>
     </button>
@@ -106,6 +110,26 @@
   </div>
 </div>
 
+<!-- Terminal overlay -->
+<div id="terminal-overlay">
+  <div class="term-header">
+    <div class="term-dots">
+      <span class="term-dot red"></span>
+      <span class="term-dot yellow"></span>
+      <span class="term-dot green"></span>
+    </div>
+    <span class="term-title">pnaika.sh — bash — 80×24</span>
+    <button id="term-close" class="term-close">✕ close</button>
+  </div>
+  <div id="term-output" class="term-output"></div>
+  <div class="term-input-row">
+    <span class="term-ps1">
+      <span class="p-user">prashanth</span><span class="p-at">@</span><span class="p-host">portfolio</span><span class="p-sym">:~$ </span>
+    </span>
+    <input id="term-input" class="term-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="" aria-label="Terminal input">
+  </div>
+</div>
+
 <!-- Bootstrap 5 bundle (includes Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Portfolio data — edit js/data.js to update content -->
@@ -114,6 +138,8 @@
 <script src="js/resume.js"></script>
 <!-- GitHub / Medium API integration -->
 <script async src="js/github.js"></script>
+<!-- Terminal fun mode -->
+<script src="js/terminal.js"></script>
 
 </body>
 </html>
