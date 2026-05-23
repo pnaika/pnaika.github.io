@@ -394,46 +394,63 @@
     });
   }
 
-  // ─── Theme toggle (light → dark → retro → light) ─────────────────────────
+  // ─── Mode dropdown ────────────────────────────────────────────────────────
 
-  var THEMES = ['light', 'dark', 'retro'];
-  var THEME_CFG = {
-    light: { icon: 'fas fa-moon',       label: 'Dark mode',   mobileIcon: 'fas fa-moon'  },
-    dark:  { icon: 'fas fa-tv',         label: 'Retro mode',  mobileIcon: 'fas fa-sun'   },
-    retro: { icon: 'fas fa-sun',        label: 'Light mode',  mobileIcon: 'fas fa-sun'   },
-  };
+  var THEME_ICONS  = { light: 'fas fa-sun', dark: 'fas fa-moon', retro: 'fas fa-tv' };
+  var THEME_LABELS = { light: 'Light', dark: 'Dark', retro: 'Retro / CRT' };
 
-  var themeBtn       = document.getElementById('theme-toggle');
-  var themeBtnMobile = document.getElementById('theme-toggle-mobile');
+  var modeNavIcon   = document.getElementById('mode-nav-icon');
+  var modeNavLabel  = document.getElementById('mode-nav-label');
+  var modeMobBtn    = document.getElementById('mode-btn-mob');
+  var modeDropdowns = document.querySelectorAll('.mode-dd');
+  var modeItems     = document.querySelectorAll('.mode-list li');
 
   function applyTheme(theme) {
-    if (THEMES.indexOf(theme) === -1) theme = 'light';
+    if (!THEME_ICONS[theme]) theme = 'light';
     document.documentElement.setAttribute('data-theme', theme);
-    var cfg = THEME_CFG[theme];
-    if (themeBtn) {
-      themeBtn.querySelector('i').className = cfg.icon;
-      themeBtn.querySelector('span').textContent = cfg.label;
-    }
-    if (themeBtnMobile) {
-      themeBtnMobile.querySelector('i').className = cfg.mobileIcon;
-    }
+    if (modeNavIcon)  modeNavIcon.className           = THEME_ICONS[theme];
+    if (modeNavLabel) modeNavLabel.textContent         = THEME_LABELS[theme];
+    if (modeMobBtn)   modeMobBtn.querySelector('i').className = THEME_ICONS[theme];
+    modeItems.forEach(function (item) {
+      item.classList.toggle('is-active', item.getAttribute('data-mode') === theme);
+    });
     if (window.Achievement) {
       if (theme === 'dark')  window.Achievement.unlock('dark');
       if (theme === 'retro') window.Achievement.unlock('retro');
     }
   }
 
-  applyTheme(localStorage.getItem('theme') || document.documentElement.getAttribute('data-theme') || 'light');
-
-  function onThemeClick() {
-    var current = document.documentElement.getAttribute('data-theme') || 'light';
-    var next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
-    localStorage.setItem('theme', next);
-    applyTheme(next);
+  function closeAllDropdowns() {
+    modeDropdowns.forEach(function (dd) { dd.classList.remove('is-open'); });
   }
 
-  if (themeBtn)       themeBtn.addEventListener('click', onThemeClick);
-  if (themeBtnMobile) themeBtnMobile.addEventListener('click', onThemeClick);
+  modeDropdowns.forEach(function (dd) {
+    var btn = dd.querySelector('button');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var wasOpen = dd.classList.contains('is-open');
+      closeAllDropdowns();
+      if (!wasOpen) dd.classList.add('is-open');
+    });
+  });
+
+  modeItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      var mode = item.getAttribute('data-mode');
+      closeAllDropdowns();
+      if (mode === 'terminal') {
+        document.dispatchEvent(new CustomEvent('open-terminal'));
+      } else {
+        localStorage.setItem('theme', mode);
+        applyTheme(mode);
+      }
+    });
+  });
+
+  document.addEventListener('click', closeAllDropdowns);
+
+  applyTheme(localStorage.getItem('theme') || document.documentElement.getAttribute('data-theme') || 'light');
 
   // ─── Active nav link via Intersection Observer ───────────────────────────────
 

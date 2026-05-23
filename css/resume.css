@@ -377,8 +377,45 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   box-shadow: 0 8px 20px rgba(0,0,0,.28);
 }
 
-/* ── Mobile theme toggle (top navbar) ───────────────────────────────────── */
-.theme-toggle-mobile {
+/* ── Mode dropdown ───────────────────────────────────────────────────────── */
+
+/* Sidebar wrapper */
+.mode-dd-nav {
+  display: flex;
+  justify-content: center;
+  margin: 0.75rem 0 0.5rem;
+  position: relative;
+}
+
+/* Mobile wrapper */
+.mode-dd {
+  position: relative;
+}
+
+/* Sidebar trigger */
+.mode-dd-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: none;
+  border: 1px solid rgba(255,255,255,.22);
+  color: rgba(255,255,255,.65);
+  border-radius: 20px;
+  padding: 0.28rem 0.9rem;
+  font-size: 0.75rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--transition), color var(--transition);
+}
+.mode-dd-nav-btn:hover,
+.mode-dd.is-open .mode-dd-nav-btn {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Mobile trigger (circle icon) */
+.mode-dd-mob-btn {
   background: none;
   border: 1px solid rgba(255,255,255,.35);
   color: rgba(255,255,255,.8);
@@ -394,40 +431,82 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   transition: border-color var(--transition), color var(--transition);
   flex-shrink: 0;
 }
-
-.theme-toggle-mobile:hover {
+.mode-dd-mob-btn:hover,
+.mode-dd.is-open .mode-dd-mob-btn {
   border-color: var(--color-accent);
   color: var(--color-accent);
 }
 
-/* ── Theme toggle button ─────────────────────────────────────────────────── */
-.nav-btn-row {
+/* Chevron rotation */
+.mode-chev {
+  font-size: 0.6rem;
+  transition: transform 0.2s ease;
+}
+.mode-dd.is-open .mode-chev { transform: rotate(180deg); }
+
+/* Shared panel */
+.mode-panel {
+  display: none;
+  position: absolute;
+  background: #1F2834;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  padding: 0.35rem;
+  min-width: 168px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.45);
+  z-index: 500;
+}
+.mode-dd.is-open .mode-panel { display: block; }
+
+/* Opens upward (sidebar — button is at bottom) */
+.mode-panel-up {
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Opens downward (mobile top bar) */
+.mode-panel-down {
+  top: calc(100% + 0.5rem);
+  right: 0;
+}
+
+/* Mode list items */
+.mode-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mode-list li {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.6rem;
-  margin: 0.75rem auto 0.5rem;
-}
-
-.theme-toggle-btn {
-  background: none;
-  border: 1px solid rgba(255,255,255,.25);
-  color: rgba(255,255,255,.65);
-  border-radius: 20px;
-  padding: 0.28rem 0.85rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 7px;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-family: var(--font-body);
+  color: rgba(255,255,255,.6);
+  transition: background 0.15s, color 0.15s;
   white-space: nowrap;
-  transition: border-color var(--transition), color var(--transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
 }
+.mode-list li:hover { background: rgba(255,255,255,.09); color: #fff; }
+.mode-list li.is-active { color: var(--color-accent); }
+.mode-list li.is-active::after { content: '✓'; margin-left: auto; padding-left: 0.6rem; font-size: 0.7rem; }
 
-.theme-toggle-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+/* Terminal item styling */
+.mode-item-term {
+  margin-top: 0.2rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 0.6rem !important;
+}
+.mode-item-term:hover { background: rgba(0,229,51,.1) !important; color: #00e533 !important; }
+
+.mode-mono {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  color: #00e533;
+  font-size: 0.8rem;
 }
 
 /* ── Dark mode overrides ─────────────────────────────────────────────────── */

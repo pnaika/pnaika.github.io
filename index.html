@@ -54,9 +54,20 @@
            alt="Prashanth Naika">
     </span>
   </a>
-  <button id="theme-toggle-mobile" class="theme-toggle-mobile d-lg-none ms-auto" aria-label="Toggle dark mode">
-    <i class="fas fa-moon"></i>
-  </button>
+  <!-- Mobile: modes dropdown in top bar -->
+  <div class="mode-dd d-lg-none ms-auto" id="mode-dd-mob">
+    <button class="mode-dd-mob-btn" id="mode-btn-mob" aria-label="Switch mode">
+      <i class="fas fa-moon"></i>
+    </button>
+    <div class="mode-panel mode-panel-down">
+      <ul class="mode-list">
+        <li data-mode="light"><i class="fas fa-sun"></i> Light</li>
+        <li data-mode="dark"><i class="fas fa-moon"></i> Dark</li>
+        <li data-mode="retro"><i class="fas fa-tv"></i> Retro / CRT</li>
+        <li data-mode="terminal" class="mode-item-term"><span class="mode-mono">&gt;_</span> Terminal</li>
+      </ul>
+    </div>
+  </div>
   <button class="navbar-toggler" type="button"
           data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,13 +86,21 @@
       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests and Hobbies</a></li>
     </ul>
-    <div class="nav-btn-row">
-      <button id="term-toggle" class="term-toggle-btn" title="Open terminal (` key)">
-        &gt;_ Terminal
+    <!-- Sidebar: modes dropdown -->
+    <div class="mode-dd mode-dd-nav" id="mode-dd-nav">
+      <button class="mode-dd-nav-btn" id="mode-btn-nav">
+        <i class="fas fa-moon" id="mode-nav-icon"></i>
+        <span id="mode-nav-label">Dark</span>
+        <i class="fas fa-chevron-up mode-chev"></i>
       </button>
-      <button id="theme-toggle" class="theme-toggle-btn">
-        <i class="fas fa-moon"></i> <span>Dark mode</span>
-      </button>
+      <div class="mode-panel mode-panel-up">
+        <ul class="mode-list">
+          <li data-mode="light"><i class="fas fa-sun"></i> Light</li>
+          <li data-mode="dark"><i class="fas fa-moon"></i> Dark</li>
+          <li data-mode="retro"><i class="fas fa-tv"></i> Retro / CRT</li>
+          <li data-mode="terminal" class="mode-item-term"><span class="mode-mono">&gt;_</span> Terminal</li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>

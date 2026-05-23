@@ -151,20 +151,24 @@ html[data-theme="retro"] .card {
   background: rgba(0, 229, 51, 0.03);
 }
 
-/* ── Theme / nav buttons ─────────────────────────────────────────────────── */
-html[data-theme="retro"] .theme-toggle-btn {
-  border-color: rgba(0, 229, 51, 0.45);
-  color: rgba(0, 229, 51, 0.7);
+/* ── Mode dropdown ───────────────────────────────────────────────────────── */
+html[data-theme="retro"] .mode-panel {
+  background: #050a05;
+  border-color: #1a3a1a;
 }
-
-html[data-theme="retro"] .theme-toggle-btn:hover {
-  border-color: #00e533;
-  color: #00e533;
+html[data-theme="retro"] .mode-list li { color: rgba(0,229,51,.6); }
+html[data-theme="retro"] .mode-list li:hover { background: rgba(0,229,51,.09); color: #00ff41; }
+html[data-theme="retro"] .mode-list li.is-active { color: #00e533; }
+html[data-theme="retro"] .mode-item-term { border-top-color: #1a3a1a; }
+html[data-theme="retro"] .mode-dd-nav-btn {
+  border-color: rgba(0,229,51,.4);
+  color: rgba(0,229,51,.7);
 }
-
-html[data-theme="retro"] .theme-toggle-mobile {
-  border-color: rgba(0, 229, 51, 0.45);
-  color: rgba(0, 229, 51, 0.7);
+html[data-theme="retro"] .mode-dd-nav-btn:hover,
+html[data-theme="retro"] .mode-dd.is-open .mode-dd-nav-btn { border-color: #00e533; color: #00e533; }
+html[data-theme="retro"] .mode-dd-mob-btn {
+  border-color: rgba(0,229,51,.4);
+  color: rgba(0,229,51,.7);
 }
 
 /* ── Footer ──────────────────────────────────────────────────────────────── */

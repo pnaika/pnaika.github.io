@@ -8,7 +8,6 @@
   var outputEl = document.getElementById('term-output');
   var inputEl  = document.getElementById('term-input');
   var closeBtn = document.getElementById('term-close');
-  var toggleBtn = document.getElementById('term-toggle');
   if (!overlay || !outputEl || !inputEl) return;
 
   var cmdHistory = [];
@@ -350,8 +349,8 @@
     }
   });
 
-  if (closeBtn)  closeBtn.addEventListener('click', closeTerm);
-  if (toggleBtn) toggleBtn.addEventListener('click', openTerm);
+  if (closeBtn) closeBtn.addEventListener('click', closeTerm);
+  document.addEventListener('open-terminal', openTerm);
 
   // ─── Welcome banner ────────────────────────────────────────────────────────
 
