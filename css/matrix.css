@@ -3,24 +3,26 @@
 #matrix-canvas {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  /* Sits above page content, below overlays */
+  z-index: 500;
   pointer-events: none;
-  display: none;
+  opacity: 0;
+  display: block;
+  transition: opacity 0.6s ease;
 }
 
 html[data-theme="matrix"] #matrix-canvas {
-  display: block;
+  opacity: 0.18;
 }
 
 html[data-theme="matrix"] body {
   background: #000;
 }
 
-/* Nav stays on top */
+/* Nav sits above rain */
 html[data-theme="matrix"] #sideNav {
-  background: rgba(0, 10, 0, 0.92) !important;
+  background: rgba(0, 10, 0, 0.95) !important;
   border-right: 1px solid #0a3a0a;
-  position: relative;
   z-index: 1040;
 }
 
@@ -33,14 +35,14 @@ html[data-theme="matrix"] #sideNav .nav-link.active {
   color: #00ff41 !important;
 }
 
-/* Page content floats above canvas */
-html[data-theme="matrix"] .container-fluid {
-  position: relative;
-  z-index: 2;
+html[data-theme="matrix"] .resume-section {
+  background: rgba(0, 5, 0, 0.92);
 }
 
-html[data-theme="matrix"] .resume-section {
-  background: rgba(0, 6, 0, 0.86);
+/* Terminal / snake overlays always on top */
+#terminal-overlay,
+#snake-overlay {
+  z-index: 9999;
 }
 
 /* Typography */
@@ -84,12 +86,15 @@ html[data-theme="matrix"] hr {
   border-color: #0a3a0a;
 }
 
-/* Mode dropdown in matrix */
+/* Mode dropdown */
 html[data-theme="matrix"] .mode-dd-nav-btn,
 html[data-theme="matrix"] .mode-panel {
-  background: rgba(0, 10, 0, 0.95);
+  background: rgba(0, 10, 0, 0.97);
   border-color: #0a3a0a;
   color: #00cc33;
+  /* above rain canvas */
+  position: relative;
+  z-index: 600;
 }
 
 html[data-theme="matrix"] .mode-list li:hover {
@@ -100,13 +105,16 @@ html[data-theme="matrix"] .mode-list li:hover {
 /* Footer */
 html[data-theme="matrix"] .site-footer {
   color: #267326;
-  position: relative;
-  z-index: 2;
 }
 
-/* Scroll-to-top button */
+/* Scroll-to-top & progress bar above rain */
 html[data-theme="matrix"] #scroll-top {
   background: #001a00;
   color: #00ff41;
   border: 1px solid #0a3a0a;
+  z-index: 600;
+}
+
+html[data-theme="matrix"] #progress-bar {
+  z-index: 600;
 }
