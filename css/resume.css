@@ -383,6 +383,7 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
 .mode-dd-nav {
   display: flex;
   justify-content: center;
+  width: 100%;
   margin: 0.75rem 0 0.5rem;
   position: relative;
 }
