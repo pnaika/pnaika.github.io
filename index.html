@@ -28,6 +28,7 @@
   <link href="css/resume.css" rel="stylesheet">
   <link href="css/retro.css" rel="stylesheet">
   <link href="css/terminal.css" rel="stylesheet">
+  <link href="css/snake.css" rel="stylesheet">
   <!-- Apply saved theme before paint to avoid flash -->
   <script>var _t=localStorage.getItem('theme');if(_t==='dark'||_t==='retro')document.documentElement.setAttribute('data-theme',_t);</script>
 
@@ -132,6 +133,34 @@
   </div>
 </div>
 
+<!-- Snake game overlay -->
+<div id="snake-overlay">
+  <div class="snake-header">
+    <div class="term-dots">
+      <span class="term-dot red"></span>
+      <span class="term-dot yellow"></span>
+      <span class="term-dot green"></span>
+    </div>
+    <span class="snake-title">🐍 SNAKE</span>
+    <button id="snake-close" class="term-close">✕ close</button>
+  </div>
+  <div class="snake-body">
+    <div class="snake-stats">
+      <div>SCORE <span class="snake-stat-val" id="snake-score">0</span></div>
+      <div>BEST <span class="snake-stat-val" id="snake-hi">0</span></div>
+    </div>
+    <div class="snake-canvas-wrap">
+      <canvas id="snake-canvas"></canvas>
+      <div id="snake-msg" class="snake-msg">
+        <div class="snake-msg-title">GAME OVER</div>
+        <div class="snake-msg-score" id="snake-msg-score"></div>
+        <button id="snake-restart" class="snake-restart-btn">↩ Play again</button>
+      </div>
+    </div>
+    <div class="snake-hint">Arrow keys / WASD · swipe on mobile · Esc to close</div>
+  </div>
+</div>
+
 <!-- Terminal overlay -->
 <div id="terminal-overlay">
   <div class="term-header">
@@ -164,6 +193,8 @@
 <script async src="js/github.js"></script>
 <!-- Terminal fun mode -->
 <script src="js/terminal.js"></script>
+<!-- Snake easter egg -->
+<script src="js/snake.js"></script>
 
 </body>
 </html>

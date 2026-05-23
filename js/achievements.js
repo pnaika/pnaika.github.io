@@ -13,6 +13,8 @@
     { id: 'awards',     emoji: '🏅', title: 'Trophy Hunter',     desc: 'Found the awards section'         },
     { id: 'scrolled',   emoji: '🏆', title: 'Bottom Feeder',     desc: 'Scrolled all the way down!'       },
     { id: 'email',      emoji: '📋', title: 'Copy Cat',          desc: 'Copied the email address'         },
+    { id: 'snake',      emoji: '🐍', title: 'Easter Egg Hunter', desc: 'Found the hidden snake game!'     },
+    { id: 'snake10',    emoji: '🎮', title: 'Snake Master',      desc: 'Scored 10+ in the snake game'    },
   ];
 
   var unlocked = [];
