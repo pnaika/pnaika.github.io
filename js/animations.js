@@ -48,6 +48,44 @@
     }, true);
   }
 
+  // ── Custom cursor (desktop only) ─────────────────────────────────────────────
+
+  if (!isTouch) {
+    var dot  = document.createElement('div'); dot.className  = 'cursor-dot';
+    var ring = document.createElement('div'); ring.className = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    document.documentElement.classList.add('custom-cursor');
+
+    var toRingX = gsap.quickTo(ring, 'x', { duration: 0.15, ease: 'power3.out' });
+    var toRingY = gsap.quickTo(ring, 'y', { duration: 0.15, ease: 'power3.out' });
+
+    document.addEventListener('mousemove', function (e) {
+      gsap.set(dot,  { x: e.clientX, y: e.clientY });
+      toRingX(e.clientX);
+      toRingY(e.clientY);
+    });
+
+    // Hide when cursor leaves window
+    document.addEventListener('mouseleave', function () {
+      gsap.to([dot, ring], { opacity: 0, duration: 0.3 });
+    });
+    document.addEventListener('mouseenter', function () {
+      gsap.to([dot, ring], { opacity: 1, duration: 0.3 });
+    });
+
+    // Enlarge ring over interactive elements
+    var hoverSel = 'a, button, .resume-item, .list-inline-item, [data-bs-toggle], label, input, select';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest(hoverSel)) ring.classList.add('is-hovering');
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest(hoverSel)) ring.classList.remove('is-hovering');
+    });
+    document.addEventListener('mousedown', function () { ring.classList.add('is-clicking'); });
+    document.addEventListener('mouseup',   function () { ring.classList.remove('is-clicking'); });
+  }
+
   // ── Text split: preserves child element classes (e.g. text-primary on h1) ───
 
   function splitIntoChars(el) {
@@ -101,14 +139,24 @@
     { sel: '#about p',           y: -25 }
   ].forEach(function (layer) {
     gsap.to(layer.sel, {
-      scrollTrigger: {
-        trigger: '#about',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1.5
-      },
-      y: layer.y,
-      ease: 'none'
+      scrollTrigger: { trigger: '#about', start: 'top top', end: 'bottom top', scrub: 1.5 },
+      y: layer.y, ease: 'none'
+    });
+  });
+
+  // ── Section accent bars: draw left-to-right on scroll (skip #about) ──────────
+
+  document.querySelectorAll('section.resume-section:not(#about)').forEach(function (section) {
+    var bar = document.createElement('div');
+    bar.className = 'section-bar';
+    section.insertAdjacentElement('afterbegin', bar);
+
+    gsap.from(bar, {
+      scrollTrigger: { trigger: section, start: 'top 82%', toggleActions: 'play none none none' },
+      scaleX: 0,
+      transformOrigin: 'left center',
+      duration: 0.9,
+      ease: 'power3.inOut'
     });
   });
 
@@ -155,7 +203,36 @@
     });
   });
 
-  // ── Desktop-only interactions ────────────────────────────────────────────────
+  // ── GPA counters: count up from 0 when education section scrolls in ──────────
+
+  document.querySelectorAll('#education .resume-item p').forEach(function (p) {
+    var m = p.textContent.match(/GPA:\s*([\d.]+)/);
+    if (!m) return;
+    var target = parseFloat(m[1]);
+    p.innerHTML = p.innerHTML.replace(
+      /GPA:\s*([\d.]+)/,
+      'GPA: <span class="count-num" data-target="' + target + '">0.0</span>'
+    );
+    var span = p.querySelector('.count-num');
+
+    ScrollTrigger.create({
+      trigger: p,
+      start: 'top 88%',
+      once: true,
+      onEnter: function () {
+        gsap.to({ val: 0 }, {
+          val: target,
+          duration: 1.8,
+          ease: 'power2.out',
+          onUpdate: function () {
+            span.textContent = this.targets()[0].val.toFixed(1);
+          }
+        });
+      }
+    });
+  });
+
+  // ── Desktop-only pointer interactions ────────────────────────────────────────
 
   if (!isTouch) {
 
@@ -178,28 +255,22 @@
 
       card.addEventListener('mouseenter', function () {
         rect = card.getBoundingClientRect();
-        gsap.to(card, {
-          boxShadow: '0 16px 40px rgba(31,40,52,0.14)',
-          duration: 0.3
-        });
+        gsap.to(card, { boxShadow: '0 16px 40px rgba(31,40,52,0.14)', duration: 0.3 });
       });
 
       card.addEventListener('mousemove', function (e) {
         if (!rect) rect = card.getBoundingClientRect();
         var xPct = (e.clientX - rect.left) / rect.width;
         var yPct = (e.clientY - rect.top)  / rect.height;
-        var rotY =  (xPct - 0.5) * 2 * 6;  // ±6°
-        var rotX = -(yPct - 0.5) * 2 * 3;  // ±3°
 
         gsap.to(card, {
-          rotateY: rotY,
-          rotateX: rotX,
+          rotateY:  (xPct - 0.5) * 2 * 6,
+          rotateX: -(yPct - 0.5) * 2 * 3,
           transformPerspective: 900,
           duration: 0.4,
           ease: 'power2.out'
         });
 
-        // Shift the CSS-driven shine radial gradient to follow cursor
         card.style.setProperty('--shine-x', (xPct * 100).toFixed(1) + '%');
         card.style.setProperty('--shine-y', (yPct * 100).toFixed(1) + '%');
       });

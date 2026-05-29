@@ -164,9 +164,21 @@ a:hover, a:focus, a:active {
 
 /* ── Sections ────────────────────────────────────────────────────────────── */
 section.resume-section {
+  position: relative;
   border-bottom: 1px solid var(--color-border);
   padding-top: 5rem !important;
   padding-bottom: 5rem !important;
+}
+
+/* Accent bar injected by animations.js, drawn left-to-right on scroll */
+.section-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  transform-origin: left center;
+  will-change: transform;
+  border-radius: 0 2px 2px 0;
 }
 
 
@@ -646,3 +658,47 @@ html[data-theme="retro"] .ach-toast {
 
 html[data-theme="retro"] .ach-label { color: #00e533; }
 html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(0,255,65,.7); }
+
+/* ── Custom cursor (desktop only, added by animations.js) ────────────────── */
+.custom-cursor,
+.custom-cursor * { cursor: none !important; }
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  z-index: 10000;
+}
+
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--color-accent);
+}
+
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 2px solid var(--color-accent);
+  opacity: 0.6;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.cursor-ring.is-hovering {
+  width: 56px; height: 56px;
+  opacity: 0.3;
+}
+
+.cursor-ring.is-clicking {
+  width: 18px; height: 18px;
+  opacity: 1;
+  background: rgba(226,123,53,0.25);
+}
+
+/* ── GPA counter ─────────────────────────────────────────────────────────── */
+.count-num {
+  color: var(--color-accent);
+  font-weight: 700;
+}
