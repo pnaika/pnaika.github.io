@@ -5,6 +5,8 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
   // ── Lenis smooth scroll ──────────────────────────────────────────────────────
 
   var lenis;
@@ -20,7 +22,7 @@
     gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
 
-    // Route nav links and scroll-to-top through Lenis (capture phase beats resume.js bubbling listener)
+    // Route nav links and scroll-to-top through Lenis (capture phase)
     document.addEventListener('click', function (e) {
       var link = e.target.closest('a.js-scroll-trigger');
       if (link) {
@@ -31,7 +33,6 @@
             e.preventDefault();
             e.stopPropagation();
             lenis.scrollTo(target, { duration: 1.4 });
-            // close mobile nav
             var nav = document.getElementById('navbarSupportedContent');
             if (nav && nav.classList.contains('show')) {
               var bsCollapse = bootstrap.Collapse.getInstance(nav);
@@ -40,20 +41,17 @@
           }
         }
       }
-
-      // Scroll-to-top button
       if (e.target.closest('#scroll-top')) {
         e.stopPropagation();
         lenis.scrollTo(0, { duration: 1.4 });
       }
-    }, true); // capture phase
+    }, true);
   }
 
   // ── Text split: preserves child element classes (e.g. text-primary on h1) ───
 
   function splitIntoChars(el) {
     var chars = [];
-
     function walk(node, inheritClass) {
       if (node.nodeType === Node.TEXT_NODE) {
         var text = node.textContent;
@@ -62,7 +60,7 @@
           var s = document.createElement('span');
           s.style.display = 'inline-block';
           if (inheritClass) s.className = inheritClass;
-          s.textContent = text[i] === ' ' ? ' ' : text[i];
+          s.textContent = text[i] === ' ' ? ' ' : text[i];
           frag.appendChild(s);
           chars.push(s);
         }
@@ -72,12 +70,11 @@
         Array.from(node.childNodes).forEach(function (child) { walk(child, cls); });
       }
     }
-
     Array.from(el.childNodes).forEach(function (child) { walk(child, ''); });
     return chars;
   }
 
-  // ── About section: on-load timeline ─────────────────────────────────────────
+  // ── About section: on-load entry timeline ────────────────────────────────────
 
   var h1 = document.querySelector('#about h1');
   var h1Chars = h1 ? splitIntoChars(h1) : [];
@@ -96,7 +93,26 @@
       scale: 0, opacity: 0, duration: 0.4, stagger: 0.06, ease: 'back.out(1.7)'
     }, '-=0.2');
 
-  // ── Section headings: character-by-character reveal on scroll ────────────────
+  // ── About parallax: layers drift at different depths as you scroll away ──────
+
+  [
+    { sel: '#about h1',          y: -70 },
+    { sel: '#about .subheading', y: -45 },
+    { sel: '#about p',           y: -25 }
+  ].forEach(function (layer) {
+    gsap.to(layer.sel, {
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.5
+      },
+      y: layer.y,
+      ease: 'none'
+    });
+  });
+
+  // ── Section headings: character-by-character cascade on scroll ───────────────
 
   document.querySelectorAll('section.resume-section:not(#about) h2').forEach(function (h2) {
     var chars = splitIntoChars(h2);
@@ -130,7 +146,7 @@
     }
   });
 
-  // ── Skill icons: bounce pop-in ────────────────────────────────────────────────
+  // ── Skill icons: bounce pop-in on scroll ─────────────────────────────────────
 
   gsap.utils.toArray('.list-icons').forEach(function (row) {
     gsap.from(row.querySelectorAll('.list-inline-item'), {
@@ -138,5 +154,65 @@
       scale: 0, opacity: 0, duration: 0.35, stagger: 0.04, ease: 'back.out(1.7)'
     });
   });
+
+  // ── Desktop-only interactions ────────────────────────────────────────────────
+
+  if (!isTouch) {
+
+    // Magnetic pull on social icons
+    document.querySelectorAll('#about .list-social-icons .list-inline-item a').forEach(function (icon) {
+      icon.addEventListener('mousemove', function (e) {
+        var r = icon.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width  / 2) * 0.35;
+        var y = (e.clientY - r.top  - r.height / 2) * 0.35;
+        gsap.to(icon, { x: x, y: y, duration: 0.3, ease: 'power2.out' });
+      });
+      icon.addEventListener('mouseleave', function () {
+        gsap.to(icon, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+      });
+    });
+
+    // 3D tilt + moving shine on resume cards
+    document.querySelectorAll('.resume-item').forEach(function (card) {
+      var rect = null;
+
+      card.addEventListener('mouseenter', function () {
+        rect = card.getBoundingClientRect();
+        gsap.to(card, {
+          boxShadow: '0 16px 40px rgba(31,40,52,0.14)',
+          duration: 0.3
+        });
+      });
+
+      card.addEventListener('mousemove', function (e) {
+        if (!rect) rect = card.getBoundingClientRect();
+        var xPct = (e.clientX - rect.left) / rect.width;
+        var yPct = (e.clientY - rect.top)  / rect.height;
+        var rotY =  (xPct - 0.5) * 2 * 6;  // ±6°
+        var rotX = -(yPct - 0.5) * 2 * 3;  // ±3°
+
+        gsap.to(card, {
+          rotateY: rotY,
+          rotateX: rotX,
+          transformPerspective: 900,
+          duration: 0.4,
+          ease: 'power2.out'
+        });
+
+        // Shift the CSS-driven shine radial gradient to follow cursor
+        card.style.setProperty('--shine-x', (xPct * 100).toFixed(1) + '%');
+        card.style.setProperty('--shine-y', (yPct * 100).toFixed(1) + '%');
+      });
+
+      card.addEventListener('mouseleave', function () {
+        gsap.to(card, {
+          rotateY: 0, rotateX: 0,
+          boxShadow: '0 0 0 rgba(31,40,52,0)',
+          duration: 0.8, ease: 'elastic.out(1, 0.4)'
+        });
+        rect = null;
+      });
+    });
+  }
 
 })();
