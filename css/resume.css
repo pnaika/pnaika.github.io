@@ -191,6 +191,13 @@ section.resume-section .resume-item .resume-date { min-width: 0; }
   section.resume-section .resume-item .resume-date { min-width: 18rem; }
 }
 
+/* Keep content top-aligned (not vertically centred) in all sections except About */
+section.resume-section:not(#about) > .my-auto {
+  margin-top: 0 !important;
+  margin-bottom: auto !important;
+  width: 100%;
+}
+
 @media (min-width: 992px) {
   section.resume-section {
     padding-top: 3rem !important;
