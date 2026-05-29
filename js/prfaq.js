@@ -19,6 +19,22 @@
     return match ? match[0].trim() : text;
   }
 
+  /* Minimal HTML escaper */
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function faqItem(question, answerHtml) {
+    return [
+      '    <p class="prfaq-q">Q: ' + escHtml(question) + '</p>',
+      '    <p class="prfaq-a">A: ' + answerHtml + '</p>'
+    ].join('\n');
+  }
+
   // ── Build overlay HTML ────────────────────────────────────────
 
   function buildOverlay() {
@@ -27,10 +43,10 @@
     var exp = d.experience[0];
     var edu = d.education[0];
 
-    var fullName   = a.name.first + ' ' + a.name.last;
-    var years      = new Date().getFullYear() - a.careerStartYear;
-    var company    = exp.company;
-    var location   = a.location;
+    var fullName = a.name.first + ' ' + a.name.last;
+    var years    = new Date().getFullYear() - a.careerStartYear;
+    var company  = exp.company;
+    var location = a.location;
 
     // Date string
     var months = ['January','February','March','April','May','June',
@@ -53,21 +69,16 @@
     var skillsList = (d.skills && d.skills.other) ? d.skills.other.join(', ') : '';
 
     // Education
-    var eduCredential = edu.degree
-      ? 'Master\'s in ' + edu.degree + ' from ' + edu.school
-      : edu.school;
-    var eduDetail = eduCredential +
+    var eduName   = edu.degree ? edu.degree + ' from ' + edu.school : edu.school;
+    var eduDetail = eduName +
       (edu.gpa    ? ', GPA ' + edu.gpa    : '') +
       (edu.period ? ' (' + edu.period + ')' : '');
 
-    // LinkedIn
+    // Social — find LinkedIn
     var linkedInUrl = '';
     if (a.social) {
       for (var i = 0; i < a.social.length; i++) {
-        if (a.social[i].label === 'LinkedIn') {
-          linkedInUrl = a.social[i].url;
-          break;
-        }
+        if (a.social[i].label === 'LinkedIn') { linkedInUrl = a.social[i].url; break; }
       }
     }
     var contactAnswer = linkedInUrl
@@ -88,8 +99,8 @@
       /* Release tag + headline */
       '  <div class="prfaq-release-tag">For Immediate Release</div>',
       '  <h1 class="prfaq-headline">',
-        escHtml(fullName) + ' Brings ' + years + '+ Years of Engineering',
-        'Excellence to Lead ' + escHtml(company) + ' Software Development',
+      '    ' + escHtml(fullName) + ' Brings ' + years + '+ Years of Engineering',
+      '    Excellence to Lead ' + escHtml(company) + ' Software Development',
       '  </h1>',
       '  <p class="prfaq-dateline"><em>' + escHtml(location) + ' &ndash; ' + dateStr + ' &ndash;</em></p>',
 
@@ -119,7 +130,7 @@
       '    <h2>Frequently Asked Questions</h2>',
 
       faqItem(
-        'What is ' + a.name.first + '\'s current role?',
+        'What is ' + a.name.first + '’s current role?',
         escHtml(exp.title) + ' at ' + escHtml(exp.company) +
           (exp.period ? ' (' + escHtml(exp.period) + ').' : '.')
       ),
@@ -132,11 +143,12 @@
 
       faqItem(
         'What technologies does ' + a.name.first + ' specialize in?',
-        'Beyond the core icon set, ' + a.name.first + ' also works with: ' + escHtml(skillsList) + '.'
+        a.name.first + ' specializes in React, Angular, TypeScript, and AWS, ' +
+          'and also works with: ' + escHtml(skillsList) + '.'
       ),
 
       faqItem(
-        'What are ' + a.name.first + '\'s academic credentials?',
+        'What are ' + a.name.first + '’s academic credentials?',
         escHtml(eduDetail) + '.'
       ),
 
@@ -155,22 +167,6 @@
     ].join('\n');
 
     return html;
-  }
-
-  /* Minimal HTML escaper (does not escape quotes used inside attributes via innerHTML) */
-  function escHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-  }
-
-  function faqItem(question, answerHtml) {
-    return [
-      '    <p class="prfaq-q">Q: ' + escHtml(question) + '</p>',
-      '    <p class="prfaq-a">A: ' + answerHtml + '</p>'
-    ].join('\n');
   }
 
   // ── Lifecycle ────────────────────────────────────────────────
@@ -213,9 +209,7 @@
 
     /* Click outside .prfaq-doc */
     overlay.addEventListener('click', function (e) {
-      if (!e.target.closest('.prfaq-doc')) {
-        closeOverlay();
-      }
+      if (!e.target.closest('.prfaq-doc')) { closeOverlay(); }
     });
 
     /* Escape key */
