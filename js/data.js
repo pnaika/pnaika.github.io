@@ -13,7 +13,11 @@ var portfolioData = {
       'Front-End Architect',
       'Builder of High-Performance Teams'
     ],
-    resumeSummary: 'Software Development Manager at Amazon.com Services with 15+ years of experience spanning software engineering and technical leadership. Specialized in web and mobile application development using React, Angular, TypeScript, and AWS. Proven track record of delivering high-impact, customer-facing products at scale while growing and mentoring engineering teams.',
+    get resumeSummary() {
+      return 'Software Development Manager at Amazon.com Services with ' +
+        (new Date().getFullYear() - this.careerStartYear) +
+        '+ years of experience spanning software engineering and technical leadership. Specialized in web and mobile application development using React, Angular, TypeScript, and AWS. Proven track record of delivering high-impact, customer-facing products at scale while growing and mentoring engineering teams.';
+    },
     profileImage: 'https://s3-us-west-2.amazonaws.com/prashanth-resume/resources/images/PrashanthPNaika.jpg',
     bio: [
       'Software Development Manager at <a href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon.com Services</a>, leading a team of engineers building Tier 0 ticketing, paging, and on-call infrastructure relied on by every engineering team across the company.',
