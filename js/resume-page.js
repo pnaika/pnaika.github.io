@@ -19,7 +19,7 @@
   function bullets(list) {
     if (!list || !list.length) return '';
     return tag('ul', {}, list.map(function (b) {
-      return tag('li', {}, b);
+      return tag('li', {}, typeof b === 'string' ? b : b.text);
     }).join(''));
   }
 

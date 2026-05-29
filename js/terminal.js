@@ -153,13 +153,13 @@
           client.roles.forEach(function (role) {
             line('<span class="term-dim">  ' + esc(role.title) + '</span>');
             (role.bullets || []).forEach(function (b) {
-              txt('    · ' + stripTags(b));
+              txt('    · ' + stripTags(typeof b === 'string' ? b : b.text));
             });
           });
         });
       } else {
         (job.bullets || []).forEach(function (b) {
-          txt('  · ' + stripTags(b));
+          txt('  · ' + stripTags(typeof b === 'string' ? b : b.text));
         });
       }
     });
