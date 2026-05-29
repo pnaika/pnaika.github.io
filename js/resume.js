@@ -17,7 +17,35 @@
 
   function bullets(list) {
     if (!list || !list.length) return '';
-    return tag('ul', {}, list.map(function (b) { return tag('li', {}, b); }).join(''));
+    return tag('ul', {}, list.map(function (b) {
+      if (typeof b === 'string') return tag('li', {}, b);
+      var badges = (b.lp || []).map(function (p) {
+        return tag('span', { class: 'lp-badge' }, p);
+      }).join('');
+      return tag('li', {}, b.text + (badges ? ' ' + badges : ''));
+    }).join(''));
+  }
+
+  function renderLeadership(principles) {
+    var cards = principles.map(function (p) {
+      return tag('div', { class: 'resume-item lp-card mb-4' },
+        tag('div', { class: 'lp-card-inner' },
+          tag('div', { class: 'lp-card-header mb-2' },
+            tag('span', { class: 'lp-principle-name' }, p.principle)
+          ) +
+          tag('p', { class: 'lp-tagline mb-2' }, p.tagline) +
+          tag('p', { class: 'mb-0' }, p.example)
+        )
+      );
+    }).join('');
+
+    return tag('div', { class: 'my-auto' },
+      tag('h2', { class: 'mb-2' }, 'Leadership Principles') +
+      tag('p', { class: 'lp-intro mb-5' },
+        'Amazon\'s Leadership Principles aren\'t a poster on a wall — they\'re the operating system. Here\'s how I live the ones that define my leadership style.'
+      ) +
+      tag('div', { class: 'lp-grid' }, cards)
+    );
   }
 
   function linkedInBadge(url, name) {
@@ -304,6 +332,7 @@
   var d = portfolioData;
   populate('about',           renderAbout(d.about));
   populate('experience',      renderExperience(d.experience));
+  populate('leadership',      renderLeadership(d.leadership));
   populate('education',       renderEducation(d.education));
   populate('skills',          renderSkills(d.skills));
   populate('sideProjects',    renderSideProjects(d.sideProjects));

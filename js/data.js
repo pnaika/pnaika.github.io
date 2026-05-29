@@ -45,11 +45,11 @@ var portfolioData = {
       logoAlt: 'Amazon',
       period: 'Aug 2025 – Present',
       bullets: [
-        'Lead a team of 10–12 engineers owning Amazon\'s Tier 0 internal ticketing, paging, and on-call platform — mission-critical infrastructure relied on by every engineering team across the company',
-        'Drive technical roadmap, headcount planning, and delivery for a zero-downtime system that underpins Amazon\'s global operational response',
-        'Partner with senior leadership and cross-org stakeholders to align on reliability, scalability, and feature investments for the platform',
-        'Champion engineering culture and operational excellence — bar raising, on-call health, and incident response standards — to maintain the highest service bar',
-        'Mentor and develop engineers across multiple levels, fostering career growth and building a high-performing, ownership-driven team'
+        { text: 'Lead a team of 10–12 engineers owning Amazon\'s Tier 0 internal ticketing, paging, and on-call platform — mission-critical infrastructure relied on by every engineering team across the company', lp: ['Ownership', 'Customer Obsession'] },
+        { text: 'Drive technical roadmap, headcount planning, and delivery for a zero-downtime system that underpins Amazon\'s global operational response', lp: ['Deliver Results', 'Think Big'] },
+        { text: 'Partner with senior leadership and cross-org stakeholders to align on reliability, scalability, and feature investments for the platform', lp: ['Earn Trust'] },
+        { text: 'Champion engineering culture and operational excellence — bar raising, on-call health, and incident response standards — to maintain the highest service bar', lp: ['Insist on the Highest Standards'] },
+        { text: 'Mentor and develop engineers across multiple levels, fostering career growth and building a high-performing, ownership-driven team', lp: ['Hire and Develop the Best'] }
       ]
     },
     {
@@ -60,11 +60,11 @@ var portfolioData = {
       logoAlt: 'Amazon',
       period: 'Mar 2020 – Aug 2025',
       bullets: [
-        'Served as front-end tech lead for the Tier 0 ticketing, paging, and on-call platform, guiding architecture decisions and setting code quality standards across the team',
-        'Designed and built customer-facing UI workflows used by Amazon engineers globally for incident management, paging, and operational response',
-        'Mentored junior and mid-level engineers through code reviews, pair programming, and front-end best practice guidance',
-        'Drove modernization of the front-end stack with React and TypeScript, improving developer velocity and long-term maintainability',
-        'Collaborated cross-functionally with PMs, designers, and back-end engineers to ship high-quality, high-reliability releases'
+        { text: 'Served as front-end tech lead for the Tier 0 ticketing, paging, and on-call platform, guiding architecture decisions and setting code quality standards across the team', lp: ['Dive Deep', 'Insist on the Highest Standards'] },
+        { text: 'Designed and built customer-facing UI workflows used by Amazon engineers globally for incident management, paging, and operational response', lp: ['Customer Obsession', 'Deliver Results'] },
+        { text: 'Mentored junior and mid-level engineers through code reviews, pair programming, and front-end best practice guidance', lp: ['Hire and Develop the Best'] },
+        { text: 'Drove modernization of the front-end stack with React and TypeScript, improving developer velocity and long-term maintainability', lp: ['Invent and Simplify'] },
+        { text: 'Collaborated cross-functionally with PMs, designers, and back-end engineers to ship high-quality, high-reliability releases', lp: ['Earn Trust'] }
       ]
     },
     {
@@ -167,6 +167,39 @@ var portfolioData = {
         'Independently managed and delivered Small Change Requests (SCRs) end-to-end into production',
         'Participated in all phases of the SDLC following the Infosys Global Delivery Model'
       ]
+    }
+  ],
+
+  leadership: [
+    {
+      principle: 'Customer Obsession',
+      tagline: 'Start with the customer and work backwards.',
+      example: 'At Amazon I lead the Tier 0 ticketing and on-call platform — the system every engineering team reaches for when production is on fire. Every architecture decision starts with one question: what happens to the engineer paging at 2am if this fails? That framing keeps the team honest about what "good enough" actually means.'
+    },
+    {
+      principle: 'Ownership',
+      tagline: 'Think long term and never say "that\'s not my job."',
+      example: 'Running a zero-downtime Tier 0 platform means ownership is non-negotiable. I\'ve driven roadmap, on-call health, and incident response standards well beyond my team\'s immediate scope — because the downstream cost of failure belongs to the whole organisation, not just the team on-call.'
+    },
+    {
+      principle: 'Hire and Develop the Best',
+      tagline: 'Raise the performance bar with every hire and every review.',
+      example: 'I\'ve mentored engineers from junior to senior across multiple teams, built structured growth plans around individual strengths, and calibrated bar-raising interview loops. The best signal I can give a team member is a rigorous, honest code review — not a rubber stamp.'
+    },
+    {
+      principle: 'Insist on the Highest Standards',
+      tagline: 'Have relentlessly high standards — continuously raise the bar.',
+      example: 'I introduced structured code review guidelines, on-call health metrics, and blameless post-incident reviews at Amazon that measurably reduced repeat pages and increased team confidence in production. High standards aren\'t a destination — they\'re a ratchet.'
+    },
+    {
+      principle: 'Invent and Simplify',
+      tagline: 'Expect and require innovation. Find ways to simplify.',
+      example: 'Led the modernisation of our front-end stack from a legacy codebase to React and TypeScript — reducing bundle size, eliminating entire classes of runtime errors, and cutting the time to ship a new feature in half. The best solutions remove things, not add them.'
+    },
+    {
+      principle: 'Deliver Results',
+      tagline: 'Focus on the key inputs. Deliver with the right quality and in a timely fashion.',
+      example: 'Shipped and operated mission-critical infrastructure at 99.99%+ availability, scaled the team from 6 to 12 engineers, and maintained delivery velocity while simultaneously improving on-call health. Results aren\'t a lagging metric — they\'re the whole point.'
     }
   ],
 
