@@ -166,11 +166,12 @@
 
   // ── Section headings: character-by-character cascade on scroll ───────────────
 
-  document.querySelectorAll('section.resume-section:not(#about) h2').forEach(function (h2) {
-    var chars = splitIntoChars(h2);
+  document.querySelectorAll('section.resume-section:not(#about) h2, section.resume-section:not(#about) h3').forEach(function (heading) {
+    var isH2 = heading.tagName === 'H2';
+    var chars = splitIntoChars(heading);
     gsap.from(chars, {
-      scrollTrigger: { trigger: h2, start: 'top 88%', toggleActions: 'play none none none' },
-      y: 60, opacity: 0, duration: 0.5, stagger: 0.025, ease: 'power3.out'
+      scrollTrigger: { trigger: heading, start: 'top 88%', toggleActions: 'play none none none' },
+      y: isH2 ? 60 : 40, opacity: 0, duration: isH2 ? 0.5 : 0.4, stagger: isH2 ? 0.025 : 0.018, ease: 'power3.out'
     });
   });
 
