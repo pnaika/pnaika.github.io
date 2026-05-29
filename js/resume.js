@@ -419,6 +419,7 @@
       scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
     }, { passive: true });
     scrollTopBtn.addEventListener('click', function () {
+      if (window._lenis) { window._lenis.scrollTo(0, { duration: 1.0 }); return; }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
