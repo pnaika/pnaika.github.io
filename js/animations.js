@@ -95,12 +95,16 @@
         var text = node.textContent;
         var frag = document.createDocumentFragment();
         for (var i = 0; i < text.length; i++) {
-          var s = document.createElement('span');
-          s.style.display = 'inline-block';
-          if (inheritClass) s.className = inheritClass;
-          s.textContent = text[i] === ' ' ? ' ' : text[i];
-          frag.appendChild(s);
-          chars.push(s);
+          if (text[i] === ' ') {
+            frag.appendChild(document.createTextNode(' '));
+          } else {
+            var s = document.createElement('span');
+            s.style.display = 'inline-block';
+            if (inheritClass) s.className = inheritClass;
+            s.textContent = text[i];
+            frag.appendChild(s);
+            chars.push(s);
+          }
         }
         node.parentNode.replaceChild(frag, node);
       } else if (node.nodeType === Node.ELEMENT_NODE) {
