@@ -1,0 +1,135 @@
+/* PR/FAQ Overlay — Amazon "Working Backwards" document style */
+
+/* Overlay container */
+#prfaq-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  background: #fff;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.28s ease-out, transform 0.28s ease-out, visibility 0s linear 0.28s;
+}
+#prfaq-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.28s ease-out, transform 0.28s ease-out, visibility 0s linear 0s;
+}
+
+/* Close button */
+#prfaq-close {
+  position: fixed;
+  top: 1.1rem;
+  right: 1.4rem;
+  z-index: 9501;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+}
+#prfaq-close:hover { color: #111; background: #f0f0f0; }
+
+/* Document wrapper */
+.prfaq-doc {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+/* Amazon orange header bar */
+.prfaq-header {
+  border-top: 3px solid #FF9900;
+  padding-top: 0.6rem;
+  margin-bottom: 1.6rem;
+}
+.prfaq-header-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FF9900;
+}
+
+/* Release tag */
+.prfaq-release-tag {
+  font-size: 0.72rem;
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  color: #FF9900;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+/* Headline */
+.prfaq-headline {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.25;
+  margin: 0.4rem 0 0.8rem;
+  color: #111;
+}
+
+/* Dateline */
+.prfaq-dateline { font-style: italic; color: #666; margin-bottom: 1.2rem; font-size: 0.95rem; }
+
+/* Body copy */
+.prfaq-doc p { text-align: justify; line-height: 1.75; margin: 0 0 1rem; }
+
+/* Pull quote */
+.prfaq-quote {
+  border-left: 4px solid #FF9900;
+  padding: 0.6rem 1rem 0.6rem 1.2rem;
+  margin: 1.4rem 0;
+  background: #fffbf2;
+  font-style: italic;
+  color: #444;
+}
+.prfaq-quote cite { display: block; margin-top: 0.5rem; font-style: normal; font-size: 0.82rem; font-weight: 600; color: #555; }
+
+/* ### separator */
+.prfaq-hash { text-align: center; font-weight: 700; letter-spacing: 0.3em; color: #555; margin: 1.8rem 0; }
+
+/* FAQ section heading — mirrors .prfaq-release-tag */
+.prfaq-faq h2 {
+  font-size: 0.72rem;
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  color: #FF9900;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid #FF9900;
+  padding-bottom: 0.35rem;
+  margin-bottom: 1.2rem;
+}
+.prfaq-q { font-weight: 700; color: #111; margin-top: 1.5rem; margin-bottom: 0.3rem; }
+.prfaq-a { margin-left: 1rem; line-height: 1.7; color: #333; }
+
+/* Boilerplate footer */
+.prfaq-boilerplate {
+  border-top: 1px solid #ddd;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* Print */
+@media print {
+  #prfaq-close { display: none; }
+  .prfaq-doc   { padding: 0; }
+}

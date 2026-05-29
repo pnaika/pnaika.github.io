@@ -396,8 +396,8 @@
 
   // ─── Mode dropdown ────────────────────────────────────────────────────────
 
-  var THEME_ICONS  = { light: 'fas fa-sun', dark: 'fas fa-moon', retro: 'fas fa-tv', matrix: 'fas fa-code' };
-  var THEME_LABELS = { light: 'Light', dark: 'Dark', retro: 'Retro / CRT', matrix: 'Matrix' };
+  var THEME_ICONS  = { light: 'fas fa-sun', dark: 'fas fa-moon', retro: 'fas fa-tv', matrix: 'fas fa-code', newspaper: 'fas fa-newspaper' };
+  var THEME_LABELS = { light: 'Light', dark: 'Dark', retro: 'Retro / CRT', matrix: 'Matrix', newspaper: 'Newspaper' };
 
   var modeNavIcon   = document.getElementById('mode-nav-icon');
   var modeNavLabel  = document.getElementById('mode-nav-label');
@@ -422,9 +422,10 @@
     });
     if (theme === 'matrix') document.dispatchEvent(new CustomEvent('matrix-start'));
     if (window.Achievement) {
-      if (theme === 'dark')   window.Achievement.unlock('dark');
-      if (theme === 'retro')  window.Achievement.unlock('retro');
-      if (theme === 'matrix') window.Achievement.unlock('matrix');
+      if (theme === 'dark')      window.Achievement.unlock('dark');
+      if (theme === 'retro')     window.Achievement.unlock('retro');
+      if (theme === 'matrix')    window.Achievement.unlock('matrix');
+      if (theme === 'newspaper') window.Achievement.unlock('newspaper');
     }
   }
 
@@ -451,6 +452,8 @@
         document.dispatchEvent(new CustomEvent('open-terminal'));
       } else if (mode === 'snake') {
         document.dispatchEvent(new CustomEvent('open-snake'));
+      } else if (mode === 'prfaq') {
+        document.dispatchEvent(new CustomEvent('open-prfaq'));
       } else {
         localStorage.setItem('theme', mode);
         applyTheme(mode);

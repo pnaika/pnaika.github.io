@@ -1,0 +1,144 @@
+/* ── Newspaper / Broadsheet mode ────────────────────────────────────────── */
+
+html[data-theme="newspaper"] {
+  --color-dark:        #1a1209;
+  --color-accent:      #8B0000;
+  --color-accent-dark: #5a0000;
+  --color-muted:       #7a6a50;
+  --color-border:      #c8b89a;
+  --color-heading:     #1a1209;
+  --color-bg:          #F2ECD8;
+  --nav-width:         17rem;
+  --font-heading:      Georgia, 'Times New Roman', Times, serif;
+  --font-body:         Georgia, 'Times New Roman', Times, serif;
+}
+
+html[data-theme="newspaper"],
+html[data-theme="newspaper"] * {
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+/* ── Body & background ───────────────────────────────────────────────────── */
+html[data-theme="newspaper"] body {
+  background-color: #F2ECD8 !important;
+  color: #1a1209 !important;
+}
+
+/* ── Masthead (About section) ────────────────────────────────────────────── */
+html[data-theme="newspaper"] #about::before {
+  content: "THE ENGINEER TIMES";
+  display: block;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1a1209;
+  border-top: 5px double #1a1209;
+  border-bottom: 5px double #1a1209;
+  padding: 0.4rem 0;
+  margin-bottom: 0.6rem;
+  width: 100%;
+}
+
+html[data-theme="newspaper"] #about .my-auto::before {
+  content: "\2015\2015  Seattle, Washington \00B7  Est. 2011 \00B7  Daily Edition  \2015\2015";
+  display: block;
+  text-align: center;
+  font-variant: small-caps;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: #7a6a50;
+  margin-bottom: 1.2rem;
+}
+
+/* ── Section headings (h2) ───────────────────────────────────────────────── */
+html[data-theme="newspaper"] h2 {
+  text-align: center !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2em !important;
+  color: #1a1209 !important;
+  border-top: 3px double #1a1209;
+  border-bottom: 1px solid #1a1209;
+  padding: 0.35rem 0;
+  margin-bottom: 1.25rem !important;
+}
+
+/* ── Drop cap ────────────────────────────────────────────────────────────── */
+html[data-theme="newspaper"] #about p:first-of-type::first-letter {
+  float: left;
+  font-size: 4rem;
+  line-height: 0.75;
+  margin: 0.08em 0.1em 0 0;
+  color: #8B0000;
+  font-weight: 900;
+}
+
+/* ── Section borders ─────────────────────────────────────────────────────── */
+html[data-theme="newspaper"] section.resume-section {
+  border-bottom: 3px double #c8b89a !important;
+}
+
+/* ── Resume items (cards) ────────────────────────────────────────────────── */
+html[data-theme="newspaper"] .resume-item {
+  background: rgba(200, 184, 154, 0.18);
+  border: 1px solid #c8b89a;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Skills columns ──────────────────────────────────────────────────────── */
+html[data-theme="newspaper"] .fa-ul {
+  columns: 2;
+}
+
+/* ── Navigation sidebar ──────────────────────────────────────────────────── */
+html[data-theme="newspaper"] #sideNav {
+  background-color: #1a1209 !important;
+  border-right: 3px double #c8b89a;
+}
+
+html[data-theme="newspaper"] #sideNav .nav-link {
+  color: rgba(242, 236, 216, 0.65) !important;
+}
+
+html[data-theme="newspaper"] #sideNav .nav-link.active,
+html[data-theme="newspaper"] #sideNav .nav-link:hover {
+  color: #F2ECD8 !important;
+}
+
+/* ── Section bar ─────────────────────────────────────────────────────────── */
+html[data-theme="newspaper"] .section-bar {
+  background: linear-gradient(90deg, #8B0000, #5a0000) !important;
+}
+
+/* ── Links ───────────────────────────────────────────────────────────────── */
+html[data-theme="newspaper"] a,
+html[data-theme="newspaper"] a:visited {
+  color: #8B0000 !important;
+  text-decoration: underline !important;
+}
+
+html[data-theme="newspaper"] a:hover {
+  color: #5a0000 !important;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+html[data-theme="newspaper"] ::-webkit-scrollbar { width: 10px; }
+html[data-theme="newspaper"] ::-webkit-scrollbar-track { background: #e8dfc8; }
+html[data-theme="newspaper"] ::-webkit-scrollbar-thumb { background: #c8b89a; border-radius: 2px; }
+html[data-theme="newspaper"] ::-webkit-scrollbar-thumb:hover { background: #a89870; }
+
+/* ── Mode dropdown ───────────────────────────────────────────────────────── */
+html[data-theme="newspaper"] .mode-panel {
+  background: #F2ECD8;
+  border-color: #c8b89a;
+}
+html[data-theme="newspaper"] .mode-list li { color: #7a6a50; }
+html[data-theme="newspaper"] .mode-list li:hover { background: rgba(200,184,154,.25); color: #1a1209; }
+html[data-theme="newspaper"] .mode-list li.is-active { color: #8B0000; }
+html[data-theme="newspaper"] .mode-dd-nav-btn,
+html[data-theme="newspaper"] .mode-dd-mob-btn {
+  border-color: rgba(139,0,0,.4);
+  color: #8B0000;
+}
