@@ -13,7 +13,7 @@
 
   if (typeof Lenis !== 'undefined') {
     lenis = new Lenis({
-      lerp:            0.08,   // per-frame interpolation — lower = more momentum
+      lerp:            0.12,   // per-frame interpolation — higher = snappier
       wheelMultiplier: 1.0,
       smoothWheel:     true,
     });
@@ -48,44 +48,6 @@
         lenis.scrollTo(0, { duration: 1.0 });
       }
     }, true);
-  }
-
-  // ── Custom cursor (desktop only) ─────────────────────────────────────────────
-
-  if (!isTouch) {
-    var dot  = document.createElement('div'); dot.className  = 'cursor-dot';
-    var ring = document.createElement('div'); ring.className = 'cursor-ring';
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
-    document.documentElement.classList.add('custom-cursor');
-
-    var toRingX = gsap.quickTo(ring, 'x', { duration: 0.15, ease: 'power3.out' });
-    var toRingY = gsap.quickTo(ring, 'y', { duration: 0.15, ease: 'power3.out' });
-
-    document.addEventListener('mousemove', function (e) {
-      gsap.set(dot,  { x: e.clientX, y: e.clientY });
-      toRingX(e.clientX);
-      toRingY(e.clientY);
-    });
-
-    // Hide when cursor leaves window
-    document.addEventListener('mouseleave', function () {
-      gsap.to([dot, ring], { opacity: 0, duration: 0.3 });
-    });
-    document.addEventListener('mouseenter', function () {
-      gsap.to([dot, ring], { opacity: 1, duration: 0.3 });
-    });
-
-    // Enlarge ring over interactive elements
-    var hoverSel = 'a, button, .resume-item, .list-inline-item, [data-bs-toggle], label, input, select';
-    document.addEventListener('mouseover', function (e) {
-      if (e.target.closest(hoverSel)) ring.classList.add('is-hovering');
-    });
-    document.addEventListener('mouseout', function (e) {
-      if (e.target.closest(hoverSel)) ring.classList.remove('is-hovering');
-    });
-    document.addEventListener('mousedown', function () { ring.classList.add('is-clicking'); });
-    document.addEventListener('mouseup',   function () { ring.classList.remove('is-clicking'); });
   }
 
   // ── Text split: preserves child element classes (e.g. text-primary on h1) ───
