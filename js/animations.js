@@ -7,49 +7,6 @@
 
   var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-  // ── Lenis smooth scroll ──────────────────────────────────────────────────────
-
-  var lenis;
-
-  if (typeof Lenis !== 'undefined') {
-    lenis = new Lenis({
-      lerp:            0.12,   // per-frame interpolation — higher = snappier
-      wheelMultiplier: 1.0,
-      smoothWheel:     true,
-    });
-
-    window._lenis = lenis;
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-    gsap.ticker.lagSmoothing(0);
-
-    // Route nav links and scroll-to-top through Lenis (capture phase)
-    document.addEventListener('click', function (e) {
-      var link = e.target.closest('a.js-scroll-trigger');
-      if (link) {
-        var href = link.getAttribute('href');
-        if (href && href.startsWith('#') && href.length > 1) {
-          var target = document.querySelector(href);
-          if (target) {
-            e.preventDefault();
-            e.stopPropagation();
-            lenis.scrollTo(target, { duration: 1.0 });
-            var nav = document.getElementById('navbarSupportedContent');
-            if (nav && nav.classList.contains('show')) {
-              var bsCollapse = bootstrap.Collapse.getInstance(nav);
-              if (bsCollapse) bsCollapse.hide();
-            }
-          }
-        }
-      }
-      if (e.target.closest('#scroll-top')) {
-        e.preventDefault();
-        e.stopPropagation();
-        lenis.scrollTo(0, { duration: 1.0 });
-      }
-    }, true);
-  }
-
   // ── Text split: preserves child element classes (e.g. text-primary on h1) ───
 
   function splitIntoChars(el) {
