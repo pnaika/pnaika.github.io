@@ -83,6 +83,28 @@
   color: #111;
 }
 
+/* Override site-level heading styles that bleed into the overlay */
+#prfaq-overlay h1,
+#prfaq-overlay h2,
+#prfaq-overlay h3,
+#prfaq-overlay h4,
+#prfaq-overlay h5,
+#prfaq-overlay h6 {
+  color: #111 !important;
+  font-family: Calibri, Arial, sans-serif !important;
+  font-size: revert !important;
+  line-height: revert !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+#prfaq-overlay .prfaq-headline {
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 1.55rem !important;
+  line-height: 1.25 !important;
+  text-transform: uppercase !important;
+  color: #111 !important;
+}
+
 /* Dateline */
 .prfaq-dateline { font-style: italic; color: #666; margin-bottom: 1.2rem; font-size: 0.95rem; }
 
