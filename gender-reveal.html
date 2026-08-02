@@ -470,9 +470,16 @@
   })();
 
   // ── Screen helpers ───────────────────────────────────────────────────────────
+  var refreshTimer = null;
+
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('active'); });
     document.getElementById(id).classList.add('active');
+
+    clearInterval(refreshTimer);
+    if (id === 'screen-result') {
+      refreshTimer = setInterval(fetchCounts, 5000);
+    }
   }
 
   function goToVote() {
