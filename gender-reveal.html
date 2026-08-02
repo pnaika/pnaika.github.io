@@ -415,6 +415,7 @@
 
   var voterName = '';
   var myVote    = '';
+  var prevVote  = '';
 
   // ── Floating background hearts ────────────────────────────────────────────
   (function () {
@@ -493,16 +494,17 @@
     myVote = choice;
     localStorage.setItem('gr-vote', JSON.stringify({ name: voterName, vote: choice }));
 
-    // Sparkle burst at tap location
     if (evt) burstSparkles(evt.clientX, evt.clientY, choice);
-
-    // Disable buttons immediately to prevent double-tap
     document.querySelectorAll('.vote-btn').forEach(function (b) { b.disabled = true; });
 
-    // Increment via CountAPI, then show results
-    fetch('https://api.countapi.xyz/hit/' + NS + '/' + choice)
-      .catch(function () { /* silent — still show results */ })
-      .finally(showResults);
+    var reqs = [fetch('https://api.countapi.xyz/hit/' + NS + '/' + choice).catch(function () {})];
+    // Undo old vote if changing sides
+    if (prevVote && prevVote !== choice) {
+      reqs.push(fetch('https://api.countapi.xyz/update/' + NS + '/' + prevVote + '?amount=-1').catch(function () {}));
+    }
+    prevVote = '';
+
+    Promise.all(reqs).finally(showResults);
   }
 
   // ── Results ──────────────────────────────────────────────────────────────────
@@ -554,11 +556,12 @@
 
   // ── Reset / change vote ───────────────────────────────────────────────────────
   function resetVote() {
+    prevVote = myVote; // remember so castVote can undo it
+    myVote   = '';
     localStorage.removeItem('gr-vote');
-    myVote = '';
-    document.getElementById('name-input').value = voterName;
+    document.getElementById('voter-name-display').textContent = voterName;
     document.querySelectorAll('.vote-btn').forEach(function (b) { b.disabled = false; });
-    showScreen('screen-name');
+    showScreen('screen-vote'); // skip name — we already know who they are
   }
 
   // ── Confetti ──────────────────────────────────────────────────────────────────
