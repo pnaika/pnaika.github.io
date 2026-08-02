@@ -3,19 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Gender Reveal 🎉 — Naika Family</title>
+  <title>Gender Reveal 🎉 — PDRF</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       min-height: 100dvh;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #fce4ec 0%, #e3f2fd 100%);
+      font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #fce4ec 0%, #e8d5f5 50%, #e3f2fd 100%);
+      background-size: 400% 400%;
+      animation: bgShift 8s ease infinite;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1rem;
       overflow-x: hidden;
+    }
+
+    @keyframes bgShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ── Floating hearts bg ── */
+    .bg-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .bg-heart {
+      position: absolute;
+      bottom: -60px;
+      font-size: 1.4rem;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+      10%  { opacity: 0.35; }
+      90%  { opacity: 0.2; }
+      100% { transform: translateY(-110vh) rotate(30deg) scale(1.1); opacity: 0; }
     }
 
     /* ── Screens ── */
@@ -25,59 +57,89 @@
       align-items: center;
       width: 100%;
       max-width: 480px;
-      animation: fadeUp 0.4s ease;
+      position: relative;
+      z-index: 1;
     }
-    .screen.active { display: flex; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .screen.active {
+      display: flex;
+      animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.88) translateY(24px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0); }
     }
 
     /* ── Card ── */
     .card {
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(12px);
-      border-radius: 24px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
       padding: 2.5rem 2rem;
       width: 100%;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 60px rgba(180,100,180,0.18), 0 2px 8px rgba(0,0,0,0.07);
       text-align: center;
+      border: 1.5px solid rgba(255,255,255,0.7);
     }
 
-    .emoji-top { font-size: 3.5rem; line-height: 1; margin-bottom: 0.6rem; }
-    h1 { font-size: 1.75rem; font-weight: 800; color: #2d2d2d; margin-bottom: 0.3rem; }
-    .subtitle { font-size: 1rem; color: #777; margin-bottom: 1.8rem; }
+    /* ── Emoji pulse ── */
+    .emoji-top {
+      font-size: 3.5rem;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+      display: inline-block;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.12); }
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: #2d2d2d;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.01em;
+    }
+    .subtitle { font-size: 1rem; color: #888; margin-bottom: 1.8rem; }
 
     /* ── Name input ── */
     input[type="text"] {
       width: 100%;
       padding: 0.85rem 1.1rem;
       font-size: 1.05rem;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
+      font-family: inherit;
+      border: 2px solid #e8d5f5;
+      border-radius: 14px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.25s, box-shadow 0.25s;
       color: #2d2d2d;
-      background: #fff;
+      background: #fdf7ff;
     }
-    input[type="text"]:focus { border-color: #c78be5; }
-    input[type="text"]::placeholder { color: #bbb; }
+    input[type="text"]:focus {
+      border-color: #c78be5;
+      box-shadow: 0 0 0 4px rgba(199,139,229,0.15);
+    }
+    input[type="text"]::placeholder { color: #cbb; }
 
     .btn-next {
       margin-top: 1rem;
       width: 100%;
-      padding: 0.9rem;
+      padding: 0.95rem;
       font-size: 1.05rem;
-      font-weight: 700;
+      font-weight: 800;
+      font-family: inherit;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       background: linear-gradient(135deg, #f48fb1, #ce93d8);
       color: #fff;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.03em;
+      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(206,147,216,0.45);
     }
-    .btn-next:hover  { opacity: 0.9; }
-    .btn-next:active { transform: scale(0.98); }
+    .btn-next:hover  { opacity: 0.92; box-shadow: 0 6px 24px rgba(206,147,216,0.6); }
+    .btn-next:active { transform: scale(0.97); }
 
     /* ── Vote buttons ── */
     .vote-row {
@@ -88,44 +150,78 @@
     }
     .vote-btn {
       flex: 1;
-      padding: 1.6rem 0.5rem;
+      padding: 2rem 0.5rem 1.6rem;
       border: none;
-      border-radius: 18px;
-      font-size: 2.8rem;
+      border-radius: 22px;
+      font-size: 3rem;
       cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
+      transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.18s;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
+      overflow: hidden;
     }
+    .vote-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 0.15s;
+    }
+    .vote-btn:hover::after { background: rgba(255,255,255,0.12); }
     .vote-btn span.label {
       font-size: 1.05rem;
-      font-weight: 800;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+    .vote-btn span.sublabel {
+      font-size: 0.72rem;
+      font-weight: 700;
+      opacity: 0.65;
       letter-spacing: 0.04em;
     }
-    .vote-btn:hover  { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
-    .vote-btn:active { transform: scale(0.97); }
+    .vote-btn:hover  { transform: translateY(-6px) scale(1.03); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
+    .vote-btn:active { transform: scale(0.96); }
 
-    .btn-girl { background: linear-gradient(135deg, #f8bbd0, #f48fb1); color: #880e4f; }
-    .btn-boy  { background: linear-gradient(135deg, #bbdefb, #64b5f6); color: #0d47a1; }
+    .btn-girl {
+      background: linear-gradient(150deg, #ffd6e7, #f48fb1, #e91e63);
+      color: #7b0033;
+      box-shadow: 0 6px 20px rgba(233,30,99,0.28);
+    }
+    .btn-boy  {
+      background: linear-gradient(150deg, #cce8ff, #64b5f6, #1976d2);
+      color: #003785;
+      box-shadow: 0 6px 20px rgba(25,118,210,0.28);
+    }
+
+    /* emoji bounce on vote buttons */
+    .vote-btn .vote-emoji {
+      display: inline-block;
+      animation: gentleBounce 1.8s ease-in-out infinite;
+    }
+    .btn-boy .vote-emoji { animation-delay: 0.4s; }
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      45%       { transform: translateY(-6px); }
+    }
 
     .greeting { font-size: 1.1rem; color: #555; margin-bottom: 1.4rem; }
     .greeting strong { color: #2d2d2d; }
 
     /* ── Results ── */
-    .result-title { font-size: 1.1rem; color: #666; margin-bottom: 1.6rem; }
+    .result-title { font-size: 1rem; color: #888; margin-bottom: 1.6rem; }
 
     .result-row {
       width: 100%;
-      margin-bottom: 1.1rem;
+      margin-bottom: 1.2rem;
     }
     .result-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.45rem;
     }
     .result-label {
       font-weight: 800;
@@ -136,48 +232,64 @@
     }
     .result-label.girl { color: #c2185b; }
     .result-label.boy  { color: #1565c0; }
-    .result-count { font-size: 0.95rem; color: #777; }
+    .result-count { font-size: 0.9rem; color: #999; font-weight: 700; }
 
     .bar-track {
       width: 100%;
-      height: 16px;
-      background: #f0f0f0;
+      height: 18px;
+      background: #f3eef7;
       border-radius: 99px;
       overflow: hidden;
     }
     .bar-fill {
       height: 100%;
       border-radius: 99px;
-      transition: width 0.8s cubic-bezier(.22,.68,0,1.2);
+      transition: width 1s cubic-bezier(.22,.68,0,1.2);
+      position: relative;
+    }
+    .bar-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, transparent 60%);
+      border-radius: inherit;
     }
     .bar-fill.girl { background: linear-gradient(90deg, #f48fb1, #e91e63); }
     .bar-fill.boy  { background: linear-gradient(90deg, #64b5f6, #1976d2); }
 
-    .total-note { font-size: 0.82rem; color: #aaa; margin-top: 1rem; }
+    .total-note { font-size: 0.82rem; color: #bbb; margin-top: 1rem; }
 
     .your-vote-badge {
       display: inline-block;
       margin-bottom: 1.5rem;
-      padding: 0.5rem 1.2rem;
+      padding: 0.5rem 1.4rem;
       border-radius: 99px;
       font-size: 0.95rem;
-      font-weight: 700;
+      font-weight: 800;
+      animation: badgePop 0.5s cubic-bezier(.34,1.56,.64,1);
     }
-    .your-vote-badge.girl { background: #fce4ec; color: #c2185b; }
-    .your-vote-badge.boy  { background: #e3f2fd; color: #1565c0; }
+    @keyframes badgePop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    .your-vote-badge.girl { background: #fce4ec; color: #c2185b; box-shadow: 0 2px 10px rgba(233,30,99,0.18); }
+    .your-vote-badge.boy  { background: #e3f2fd; color: #1565c0; box-shadow: 0 2px 10px rgba(25,118,210,0.18); }
 
     .refresh-btn {
       margin-top: 1.2rem;
       background: none;
-      border: 2px solid #e0e0e0;
+      border: 2px solid #ede0f5;
       border-radius: 10px;
-      padding: 0.5rem 1.2rem;
-      font-size: 0.9rem;
-      color: #888;
+      padding: 0.5rem 1.4rem;
+      font-size: 0.88rem;
+      font-family: inherit;
+      font-weight: 700;
+      color: #b09bc0;
       cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
+      transition: border-color 0.2s, color 0.2s, transform 0.1s;
     }
-    .refresh-btn:hover { border-color: #bbb; color: #555; }
+    .refresh-btn:hover { border-color: #c78be5; color: #9c6bb5; }
+    .refresh-btn:active { transform: rotate(180deg); }
 
     /* ── Confetti ── */
     .confetti-wrap {
@@ -189,28 +301,45 @@
     }
     .piece {
       position: absolute;
-      top: -10px;
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
+      top: -14px;
+      border-radius: 3px;
       animation: fall linear forwards;
     }
     @keyframes fall {
-      to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+      0%   { opacity: 1; }
+      80%  { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(900deg); opacity: 0; }
     }
 
     /* ── Already voted ── */
-    .already-msg { font-size: 0.85rem; color: #999; margin-top: 1rem; }
-    .already-msg a { color: #c78be5; text-decoration: none; }
+    .already-msg { font-size: 0.85rem; color: #bbb; margin-top: 1rem; }
+    .already-msg a { color: #c78be5; text-decoration: none; font-weight: 700; }
+    .already-msg a:hover { text-decoration: underline; }
+
+    /* ── Sparkle stars ── */
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.1rem;
+      animation: sparklePop 1s ease forwards;
+    }
+    @keyframes sparklePop {
+      0%   { transform: scale(0) rotate(0deg);   opacity: 1; }
+      60%  { transform: scale(1.4) rotate(30deg); opacity: 1; }
+      100% { transform: scale(0) rotate(60deg);  opacity: 0; }
+    }
 
     @media (max-width: 360px) {
-      .card { padding: 2rem 1.4rem; }
-      h1 { font-size: 1.5rem; }
-      .vote-btn { padding: 1.3rem 0.4rem; font-size: 2.4rem; }
+      .card { padding: 2rem 1.2rem; }
+      h1 { font-size: 1.55rem; }
+      .vote-btn { padding: 1.6rem 0.4rem 1.3rem; font-size: 2.5rem; }
     }
   </style>
 </head>
 <body>
+
+<!-- Floating hearts background -->
+<div class="bg-hearts" id="bg-hearts"></div>
 
 <!-- Confetti container -->
 <div class="confetti-wrap" id="confetti"></div>
@@ -220,9 +349,9 @@
   <div class="card">
     <div class="emoji-top">🎀👶🎉</div>
     <h1>Gender Reveal!</h1>
-    <p class="subtitle">Naika Family · Cast your vote 💕</p>
+    <p class="subtitle">PDRF · Cast your vote 💕</p>
     <input type="text" id="name-input" placeholder="Enter your name…" maxlength="40" autocomplete="off">
-    <button class="btn-next" onclick="goToVote()">Continue →</button>
+    <button class="btn-next" onclick="goToVote()">Let's Go ✨</button>
   </div>
 </div>
 
@@ -233,13 +362,15 @@
     <h1>Boy or Girl?</h1>
     <p class="subtitle" style="margin-bottom:1.6rem">Tap to cast your vote!</p>
     <div class="vote-row">
-      <button class="vote-btn btn-girl" onclick="castVote('girl')">
-        💗
+      <button class="vote-btn btn-girl" onclick="castVote('girl', event)">
+        <span class="vote-emoji">💗</span>
         <span class="label">GIRL</span>
+        <span class="sublabel">Team Pink</span>
       </button>
-      <button class="vote-btn btn-boy" onclick="castVote('boy')">
-        💙
+      <button class="vote-btn btn-boy" onclick="castVote('boy', event)">
+        <span class="vote-emoji">💙</span>
         <span class="label">BOY</span>
+        <span class="sublabel">Team Blue</span>
       </button>
     </div>
   </div>
@@ -278,14 +409,30 @@
 
 <script>
   // ── Config ──────────────────────────────────────────────────────────────────
-  // CountAPI: free, no signup. Keys are unique — change the date if you want
-  // a fresh count (e.g. for retesting).
   var NS   = 'pnaika-gender-reveal-2025';
   var GIRL = 'girl';
   var BOY  = 'boy';
 
   var voterName = '';
   var myVote    = '';
+
+  // ── Floating background hearts ────────────────────────────────────────────
+  (function () {
+    var wrap   = document.getElementById('bg-hearts');
+    var emojis = ['💗','💙','💜','🌸','✨','🎀','⭐','💫'];
+    for (var i = 0; i < 18; i++) {
+      (function (i) {
+        var el = document.createElement('div');
+        el.className = 'bg-heart';
+        el.textContent = emojis[i % emojis.length];
+        el.style.left             = (Math.random() * 100) + 'vw';
+        el.style.fontSize         = (0.9 + Math.random() * 1.2) + 'rem';
+        el.style.animationDuration = (8 + Math.random() * 12) + 's';
+        el.style.animationDelay   = (Math.random() * 12) + 's';
+        wrap.appendChild(el);
+      })(i);
+    }
+  })();
 
   // ── Restore from localStorage ────────────────────────────────────────────────
   (function () {
@@ -315,10 +462,39 @@
     if (e.key === 'Enter') goToVote();
   });
 
+  // ── Sparkle burst on tap ────────────────────────────────────────────────────
+  function burstSparkles(x, y, choice) {
+    var stars = choice === 'girl'
+      ? ['💗','🌸','✨','💕','🎀']
+      : ['💙','⭐','✨','💦','🌊'];
+    for (var i = 0; i < 8; i++) {
+      (function (i) {
+        var el = document.createElement('div');
+        el.className = 'sparkle';
+        el.textContent = stars[i % stars.length];
+        var angle  = (i / 8) * 360;
+        var dist   = 50 + Math.random() * 40;
+        var tx     = Math.cos(angle * Math.PI / 180) * dist;
+        var ty     = Math.sin(angle * Math.PI / 180) * dist;
+        el.style.left = (x - 12) + 'px';
+        el.style.top  = (y - 12) + 'px';
+        el.style.setProperty('--tx', tx + 'px');
+        el.style.setProperty('--ty', ty + 'px');
+        el.style.animationDelay = (i * 0.04) + 's';
+        el.style.transform = 'translate(0,0)';
+        document.body.appendChild(el);
+        setTimeout(function () { el.remove(); }, 1100);
+      })(i);
+    }
+  }
+
   // ── Voting ───────────────────────────────────────────────────────────────────
-  function castVote(choice) {
+  function castVote(choice, evt) {
     myVote = choice;
     localStorage.setItem('gr-vote', JSON.stringify({ name: voterName, vote: choice }));
+
+    // Sparkle burst at tap location
+    if (evt) burstSparkles(evt.clientX, evt.clientY, choice);
 
     // Disable buttons immediately to prevent double-tap
     document.querySelectorAll('.vote-btn').forEach(function (b) { b.disabled = true; });
@@ -390,21 +566,25 @@
     var wrap   = document.getElementById('confetti');
     wrap.innerHTML = '';
     var colors = choice === 'girl'
-      ? ['#f48fb1','#e91e63','#f8bbd0','#fff','#fce4ec','#ce93d8']
-      : ['#64b5f6','#1976d2','#bbdefb','#fff','#e3f2fd','#80cbc4'];
+      ? ['#f48fb1','#e91e63','#f8bbd0','#fff','#fce4ec','#ce93d8','#ff80ab','#ff4081']
+      : ['#64b5f6','#1976d2','#bbdefb','#fff','#e3f2fd','#80cbc4','#40c4ff','#0091ea'];
+    var shapes = ['2px', '50%', '50%', '0'];  // square, circle, circle, diamond
 
-    for (var i = 0; i < 80; i++) {
+    for (var i = 0; i < 130; i++) {
       (function (i) {
         var el  = document.createElement('div');
         el.className = 'piece';
-        el.style.left     = Math.random() * 100 + 'vw';
-        el.style.background = colors[Math.floor(Math.random() * colors.length)];
-        el.style.width    = (6 + Math.random() * 8) + 'px';
-        el.style.height   = (6 + Math.random() * 8) + 'px';
-        el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-        el.style.animationDelay   = (Math.random() * 0.8) + 's';
+        var size = 6 + Math.random() * 10;
+        el.style.left         = Math.random() * 100 + 'vw';
+        el.style.background   = colors[Math.floor(Math.random() * colors.length)];
+        el.style.width        = size + 'px';
+        el.style.height       = (size * (0.5 + Math.random())) + 'px';
+        el.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
+        el.style.animationDuration = (1.8 + Math.random() * 2.2) + 's';
+        el.style.animationDelay   = (Math.random() * 1.2) + 's';
+        el.style.opacity      = 0.85 + Math.random() * 0.15;
         wrap.appendChild(el);
-        setTimeout(function () { el.remove(); }, 3500);
+        setTimeout(function () { el.remove(); }, 4000);
       })(i);
     }
   }
