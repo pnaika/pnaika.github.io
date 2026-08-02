@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Gender Reveal 🎉 — Naika Family</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100dvh;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #fce4ec 0%, #e3f2fd 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      overflow-x: hidden;
+    }
+
+    /* ── Screens ── */
+    .screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 480px;
+      animation: fadeUp 0.4s ease;
+    }
+    .screen.active { display: flex; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Card ── */
+    .card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    .emoji-top { font-size: 3.5rem; line-height: 1; margin-bottom: 0.6rem; }
+    h1 { font-size: 1.75rem; font-weight: 800; color: #2d2d2d; margin-bottom: 0.3rem; }
+    .subtitle { font-size: 1rem; color: #777; margin-bottom: 1.8rem; }
+
+    /* ── Name input ── */
+    input[type="text"] {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      font-size: 1.05rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+      color: #2d2d2d;
+      background: #fff;
+    }
+    input[type="text"]:focus { border-color: #c78be5; }
+    input[type="text"]::placeholder { color: #bbb; }
+
+    .btn-next {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.9rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f48fb1, #ce93d8);
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-next:hover  { opacity: 0.9; }
+    .btn-next:active { transform: scale(0.98); }
+
+    /* ── Vote buttons ── */
+    .vote-row {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .vote-btn {
+      flex: 1;
+      padding: 1.6rem 0.5rem;
+      border: none;
+      border-radius: 18px;
+      font-size: 2.8rem;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .vote-btn span.label {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .vote-btn:hover  { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+    .vote-btn:active { transform: scale(0.97); }
+
+    .btn-girl { background: linear-gradient(135deg, #f8bbd0, #f48fb1); color: #880e4f; }
+    .btn-boy  { background: linear-gradient(135deg, #bbdefb, #64b5f6); color: #0d47a1; }
+
+    .greeting { font-size: 1.1rem; color: #555; margin-bottom: 1.4rem; }
+    .greeting strong { color: #2d2d2d; }
+
+    /* ── Results ── */
+    .result-title { font-size: 1.1rem; color: #666; margin-bottom: 1.6rem; }
+
+    .result-row {
+      width: 100%;
+      margin-bottom: 1.1rem;
+    }
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+    .result-label {
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .result-label.girl { color: #c2185b; }
+    .result-label.boy  { color: #1565c0; }
+    .result-count { font-size: 0.95rem; color: #777; }
+
+    .bar-track {
+      width: 100%;
+      height: 16px;
+      background: #f0f0f0;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.8s cubic-bezier(.22,.68,0,1.2);
+    }
+    .bar-fill.girl { background: linear-gradient(90deg, #f48fb1, #e91e63); }
+    .bar-fill.boy  { background: linear-gradient(90deg, #64b5f6, #1976d2); }
+
+    .total-note { font-size: 0.82rem; color: #aaa; margin-top: 1rem; }
+
+    .your-vote-badge {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 99px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .your-vote-badge.girl { background: #fce4ec; color: #c2185b; }
+    .your-vote-badge.boy  { background: #e3f2fd; color: #1565c0; }
+
+    .refresh-btn {
+      margin-top: 1.2rem;
+      background: none;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.9rem;
+      color: #888;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .refresh-btn:hover { border-color: #bbb; color: #555; }
+
+    /* ── Confetti ── */
+    .confetti-wrap {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999;
+    }
+    .piece {
+      position: absolute;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── Already voted ── */
+    .already-msg { font-size: 0.85rem; color: #999; margin-top: 1rem; }
+    .already-msg a { color: #c78be5; text-decoration: none; }
+
+    @media (max-width: 360px) {
+      .card { padding: 2rem 1.4rem; }
+      h1 { font-size: 1.5rem; }
+      .vote-btn { padding: 1.3rem 0.4rem; font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Confetti container -->
+<div class="confetti-wrap" id="confetti"></div>
+
+<!-- ── Screen 1: Enter name ── -->
+<div class="screen active" id="screen-name">
+  <div class="card">
+    <div class="emoji-top">🎀👶🎉</div>
+    <h1>Gender Reveal!</h1>
+    <p class="subtitle">Naika Family · Cast your vote 💕</p>
+    <input type="text" id="name-input" placeholder="Enter your name…" maxlength="40" autocomplete="off">
+    <button class="btn-next" onclick="goToVote()">Continue →</button>
+  </div>
+</div>
+
+<!-- ── Screen 2: Vote ── -->
+<div class="screen" id="screen-vote">
+  <div class="card">
+    <p class="greeting">Hey <strong id="voter-name-display"></strong>! What do you think? 🤔</p>
+    <h1>Boy or Girl?</h1>
+    <p class="subtitle" style="margin-bottom:1.6rem">Tap to cast your vote!</p>
+    <div class="vote-row">
+      <button class="vote-btn btn-girl" onclick="castVote('girl')">
+        💗
+        <span class="label">GIRL</span>
+      </button>
+      <button class="vote-btn btn-boy" onclick="castVote('boy')">
+        💙
+        <span class="label">BOY</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Screen 3: Results ── -->
+<div class="screen" id="screen-result">
+  <div class="card">
+    <div class="emoji-top" id="result-emoji">🎉</div>
+    <h1>Your vote is in!</h1>
+    <p class="result-title">Here's what everyone thinks…</p>
+
+    <div id="your-vote-badge" class="your-vote-badge"></div>
+
+    <div class="result-row">
+      <div class="result-meta">
+        <span class="result-label girl">💗 Girl</span>
+        <span class="result-count" id="girl-count">0 votes</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill girl" id="girl-bar" style="width:0%"></div></div>
+    </div>
+
+    <div class="result-row">
+      <div class="result-meta">
+        <span class="result-label boy">💙 Boy</span>
+        <span class="result-count" id="boy-count">0 votes</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill boy" id="boy-bar" style="width:0%"></div></div>
+    </div>
+
+    <p class="total-note" id="total-note"></p>
+    <button class="refresh-btn" onclick="refreshResults()">↻ Refresh results</button>
+    <p class="already-msg" id="change-vote-msg"></p>
+  </div>
+</div>
+
+<script>
+  // ── Config ──────────────────────────────────────────────────────────────────
+  // CountAPI: free, no signup. Keys are unique — change the date if you want
+  // a fresh count (e.g. for retesting).
+  var NS   = 'pnaika-gender-reveal-2025';
+  var GIRL = 'girl';
+  var BOY  = 'boy';
+
+  var voterName = '';
+  var myVote    = '';
+
+  // ── Restore from localStorage ────────────────────────────────────────────────
+  (function () {
+    var saved = JSON.parse(localStorage.getItem('gr-vote') || 'null');
+    if (saved && saved.name && saved.vote) {
+      voterName = saved.name;
+      myVote    = saved.vote;
+      showResults();
+    }
+  })();
+
+  // ── Screen helpers ───────────────────────────────────────────────────────────
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+  }
+
+  function goToVote() {
+    var val = document.getElementById('name-input').value.trim();
+    if (!val) { document.getElementById('name-input').focus(); return; }
+    voterName = val;
+    document.getElementById('voter-name-display').textContent = voterName;
+    showScreen('screen-vote');
+  }
+
+  document.getElementById('name-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') goToVote();
+  });
+
+  // ── Voting ───────────────────────────────────────────────────────────────────
+  function castVote(choice) {
+    myVote = choice;
+    localStorage.setItem('gr-vote', JSON.stringify({ name: voterName, vote: choice }));
+
+    // Disable buttons immediately to prevent double-tap
+    document.querySelectorAll('.vote-btn').forEach(function (b) { b.disabled = true; });
+
+    // Increment via CountAPI, then show results
+    fetch('https://api.countapi.xyz/hit/' + NS + '/' + choice)
+      .catch(function () { /* silent — still show results */ })
+      .finally(showResults);
+  }
+
+  // ── Results ──────────────────────────────────────────────────────────────────
+  function showResults() {
+    // Badge
+    var badge = document.getElementById('your-vote-badge');
+    badge.textContent = myVote === 'girl' ? '💗 You voted: GIRL' : '💙 You voted: BOY';
+    badge.className   = 'your-vote-badge ' + myVote;
+
+    // Emoji
+    document.getElementById('result-emoji').textContent = myVote === 'girl' ? '💗🎀' : '💙🍭';
+
+    // Change-vote note
+    document.getElementById('change-vote-msg').innerHTML =
+      'Changed your mind? <a href="#" onclick="resetVote();return false;">Vote again</a>';
+
+    showScreen('screen-result');
+    launchConfetti(myVote);
+    fetchCounts();
+  }
+
+  function refreshResults() { fetchCounts(); }
+
+  function fetchCounts() {
+    Promise.all([
+      fetch('https://api.countapi.xyz/get/' + NS + '/' + GIRL).then(function (r) { return r.json(); }),
+      fetch('https://api.countapi.xyz/get/' + NS + '/' + BOY ).then(function (r) { return r.json(); })
+    ]).then(function (data) {
+      var g     = Math.max(0, data[0].value || 0);
+      var b     = Math.max(0, data[1].value || 0);
+      var total = g + b;
+
+      document.getElementById('girl-count').textContent = g + (g === 1 ? ' vote' : ' votes');
+      document.getElementById('boy-count' ).textContent = b + (b === 1 ? ' vote' : ' votes');
+
+      var gPct = total ? Math.round((g / total) * 100) : 50;
+      var bPct = total ? 100 - gPct : 50;
+
+      document.getElementById('girl-bar').style.width = gPct + '%';
+      document.getElementById('boy-bar' ).style.width = bPct + '%';
+
+      document.getElementById('total-note').textContent =
+        total + ' ' + (total === 1 ? 'vote' : 'votes') + ' cast so far';
+    }).catch(function () {
+      document.getElementById('total-note').textContent =
+        'Could not load live counts — try refreshing.';
+    });
+  }
+
+  // ── Reset / change vote ───────────────────────────────────────────────────────
+  function resetVote() {
+    localStorage.removeItem('gr-vote');
+    myVote = '';
+    document.getElementById('name-input').value = voterName;
+    document.querySelectorAll('.vote-btn').forEach(function (b) { b.disabled = false; });
+    showScreen('screen-name');
+  }
+
+  // ── Confetti ──────────────────────────────────────────────────────────────────
+  function launchConfetti(choice) {
+    var wrap   = document.getElementById('confetti');
+    wrap.innerHTML = '';
+    var colors = choice === 'girl'
+      ? ['#f48fb1','#e91e63','#f8bbd0','#fff','#fce4ec','#ce93d8']
+      : ['#64b5f6','#1976d2','#bbdefb','#fff','#e3f2fd','#80cbc4'];
+
+    for (var i = 0; i < 80; i++) {
+      (function (i) {
+        var el  = document.createElement('div');
+        el.className = 'piece';
+        el.style.left     = Math.random() * 100 + 'vw';
+        el.style.background = colors[Math.floor(Math.random() * colors.length)];
+        el.style.width    = (6 + Math.random() * 8) + 'px';
+        el.style.height   = (6 + Math.random() * 8) + 'px';
+        el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+        el.style.animationDelay   = (Math.random() * 0.8) + 's';
+        wrap.appendChild(el);
+        setTimeout(function () { el.remove(); }, 3500);
+      })(i);
+    }
+  }
+</script>
+</body>
+</html>
