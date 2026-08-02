@@ -356,6 +356,63 @@
       100% { transform: scale(0) rotate(60deg);  opacity: 0; }
     }
 
+    /* ── Admin ── */
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.8rem;
+      font-size: 0.88rem;
+    }
+    .admin-table th {
+      text-align: left;
+      padding: 0.4rem 0.6rem;
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #aaa;
+      border-bottom: 2px solid #f0e8f8;
+    }
+    .admin-table td {
+      padding: 0.45rem 0.6rem;
+      border-bottom: 1px solid #f5f0fa;
+      color: #444;
+      font-weight: 600;
+    }
+    .admin-table td .badge {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+    .admin-table td .badge.girl { background: #fce4ec; color: #c2185b; }
+    .admin-table td .badge.boy  { background: #e3f2fd; color: #1565c0; }
+    .admin-table tr:last-child td { border-bottom: none; }
+
+    .reset-btn {
+      margin-top: 1.2rem;
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-family: inherit;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff5252, #c62828);
+      color: #fff;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: opacity 0.2s, transform 0.1s;
+      box-shadow: 0 4px 14px rgba(198,40,40,0.35);
+    }
+    .reset-btn:hover  { opacity: 0.88; }
+    .reset-btn:active { transform: scale(0.97); }
+
+    .admin-note { font-size: 0.78rem; color: #bbb; margin-top: 0.6rem; }
+
+    .pw-error { font-size: 0.85rem; color: #e53935; margin-top: 0.5rem; min-height: 1.2em; }
+
     @media (max-width: 360px) {
       .card { padding: 2rem 1.2rem; }
       h1 { font-size: 1.55rem; }
@@ -433,9 +490,39 @@
   </div>
 </div>
 
+<!-- ── Screen 4a: Admin password ── -->
+<div class="screen" id="screen-admin-login">
+  <div class="card">
+    <div class="emoji-top">🔐</div>
+    <h1>Admin</h1>
+    <p class="subtitle" style="margin-bottom:1.4rem">Enter the admin password</p>
+    <input type="password" id="admin-pw-input" placeholder="Password…" autocomplete="off">
+    <button class="btn-next" onclick="checkAdminPw()">Enter →</button>
+    <p class="pw-error" id="pw-error"></p>
+  </div>
+</div>
+
+<!-- ── Screen 4b: Admin dashboard ── -->
+<div class="screen" id="screen-admin">
+  <div class="card">
+    <div class="emoji-top">📋</div>
+    <h1>Admin</h1>
+    <p class="result-title" id="admin-summary">Loading…</p>
+    <div style="overflow-x:auto;width:100%">
+      <table class="admin-table">
+        <thead><tr><th>#</th><th>Name</th><th>Team</th><th>Time</th></tr></thead>
+        <tbody id="admin-tbody"></tbody>
+      </table>
+    </div>
+    <button class="reset-btn" onclick="resetAllVotes()">🗑 Reset all votes</button>
+    <p class="admin-note">Auto-refreshes every 5 s · <a href="gender-reveal.html" style="color:#c78be5;text-decoration:none">← Back to vote page</a></p>
+  </div>
+</div>
+
 <script>
   // ── Config ──────────────────────────────────────────────────────────────────
-  var DB = 'https://pdrf-gender-reveal-default-rtdb.firebaseio.com';
+  var DB     = 'https://pdrf-gender-reveal-default-rtdb.firebaseio.com';
+  var ADMIN_PW = 'pdrf2025';
 
   var voterName = '';
   var myVote    = '';
@@ -458,6 +545,77 @@
       })(i);
     }
   })();
+
+  // ── Admin mode ───────────────────────────────────────────────────────────────
+  if (new URLSearchParams(window.location.search).has('admin')) {
+    document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('active'); });
+    document.getElementById('screen-admin-login').classList.add('active');
+  }
+
+  function checkAdminPw() {
+    var val = document.getElementById('admin-pw-input').value;
+    if (val === ADMIN_PW) {
+      showScreen('screen-admin');
+      fetchAdminData();
+      setInterval(fetchAdminData, 5000);
+    } else {
+      document.getElementById('pw-error').textContent = 'Wrong password — try again.';
+      document.getElementById('admin-pw-input').value = '';
+    }
+  }
+
+  document.getElementById && document.getElementById('admin-pw-input') &&
+    document.getElementById('admin-pw-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') checkAdminPw();
+    });
+
+  function fetchAdminData() {
+    Promise.all([
+      fetch(DB + '/counts.json').then(function (r) { return r.json(); }),
+      fetch(DB + '/voters.json').then(function (r) { return r.json(); })
+    ]).then(function (res) {
+      var counts = res[0] || {};
+      var voters = res[1] || {};
+      var g = counts.girl || 0, b = counts.boy || 0;
+      document.getElementById('admin-summary').textContent =
+        '💗 Girl: ' + g + '  ·  💙 Boy: ' + b + '  ·  Total: ' + (g + b);
+
+      var tbody = document.getElementById('admin-tbody');
+      tbody.innerHTML = '';
+      var keys = Object.keys(voters);
+      keys.sort(function (a, b) { return (voters[a].ts || 0) - (voters[b].ts || 0); });
+      keys.forEach(function (key, i) {
+        var v  = voters[key];
+        var tr = document.createElement('tr');
+        var t  = v.ts ? new Date(v.ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—';
+        tr.innerHTML =
+          '<td>' + (i + 1) + '</td>' +
+          '<td>' + v.name + '</td>' +
+          '<td><span class="badge ' + v.vote + '">' + (v.vote === 'girl' ? '💗 Girl' : '💙 Boy') + '</span></td>' +
+          '<td>' + t + '</td>';
+        tbody.appendChild(tr);
+      });
+      if (!keys.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#bbb;padding:1rem">No votes yet</td></tr>';
+      }
+    });
+  }
+
+  function resetAllVotes() {
+    if (!confirm('Reset ALL votes? This cannot be undone.')) return;
+    Promise.all([
+      fetch(DB + '/voters.json', { method: 'DELETE' }),
+      fetch(DB + '/counts.json', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ girl: 0, boy: 0 })
+      })
+    ]).then(function () {
+      document.getElementById('admin-tbody').innerHTML =
+        '<tr><td colspan="4" style="text-align:center;color:#bbb;padding:1rem">Votes reset ✓</td></tr>';
+      document.getElementById('admin-summary').textContent = '💗 Girl: 0  ·  💙 Boy: 0  ·  Total: 0';
+    });
+  }
 
   // ── Restore from localStorage ────────────────────────────────────────────────
   (function () {
