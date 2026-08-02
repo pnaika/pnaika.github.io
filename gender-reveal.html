@@ -613,6 +613,7 @@
       girlEl.querySelectorAll('[data-key]').forEach(function (el) { rendered[el.dataset.key] = el; });
       boyEl .querySelectorAll('[data-key]').forEach(function (el) { rendered[el.dataset.key] = el; });
 
+      var newVotes = [];
       Object.keys(voters).forEach(function (key) {
         if (rendered[key]) return; // already in DOM, skip
         var v    = voters[key];
@@ -622,7 +623,14 @@
         div.textContent  = v.name + (isMe ? ' ⭐' : '');
         div.dataset.key  = key;
         (v.vote === 'girl' ? girlEl : boyEl).appendChild(div);
+        newVotes.push(v.vote);
       });
+
+      // Fire a small confetti burst for each new vote detected by the poll
+      if (newVotes.length) {
+        var lastVote = newVotes[newVotes.length - 1];
+        launchConfetti(lastVote, true);
+      }
     }).catch(function () {
       document.getElementById('total-note').textContent =
         'Could not load live counts — try refreshing.';
@@ -640,15 +648,16 @@
   }
 
   // ── Confetti ──────────────────────────────────────────────────────────────────
-  function launchConfetti(choice) {
+  function launchConfetti(choice, mini) {
     var wrap   = document.getElementById('confetti');
-    wrap.innerHTML = '';
+    if (!mini) wrap.innerHTML = ''; // full burst clears old pieces; mini burst adds on top
     var colors = choice === 'girl'
       ? ['#f48fb1','#e91e63','#f8bbd0','#fff','#fce4ec','#ce93d8','#ff80ab','#ff4081']
       : ['#64b5f6','#1976d2','#bbdefb','#fff','#e3f2fd','#80cbc4','#40c4ff','#0091ea'];
-    var shapes = ['2px', '50%', '50%', '0'];  // square, circle, circle, diamond
+    var shapes = ['2px', '50%', '50%', '0'];
+    var count  = mini ? 40 : 130;
 
-    for (var i = 0; i < 130; i++) {
+    for (var i = 0; i < count; i++) {
       (function (i) {
         var el  = document.createElement('div');
         el.className = 'piece';
@@ -659,7 +668,7 @@
         el.style.height       = (size * (0.5 + Math.random())) + 'px';
         el.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
         el.style.animationDuration = (1.8 + Math.random() * 2.2) + 's';
-        el.style.animationDelay   = (Math.random() * 1.2) + 's';
+        el.style.animationDelay   = (Math.random() * (mini ? 0.3 : 1.2)) + 's';
         el.style.opacity      = 0.85 + Math.random() * 0.15;
         wrap.appendChild(el);
         setTimeout(function () { el.remove(); }, 4000);
