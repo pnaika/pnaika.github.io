@@ -409,9 +409,7 @@
 
 <script>
   // ── Config ──────────────────────────────────────────────────────────────────
-  var NS   = 'pnaika-gender-reveal-2025';
-  var GIRL = 'girl';
-  var BOY  = 'boy';
+  var DB = 'https://pdrf-gender-reveal-default-rtdb.firebaseio.com';
 
   var voterName = '';
   var myVote    = '';
@@ -497,10 +495,37 @@
     if (evt) burstSparkles(evt.clientX, evt.clientY, choice);
     document.querySelectorAll('.vote-btn').forEach(function (b) { b.disabled = true; });
 
-    var reqs = [fetch('https://api.countapi.xyz/hit/' + NS + '/' + choice).catch(function () {})];
-    // Undo old vote if changing sides
+    // Store individual vote keyed by name (overwrites if same person votes again)
+    var safeKey = voterName.toLowerCase().replace(/[^a-z0-9]/g, '_') || 'anon';
+    var voterRecord = { name: voterName, vote: choice, ts: { '.sv': 'timestamp' } };
+    var reqs = [
+      fetch(DB + '/voters/' + encodeURIComponent(safeKey) + '.json', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(voterRecord)
+      }).catch(function () {}),
+
+      // Atomic server-side increment for new choice
+      (function () {
+        var inc = {};
+        inc[choice] = { '.sv': { increment: 1 } };
+        return fetch(DB + '/counts.json', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(inc)
+        }).catch(function () {});
+      })()
+    ];
+
+    // Undo old vote if switching sides
     if (prevVote && prevVote !== choice) {
-      reqs.push(fetch('https://api.countapi.xyz/update/' + NS + '/' + prevVote + '?amount=-1').catch(function () {}));
+      var dec = {};
+      dec[prevVote] = { '.sv': { increment: -1 } };
+      reqs.push(fetch(DB + '/counts.json', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dec)
+      }).catch(function () {}));
     }
     prevVote = '';
 
@@ -529,29 +554,28 @@
   function refreshResults() { fetchCounts(); }
 
   function fetchCounts() {
-    Promise.all([
-      fetch('https://api.countapi.xyz/get/' + NS + '/' + GIRL).then(function (r) { return r.json(); }),
-      fetch('https://api.countapi.xyz/get/' + NS + '/' + BOY ).then(function (r) { return r.json(); })
-    ]).then(function (data) {
-      var g     = Math.max(0, data[0].value || 0);
-      var b     = Math.max(0, data[1].value || 0);
-      var total = g + b;
+    fetch(DB + '/counts.json')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var g     = Math.max(0, (data && data.girl) || 0);
+        var b     = Math.max(0, (data && data.boy)  || 0);
+        var total = g + b;
 
-      document.getElementById('girl-count').textContent = g + (g === 1 ? ' vote' : ' votes');
-      document.getElementById('boy-count' ).textContent = b + (b === 1 ? ' vote' : ' votes');
+        document.getElementById('girl-count').textContent = g + (g === 1 ? ' vote' : ' votes');
+        document.getElementById('boy-count' ).textContent = b + (b === 1 ? ' vote' : ' votes');
 
-      var gPct = total ? Math.round((g / total) * 100) : 50;
-      var bPct = total ? 100 - gPct : 50;
+        var gPct = total ? Math.round((g / total) * 100) : 50;
+        var bPct = total ? 100 - gPct : 50;
 
-      document.getElementById('girl-bar').style.width = gPct + '%';
-      document.getElementById('boy-bar' ).style.width = bPct + '%';
+        document.getElementById('girl-bar').style.width = gPct + '%';
+        document.getElementById('boy-bar' ).style.width = bPct + '%';
 
-      document.getElementById('total-note').textContent =
-        total + ' ' + (total === 1 ? 'vote' : 'votes') + ' cast so far';
-    }).catch(function () {
-      document.getElementById('total-note').textContent =
-        'Could not load live counts — try refreshing.';
-    });
+        document.getElementById('total-note').textContent =
+          total + ' ' + (total === 1 ? 'vote' : 'votes') + ' cast so far';
+      }).catch(function () {
+        document.getElementById('total-note').textContent =
+          'Could not load live counts — try refreshing.';
+      });
   }
 
   // ── Reset / change vote ───────────────────────────────────────────────────────
