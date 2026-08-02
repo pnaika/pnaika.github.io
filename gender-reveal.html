@@ -607,16 +607,20 @@
 
       var girlEl = document.getElementById('girl-names');
       var boyEl  = document.getElementById('boy-names');
-      girlEl.innerHTML = '';
-      boyEl.innerHTML  = '';
 
-      Object.keys(voters).forEach(function (key, idx) {
-        var v   = voters[key];
-        var div = document.createElement('div');
+      // Only add names not already rendered — avoids blink on every poll
+      var rendered = {};
+      girlEl.querySelectorAll('[data-key]').forEach(function (el) { rendered[el.dataset.key] = el; });
+      boyEl .querySelectorAll('[data-key]').forEach(function (el) { rendered[el.dataset.key] = el; });
+
+      Object.keys(voters).forEach(function (key) {
+        if (rendered[key]) return; // already in DOM, skip
+        var v    = voters[key];
+        var div  = document.createElement('div');
         var isMe = v.name.toLowerCase() === voterName.toLowerCase();
-        div.className = 'team-name ' + v.vote + (isMe ? ' me' : '');
-        div.textContent = v.name + (isMe ? ' ⭐' : '');
-        div.style.animationDelay = (idx * 0.05) + 's';
+        div.className    = 'team-name ' + v.vote + (isMe ? ' me' : '');
+        div.textContent  = v.name + (isMe ? ' ⭐' : '');
+        div.dataset.key  = key;
         (v.vote === 'girl' ? girlEl : boyEl).appendChild(div);
       });
     }).catch(function () {
