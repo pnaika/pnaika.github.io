@@ -211,53 +211,80 @@
     .greeting strong { color: #2d2d2d; }
 
     /* ── Results ── */
-    .result-title { font-size: 1rem; color: #888; margin-bottom: 1.6rem; }
+    .result-title { font-size: 1rem; color: #888; margin-bottom: 1.2rem; }
 
-    .result-row {
-      width: 100%;
-      margin-bottom: 1.2rem;
-    }
-    .result-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.45rem;
-    }
-    .result-label {
-      font-weight: 800;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .result-label.girl { color: #c2185b; }
-    .result-label.boy  { color: #1565c0; }
-    .result-count { font-size: 0.9rem; color: #999; font-weight: 700; }
+    .total-note { font-size: 0.82rem; color: #bbb; margin-top: 0.8rem; }
 
-    .bar-track {
+    /* ── Team columns ── */
+    .teams-row {
+      display: flex;
+      gap: 0.75rem;
       width: 100%;
-      height: 18px;
-      background: #f3eef7;
+      margin-top: 0.3rem;
+    }
+    .team-col {
+      flex: 1;
+      border-radius: 18px;
+      padding: 1rem 0.85rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 120px;
+    }
+    .team-col.girl { background: linear-gradient(160deg, #fce4ec, #f8bbd0); }
+    .team-col.boy  { background: linear-gradient(160deg, #e3f2fd, #bbdefb); }
+
+    .team-header {
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .team-header.girl { color: #c2185b; }
+    .team-header.boy  { color: #1565c0; }
+
+    .team-count {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .team-count.girl { color: #e91e63; }
+    .team-count.boy  { color: #1976d2; }
+
+    .team-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      opacity: 0.6;
+      margin-top: -0.3rem;
+    }
+
+    .team-names {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.28rem;
+      margin-top: 0.3rem;
+    }
+    .team-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 0.25rem 0.5rem;
       border-radius: 99px;
+      white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
+      animation: nameSlide 0.35s cubic-bezier(.34,1.56,.64,1) both;
     }
-    .bar-fill {
-      height: 100%;
-      border-radius: 99px;
-      transition: width 1s cubic-bezier(.22,.68,0,1.2);
-      position: relative;
+    @keyframes nameSlide {
+      from { opacity: 0; transform: translateY(6px) scale(0.9); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .bar-fill::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, transparent 60%);
-      border-radius: inherit;
-    }
-    .bar-fill.girl { background: linear-gradient(90deg, #f48fb1, #e91e63); }
-    .bar-fill.boy  { background: linear-gradient(90deg, #64b5f6, #1976d2); }
-
-    .total-note { font-size: 0.82rem; color: #bbb; margin-top: 1rem; }
+    .team-name.girl { background: rgba(233,30,99,0.1); color: #b0003a; }
+    .team-name.boy  { background: rgba(25,118,210,0.1); color: #003c8f; }
+    .team-name.me   { font-weight: 900; box-shadow: 0 0 0 2px currentColor; }
 
     .your-vote-badge {
       display: inline-block;
@@ -385,20 +412,19 @@
 
     <div id="your-vote-badge" class="your-vote-badge"></div>
 
-    <div class="result-row">
-      <div class="result-meta">
-        <span class="result-label girl">💗 Girl</span>
-        <span class="result-count" id="girl-count">0 votes</span>
+    <div class="teams-row">
+      <div class="team-col girl">
+        <div class="team-header girl">💗 Team Girl</div>
+        <div class="team-count girl" id="girl-count">0</div>
+        <div class="team-label" id="girl-votes-label">votes</div>
+        <div class="team-names" id="girl-names"></div>
       </div>
-      <div class="bar-track"><div class="bar-fill girl" id="girl-bar" style="width:0%"></div></div>
-    </div>
-
-    <div class="result-row">
-      <div class="result-meta">
-        <span class="result-label boy">💙 Boy</span>
-        <span class="result-count" id="boy-count">0 votes</span>
+      <div class="team-col boy">
+        <div class="team-header boy">💙 Team Boy</div>
+        <div class="team-count boy" id="boy-count">0</div>
+        <div class="team-label" id="boy-votes-label">votes</div>
+        <div class="team-names" id="boy-names"></div>
       </div>
-      <div class="bar-track"><div class="bar-fill boy" id="boy-bar" style="width:0%"></div></div>
     </div>
 
     <p class="total-note" id="total-note"></p>
@@ -554,28 +580,42 @@
   function refreshResults() { fetchCounts(); }
 
   function fetchCounts() {
-    fetch(DB + '/counts.json')
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        var g     = Math.max(0, (data && data.girl) || 0);
-        var b     = Math.max(0, (data && data.boy)  || 0);
-        var total = g + b;
+    Promise.all([
+      fetch(DB + '/counts.json').then(function (r) { return r.json(); }),
+      fetch(DB + '/voters.json').then(function (r) { return r.json(); })
+    ]).then(function (results) {
+      var counts = results[0] || {};
+      var voters = results[1] || {};
 
-        document.getElementById('girl-count').textContent = g + (g === 1 ? ' vote' : ' votes');
-        document.getElementById('boy-count' ).textContent = b + (b === 1 ? ' vote' : ' votes');
+      var g     = Math.max(0, counts.girl || 0);
+      var b     = Math.max(0, counts.boy  || 0);
+      var total = g + b;
 
-        var gPct = total ? Math.round((g / total) * 100) : 50;
-        var bPct = total ? 100 - gPct : 50;
+      document.getElementById('girl-count').textContent = g;
+      document.getElementById('boy-count' ).textContent = b;
+      document.getElementById('girl-votes-label').textContent = g === 1 ? 'vote' : 'votes';
+      document.getElementById('boy-votes-label' ).textContent = b === 1 ? 'vote' : 'votes';
+      document.getElementById('total-note').textContent =
+        total + ' ' + (total === 1 ? 'vote' : 'votes') + ' cast so far';
 
-        document.getElementById('girl-bar').style.width = gPct + '%';
-        document.getElementById('boy-bar' ).style.width = bPct + '%';
+      var girlEl = document.getElementById('girl-names');
+      var boyEl  = document.getElementById('boy-names');
+      girlEl.innerHTML = '';
+      boyEl.innerHTML  = '';
 
-        document.getElementById('total-note').textContent =
-          total + ' ' + (total === 1 ? 'vote' : 'votes') + ' cast so far';
-      }).catch(function () {
-        document.getElementById('total-note').textContent =
-          'Could not load live counts — try refreshing.';
+      Object.keys(voters).forEach(function (key, idx) {
+        var v   = voters[key];
+        var div = document.createElement('div');
+        var isMe = v.name.toLowerCase() === voterName.toLowerCase();
+        div.className = 'team-name ' + v.vote + (isMe ? ' me' : '');
+        div.textContent = v.name + (isMe ? ' ⭐' : '');
+        div.style.animationDelay = (idx * 0.05) + 's';
+        (v.vote === 'girl' ? girlEl : boyEl).appendChild(div);
       });
+    }).catch(function () {
+      document.getElementById('total-note').textContent =
+        'Could not load live counts — try refreshing.';
+    });
   }
 
   // ── Reset / change vote ───────────────────────────────────────────────────────
