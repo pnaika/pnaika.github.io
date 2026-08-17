@@ -856,3 +856,12 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
 
 [data-theme="dark"] .ach-item.unlocked { background: rgba(226,123,53,0.12); }
 [data-theme="dark"] .ach-item.locked   { background: rgba(255,255,255,0.04); }
+
+/* Mobile achievement badge in top nav */
+.ach-progress-mob {
+  margin: 0 0.3rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.25);
+}

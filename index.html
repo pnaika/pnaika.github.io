@@ -58,6 +58,10 @@
            alt="Prashanth Naika">
     </span>
   </a>
+  <!-- Mobile: achievement badge in top bar -->
+  <button class="ach-progress-btn ach-progress-mob d-lg-none" id="ach-progress-btn-mob" title="Achievements">
+    🏆 <span id="ach-count-mob">0</span>/<span>16</span>
+  </button>
   <!-- Mobile: modes dropdown in top bar -->
   <div class="mode-dd d-lg-none ms-auto" id="mode-dd-mob">
     <button class="mode-dd-mob-btn" id="mode-btn-mob" aria-label="Switch mode">
@@ -116,8 +120,8 @@
       </div>
     </div>
 
-    <!-- Achievements badge -->
-    <button class="ach-progress-btn" id="ach-progress-btn" title="Achievements">
+    <!-- Achievements badge (desktop sidebar) -->
+    <button class="ach-progress-btn d-none d-lg-flex" id="ach-progress-btn" title="Achievements">
       🏆 <span id="ach-count">0</span> / 16
     </button>
   </div>
