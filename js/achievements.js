@@ -77,13 +77,52 @@
     }, 3400);
   }
 
+  // ─── Progress badge & panel ────────────────────────────────────────────────
+
+  function updateBadge() {
+    var el = document.getElementById('ach-count');
+    if (el) el.textContent = unlocked.length;
+  }
+
+  function renderPanel() {
+    var grid = document.getElementById('ach-grid');
+    var sub  = document.getElementById('ach-panel-sub');
+    if (!grid) return;
+    grid.innerHTML = '';
+    if (sub) sub.textContent = unlocked.length + ' of ' + ACHIEVEMENTS.length + ' unlocked — keep exploring!';
+    ACHIEVEMENTS.forEach(function (a) {
+      var done = unlocked.indexOf(a.id) !== -1;
+      var item = document.createElement('div');
+      item.className = 'ach-item ' + (done ? 'unlocked' : 'locked');
+      item.innerHTML =
+        '<div class="ach-item-emoji">' + (done ? a.emoji : '🔒') + '</div>' +
+        '<div class="ach-item-body">' +
+          '<div class="ach-item-title">' + (done ? a.title : '???') + '</div>' +
+          '<div class="ach-item-desc">'  + (done ? a.desc  : 'Keep exploring to unlock') + '</div>' +
+        '</div>';
+      grid.appendChild(item);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    updateBadge();
+    var btn = document.getElementById('ach-progress-btn');
+    if (btn) btn.addEventListener('click', function () {
+      renderPanel();
+      document.getElementById('ach-panel').classList.add('open');
+      document.getElementById('ach-panel-overlay').classList.add('open');
+    });
+  });
+
   // ─── Expose globally ───────────────────────────────────────────────────────
 
-  window.Achievement = { unlock: unlock };
+  window.Achievement = {
+    unlock: function (id) { unlock(id); updateBadge(); }
+  };
 
   // ─── Auto unlocks ──────────────────────────────────────────────────────────
 
-  setTimeout(function () { unlock('welcome'); }, 1200);
+  setTimeout(function () { unlock('welcome'); updateBadge(); }, 1200);
 
   // Scroll to bottom
   window.addEventListener('scroll', function () {
