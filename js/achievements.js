@@ -100,7 +100,7 @@
       item.innerHTML =
         '<div class="ach-item-emoji">' + (done ? a.emoji : '🔒') + '</div>' +
         '<div class="ach-item-body">' +
-          '<div class="ach-item-title">' + (done ? a.title : '???') + '</div>' +
+          '<div class="ach-item-title">' + a.title + '</div>' +
           '<div class="ach-item-desc">'  + (done ? a.desc  : 'Keep exploring to unlock') + '</div>' +
         '</div>';
       grid.appendChild(item);
