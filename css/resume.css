@@ -765,7 +765,7 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
   right: 0;
   width: min(340px, 92vw);
   height: 100dvh;
-  background: var(--bs-body-bg, #fff);
+  background: var(--color-bg, #fff);
   box-shadow: -4px 0 32px rgba(0,0,0,0.18);
   z-index: 9999;
   transform: translateX(100%);
@@ -784,7 +784,7 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
   font-weight: 800;
   font-size: 1.05rem;
   color: var(--color-heading, #1F2834);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid var(--color-border, #dee2e6);
   flex-shrink: 0;
 }
 .ach-panel-close {
@@ -792,18 +792,21 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
-  color: #aaa;
+  color: var(--color-muted, #868e96);
   line-height: 1;
   padding: 0.2rem 0.4rem;
   border-radius: 6px;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
 }
-.ach-panel-close:hover { background: rgba(0,0,0,0.07); }
+.ach-panel-close:hover {
+  background: var(--color-border, #dee2e6);
+  color: var(--color-heading, #1F2834);
+}
 
 .ach-panel-sub {
   padding: 0.5rem 1.2rem 0.8rem;
   font-size: 0.82rem;
-  color: #aaa;
+  color: var(--color-muted, #868e96);
   flex-shrink: 0;
   margin: 0;
 }
@@ -826,7 +829,7 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
   transition: background 0.15s;
 }
 .ach-item.unlocked { background: rgba(226,123,53,0.08); }
-.ach-item.locked   { background: rgba(0,0,0,0.04); opacity: 0.55; }
+.ach-item.locked   { background: var(--color-border, #dee2e6); opacity: 0.55; }
 
 .ach-item-emoji {
   font-size: 1.6rem;
@@ -844,18 +847,17 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.ach-item.locked .ach-item-title { color: #aaa; }
+.ach-item.locked .ach-item-title { color: var(--color-muted, #868e96); }
 .ach-item-desc {
   font-size: 0.75rem;
-  color: #999;
+  color: var(--color-muted, #868e96);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.ach-item.unlocked .ach-item-desc { color: var(--color-muted, #868e96); }
 
-[data-theme="dark"] .ach-item.unlocked { background: rgba(226,123,53,0.12); }
-[data-theme="dark"] .ach-item.locked   { background: rgba(255,255,255,0.04); }
+[data-theme="dark"] .ach-item.unlocked { background: rgba(226,123,53,0.15); }
+[data-theme="dark"] .ach-item.locked   { background: rgba(255,255,255,0.06); }
 
 /* Mobile achievement badge in top nav */
 .ach-progress-mob {
