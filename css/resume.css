@@ -867,3 +867,70 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
   background: rgba(255,255,255,0.15);
   border-color: rgba(255,255,255,0.25);
 }
+
+/* Achievement unlock hint popup */
+.ach-hint-popup {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+  border-radius: inherit;
+}
+.ach-hint-popup.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.ach-hint-card {
+  background: var(--color-bg, #fff);
+  border: 1px solid var(--color-border, #dee2e6);
+  border-radius: 16px;
+  padding: 1.25rem 1rem 1.25rem 1.1rem;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  position: relative;
+}
+.ach-hint-emoji {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.ach-hint-body { flex: 1; min-width: 0; padding-right: 1.2rem; }
+.ach-hint-title {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--color-heading, #1F2834);
+  margin-bottom: 0.35rem;
+}
+.ach-hint-text {
+  font-size: 0.83rem;
+  color: var(--color-muted, #868e96);
+  line-height: 1.55;
+}
+.ach-hint-close {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  background: none;
+  border: none;
+  color: var(--color-muted, #868e96);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  line-height: 1;
+  transition: background 0.15s, color 0.15s;
+}
+.ach-hint-close:hover {
+  background: var(--color-border, #dee2e6);
+  color: var(--color-heading, #1F2834);
+}

@@ -2,22 +2,22 @@
   'use strict';
 
   var ACHIEVEMENTS = [
-    { id: 'welcome',    emoji: '👋', title: 'Welcome!',          desc: 'You found the portfolio'           },
-    { id: 'dark',       emoji: '🌙', title: 'Night Owl',         desc: 'Switched to dark mode'             },
-    { id: 'retro',      emoji: '📺', title: 'Retro Fan',         desc: 'Enabled CRT mode. Respect.'        },
-    { id: 'terminal',   emoji: '💻', title: 'Terminal Hacker',   desc: 'Opened the CLI'                    },
-    { id: 'cmd5',       emoji: '🎯', title: 'Command Master',    desc: 'Ran 5 terminal commands'           },
-    { id: 'experience', emoji: '📅', title: 'Career Curious',    desc: 'Checked out the work history'     },
-    { id: 'github',     emoji: '🔍', title: 'GitHub Stalker',    desc: 'Snooping through the repos'       },
-    { id: 'blog',       emoji: '📚', title: 'Blog Reader',       desc: 'Clicked on a blog post'           },
-    { id: 'awards',     emoji: '🏅', title: 'Trophy Hunter',     desc: 'Found the awards section'         },
-    { id: 'scrolled',   emoji: '🏆', title: 'Bottom Feeder',     desc: 'Scrolled all the way down!'       },
-    { id: 'email',      emoji: '📋', title: 'Copy Cat',          desc: 'Copied the email address'         },
-    { id: 'snake',      emoji: '🐍', title: 'Easter Egg Hunter', desc: 'Found the hidden snake game!'     },
-    { id: 'snake10',    emoji: '🎮', title: 'Snake Master',      desc: 'Scored 10+ in the snake game'    },
-    { id: 'matrix',     emoji: '🟩', title: 'Follow the White Rabbit', desc: 'Entered the Matrix'              },
-    { id: 'newspaper',  emoji: '📰', title: 'Extra! Extra!',           desc: 'Read all about it — Newspaper mode' },
-    { id: 'prfaq',      emoji: '📄', title: 'Working Backwards',       desc: 'Read the Amazon PR/FAQ'            },
+    { id: 'welcome',    emoji: '👋', title: 'Welcome!',               desc: 'You found the portfolio',              hint: 'Just open the portfolio — this one unlocks automatically!'           },
+    { id: 'dark',       emoji: '🌙', title: 'Night Owl',              desc: 'Switched to dark mode',                hint: 'Open the mode switcher and select Dark.'                             },
+    { id: 'retro',      emoji: '📺', title: 'Retro Fan',              desc: 'Enabled CRT mode. Respect.',           hint: 'Open the mode switcher and select Retro / CRT.'                      },
+    { id: 'terminal',   emoji: '💻', title: 'Terminal Hacker',        desc: 'Opened the CLI',                       hint: 'Open the mode switcher and select Terminal (>_).'                    },
+    { id: 'cmd5',       emoji: '🎯', title: 'Command Master',         desc: 'Ran 5 terminal commands',              hint: 'Open Terminal mode and run any 5 commands — try: help, skills, whoami.' },
+    { id: 'experience', emoji: '📅', title: 'Career Curious',         desc: 'Checked out the work history',         hint: 'Scroll down to the Experience section.'                              },
+    { id: 'github',     emoji: '🔍', title: 'GitHub Stalker',         desc: 'Snooping through the repos',           hint: 'Scroll down to the GitHub section.'                                  },
+    { id: 'blog',       emoji: '📚', title: 'Blog Reader',            desc: 'Clicked on a blog post',               hint: 'Click on any blog post link in the Blogs section.'                   },
+    { id: 'awards',     emoji: '🏅', title: 'Trophy Hunter',          desc: 'Found the awards section',             hint: 'Scroll all the way down to the Awards section.'                      },
+    { id: 'scrolled',   emoji: '🏆', title: 'Bottom Feeder',          desc: 'Scrolled all the way down!',           hint: 'Keep scrolling until you hit the very bottom of the page.'           },
+    { id: 'email',      emoji: '📋', title: 'Copy Cat',               desc: 'Copied the email address',             hint: 'Find the email in the About section and click the copy button.'      },
+    { id: 'snake',      emoji: '🐍', title: 'Easter Egg Hunter',      desc: 'Found the hidden snake game!',         hint: 'Open the mode switcher and select Snake 🐍.'                         },
+    { id: 'snake10',    emoji: '🎮', title: 'Snake Master',           desc: 'Scored 10+ in the snake game',         hint: 'Play Snake mode and score at least 10 points. Good luck!'            },
+    { id: 'matrix',     emoji: '🟩', title: 'Follow the White Rabbit',desc: 'Entered the Matrix',                   hint: 'Open the mode switcher and select Matrix (01).'                      },
+    { id: 'newspaper',  emoji: '📰', title: 'Extra! Extra!',          desc: 'Read all about it — Newspaper mode',   hint: 'Open the mode switcher and select Newspaper.'                        },
+    { id: 'prfaq',      emoji: '📄', title: 'Working Backwards',      desc: 'Read the Amazon PR/FAQ',               hint: 'Open the mode switcher and select PR / FAQ (📄).'                   },
   ];
 
   var unlocked = [];
@@ -87,6 +87,38 @@
     });
   }
 
+  var hintPopup = null;
+
+  function ensureHintPopup() {
+    if (hintPopup) return;
+    hintPopup = document.createElement('div');
+    hintPopup.className = 'ach-hint-popup';
+    hintPopup.innerHTML =
+      '<div class="ach-hint-card">' +
+        '<div class="ach-hint-emoji"></div>' +
+        '<div class="ach-hint-body">' +
+          '<div class="ach-hint-title"></div>' +
+          '<div class="ach-hint-text"></div>' +
+        '</div>' +
+        '<button class="ach-hint-close" aria-label="Close">✕</button>' +
+      '</div>';
+    hintPopup.querySelector('.ach-hint-close').addEventListener('click', hideHint);
+    hintPopup.addEventListener('click', function (e) { if (e.target === hintPopup) hideHint(); });
+    document.getElementById('ach-panel').appendChild(hintPopup);
+  }
+
+  function showHint(ach) {
+    ensureHintPopup();
+    hintPopup.querySelector('.ach-hint-emoji').textContent = ach.emoji;
+    hintPopup.querySelector('.ach-hint-title').textContent = ach.title;
+    hintPopup.querySelector('.ach-hint-text').textContent  = ach.hint;
+    hintPopup.classList.add('open');
+  }
+
+  function hideHint() {
+    if (hintPopup) hintPopup.classList.remove('open');
+  }
+
   function renderPanel() {
     var grid = document.getElementById('ach-grid');
     var sub  = document.getElementById('ach-panel-sub');
@@ -101,8 +133,12 @@
         '<div class="ach-item-emoji">' + (done ? a.emoji : '🔒') + '</div>' +
         '<div class="ach-item-body">' +
           '<div class="ach-item-title">' + a.title + '</div>' +
-          '<div class="ach-item-desc">'  + (done ? a.desc  : 'Keep exploring to unlock') + '</div>' +
+          '<div class="ach-item-desc">'  + (done ? a.desc : 'Tap for a hint…') + '</div>' +
         '</div>';
+      if (!done) {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', (function (ach) { return function () { showHint(ach); }; })(a));
+      }
       grid.appendChild(item);
     });
   }
