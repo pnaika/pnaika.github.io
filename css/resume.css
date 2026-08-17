@@ -870,9 +870,9 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
 
 /* Achievement unlock hint popup */
 .ach-hint-popup {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -880,8 +880,7 @@ html[data-theme="retro"] .ach-title { color: #00ff41; text-shadow: 0 0 6px rgba(
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s;
-  z-index: 10;
-  border-radius: inherit;
+  z-index: 10000;
 }
 .ach-hint-popup.open {
   opacity: 1;

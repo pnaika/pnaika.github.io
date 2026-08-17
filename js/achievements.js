@@ -104,7 +104,7 @@
       '</div>';
     hintPopup.querySelector('.ach-hint-close').addEventListener('click', hideHint);
     hintPopup.addEventListener('click', function (e) { if (e.target === hintPopup) hideHint(); });
-    document.getElementById('ach-panel').appendChild(hintPopup);
+    document.body.appendChild(hintPopup);
   }
 
   function showHint(ach) {
