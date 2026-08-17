@@ -80,8 +80,11 @@
   // ─── Progress badge & panel ────────────────────────────────────────────────
 
   function updateBadge() {
-    var el = document.getElementById('ach-count');
-    if (el) el.textContent = unlocked.length;
+    var n = unlocked.length;
+    ['ach-count', 'ach-count-mob'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = n;
+    });
   }
 
   function renderPanel() {
@@ -104,13 +107,17 @@
     });
   }
 
+  function openPanel() {
+    renderPanel();
+    document.getElementById('ach-panel').classList.add('open');
+    document.getElementById('ach-panel-overlay').classList.add('open');
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     updateBadge();
-    var btn = document.getElementById('ach-progress-btn');
-    if (btn) btn.addEventListener('click', function () {
-      renderPanel();
-      document.getElementById('ach-panel').classList.add('open');
-      document.getElementById('ach-panel-overlay').classList.add('open');
+    ['ach-progress-btn', 'ach-progress-btn-mob'].forEach(function (id) {
+      var btn = document.getElementById(id);
+      if (btn) btn.addEventListener('click', openPanel);
     });
   });
 
