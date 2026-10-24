@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who's Coming — Boss Baby 2 Baby Shower</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Libre+Baskerville:ital@0;1&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-deep:#12233F; --navy:#1B3156; --navy-mid:#2E4A75;
+    --gold:#C9A24B; --gold-soft:rgba(201,162,75,.55);
+    --cream:#F4EFE4; --cream-dim:#D8CBAF; --cream-dimmer:#B9AF97;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Montserrat',sans-serif; color:var(--cream);
+    background: radial-gradient(ellipse 1200px 800px at 50% -10%, var(--navy-mid) 0%, var(--navy) 45%, var(--navy-deep) 100%) fixed;
+    min-height:100vh;
+  }
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 2px, transparent 2px 38px);
+  }
+  .wrap { position:relative; max-width:680px; margin:0 auto; padding:40px 20px 80px; }
+  .card {
+    border:3px solid var(--gold); border-radius:8px; padding:40px 28px 48px;
+    position:relative; background:rgba(255,255,255,.025);
+  }
+  .card::after { content:''; position:absolute; inset:8px; border:1px solid var(--gold-soft); border-radius:5px; pointer-events:none; }
+  .inner { position:relative; z-index:1; text-align:center; }
+
+  .back { text-align:left; margin-bottom:18px; }
+  .back a { color:var(--gold); text-decoration:none; font-size:13px; letter-spacing:2px; font-weight:700; text-transform:uppercase; }
+  .back a:hover { text-decoration:underline; }
+
+  .memo {
+    display:inline-block; font-size:13px; letter-spacing:5px; font-weight:700;
+    color:var(--gold); border:2px solid var(--gold); padding:8px 18px; border-radius:4px;
+    text-transform:uppercase;
+  }
+  h1 {
+    font-family:'Archivo Black',sans-serif; font-size:clamp(30px,7vw,44px);
+    margin-top:20px; letter-spacing:2px; text-shadow:0 4px 0 #0C1830; text-transform:uppercase;
+  }
+  h1 .accent { color:var(--gold); }
+  .tag { font-family:'Libre Baskerville',serif; font-style:italic; font-size:16px; color:var(--cream-dim); margin-top:10px; }
+
+  .stats { display:flex; justify-content:center; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .stat {
+    background:rgba(255,255,255,.06); border:1.5px solid var(--gold-soft); border-radius:10px;
+    padding:16px 24px; text-align:center; min-width:130px;
+  }
+  .stat .num { font-family:'Archivo Black',sans-serif; font-size:34px; color:var(--gold); }
+  .stat .lbl { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cream-dim); margin-top:4px; font-weight:700; }
+
+  .guestlist { margin-top:30px; display:flex; flex-direction:column; gap:9px; text-align:left; }
+  .guest {
+    display:flex; align-items:center; gap:13px;
+    background:rgba(255,255,255,.045); border:1px solid rgba(201,162,75,.3); border-radius:8px;
+    padding:13px 17px;
+  }
+  .guest .badge {
+    width:36px; height:36px; border-radius:50%; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:16px;
+  }
+  .guest.yes .badge { background:rgba(62,124,79,.3); color:#9FD4AC; border:1.5px solid #3E7C4F; }
+  .guest.maybe .badge { background:rgba(201,162,75,.2); color:var(--gold); border:1.5px solid var(--gold-soft); }
+  .guest .gname { font-weight:700; font-size:15.5px; }
+  .guest .gmeta { margin-left:auto; font-size:12.5px; color:var(--cream-dimmer); white-space:nowrap; }
+
+  .empty { color:var(--cream-dimmer); font-style:italic; font-size:14.5px; margin-top:26px; }
+
+  .cta { margin-top:36px; }
+  .cta a {
+    display:inline-block; padding:14px 34px; border-radius:8px; text-decoration:none;
+    background:var(--gold); color:var(--navy-deep);
+    font-family:'Archivo Black',sans-serif; font-size:14px; letter-spacing:3px; text-transform:uppercase;
+    transition:transform .1s, box-shadow .15s;
+  }
+  .cta a:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(201,162,75,.35); }
+
+  .footer { text-align:center; margin-top:40px; font-size:11px; letter-spacing:3px; color:var(--gold); font-weight:600; text-transform:uppercase; opacity:.8; }
+
+  .mock-banner {
+    position:fixed; bottom:0; left:0; right:0; z-index:9;
+    background:#B03A2E; color:#fff; text-align:center; font-size:12px; padding:7px; letter-spacing:1px;
+  }
+
+  /* ---- themed loader ---- */
+  #loader {
+    position:fixed; inset:0; z-index:100; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:18px;
+    background: radial-gradient(ellipse 1200px 800px at 50% -10%, var(--navy-mid) 0%, var(--navy) 45%, var(--navy-deep) 100%);
+    transition:opacity .45s ease; opacity:1;
+  }
+  #loader.hide { opacity:0; pointer-events:none; }
+  #loader .crown-spin svg { width:64px; height:auto; animation: crownBob 1.2s ease-in-out infinite; filter:drop-shadow(0 4px 10px rgba(201,162,75,.35)); }
+  @keyframes crownBob { 0%,100% { transform:translateY(0) rotate(-4deg); } 50% { transform:translateY(-10px) rotate(4deg); } }
+  #loader .ltitle { font-family:'Archivo Black',sans-serif; font-size:20px; letter-spacing:4px; color:var(--cream); text-transform:uppercase; }
+  #loader .ltitle span { color:var(--gold); }
+  #loader .lsub { font-family:'Libre Baskerville',serif; font-style:italic; font-size:14px; color:var(--cream-dim); }
+  #loader .dots::after { content:''; animation: dots 1.4s steps(4,end) infinite; }
+  @keyframes dots { 0% {content:''} 25% {content:'.'} 50% {content:'..'} 75% {content:'...'} }
+</style>
+</head>
+<body>
+<div id="loader">
+  <div class="crown-spin"><svg viewBox="0 0 60 38" fill="#C9A24B"><path d="M4 32 L1 10 L15 20 L30 2 L45 20 L59 10 L56 32 Z"/><rect x="4" y="34" width="52" height="4" rx="2"/></svg></div>
+  <div class="ltitle">COMPANY <span>ROSTER</span></div>
+  <div class="lsub dots">pulling the personnel files</div>
+</div>
+<div class="wrap">
+  <div class="card"><div class="inner">
+    <div class="back"><a href="index.html">← back to invite</a></div>
+    <div class="memo">Internal Directory</div>
+    <h1>Company <span class="accent">Roster</span></h1>
+    <div class="tag">who's coming to the shower (so far)</div>
+
+    <div class="stats">
+      <div class="stat"><div class="num" id="statFamilies">0</div><div class="lbl">Families</div></div>
+      <div class="stat"><div class="num" id="statAdults">0</div><div class="lbl">Adults</div></div>
+      <div class="stat"><div class="num" id="statKids">0</div><div class="lbl">Kids</div></div>
+    </div>
+
+    <div class="guestlist" id="guestList"></div>
+    <div class="empty" id="boardEmpty" style="display:none">No RSVPs filed yet — be the first!</div>
+
+    <div class="cta"><a href="index.html#rsvpSection">File Your RSVP →</a></div>
+
+    <div class="footer">suits required • pacifiers provided • see you in november</div>
+  </div></div>
+</div>
+
+<div class="mock-banner" style="display:none">⚠ DEMO MODE</div>
+
+<script>
+/* Supabase (live): roster reads the public_roster view — names + counts only. */
+const SB_URL = 'https://ykaojudohdpvkhhvyszv.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrYW9qdWRvaGRwdmtoaHZ5c3p2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3ODI4NzksImV4cCI6MjEwODM1ODg3OX0.LqxKawmtjqxIky36y3I5rKqCM-gAHtSrA2SdCTqu-tI';
+async function sbFetch(path, opts = {}) {
+  const res = await fetch(`${SB_URL}/rest/v1/${path}`, {
+    ...opts,
+    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`, 'Content-Type': 'application/json', ...(opts.headers || {}) }
+  });
+  if (!res.ok) throw new Error(`supabase ${res.status}`);
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
+const backend = {
+  async getRoster() { return (await sbFetch('public_roster?select=*')) || []; }
+};
+const $ = id => document.getElementById(id);
+function hideLoader() {
+  const l = document.getElementById('loader');
+  if (l) { l.classList.add('hide'); setTimeout(() => l.remove(), 500); }
+}
+/* safety net: never trap users on the loader */
+setTimeout(hideLoader, 9000);
+
+(async () => {
+  /* honor admin visibility toggle (from server config) */
+  let rosterHidden = false;
+  try {
+    const rows = await sbFetch('site_config?id=eq.1&select=config');
+    rosterHidden = rows && rows[0] && rows[0].config && rows[0].config.show_roster === false;
+  } catch {}
+  if (rosterHidden) {
+    $('guestList').style.display = 'none';
+    document.querySelector('.stats').style.display = 'none';
+    const e = $('boardEmpty');
+    e.textContent = 'The guest list is under wraps for now. Check back later!';
+    e.style.display = 'block';
+    hideLoader();
+    return;
+  }
+  let roster = [];
+  try { roster = await backend.getRoster(); }
+  catch {
+    document.querySelector('.stats').style.display = 'none';
+    const e = $('boardEmpty');
+    e.textContent = 'Something didn\u2019t work loading the roster. Please contact or leave a message to Prashanth / Deepti.';
+    e.style.display = 'block';
+    hideLoader();
+    return;
+  }
+  const list = $('guestList');
+  let adults = 0, kids = 0, families = 0;
+  roster.forEach(g => {
+    if (g.attending === 'yes') { adults += g.adults; kids += g.kids; families++; }
+    const row = document.createElement('div');
+    row.className = 'guest ' + g.attending;
+    const people = `${g.adults} ${g.adults>1?'adults':'adult'}` + (g.kids ? ` + ${g.kids} kid${g.kids>1?'s':''}` : '');
+    row.innerHTML = `
+      <div class="badge">${g.attending === 'yes' ? '✓' : '~'}</div>
+      <div class="gname"></div>
+      <div class="gmeta">${g.attending === 'maybe' ? 'maybe · ' : ''}${people}</div>`;
+    row.querySelector('.gname').textContent = g.name;
+    list.appendChild(row);
+  });
+  $('statFamilies').textContent = families;
+  $('statAdults').textContent = adults;
+  $('statKids').textContent = kids;
+  $('boardEmpty').style.display = roster.length ? 'none' : 'block';
+  hideLoader();
+})();
+</script>
+</body>
+</html>

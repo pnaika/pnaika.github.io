@@ -2,4 +2,6 @@
 .git/*
 .idea/
 .idea/*
+.claude/
+.code-graph/
 /node_modules

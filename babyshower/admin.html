@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Boss Baby 2 Baby Shower</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-deep:#12233F; --navy:#1B3156; --navy-mid:#2E4A75;
+    --gold:#C9A24B; --gold-soft:rgba(201,162,75,.55);
+    --cream:#F4EFE4; --cream-dim:#D8CBAF; --cream-dimmer:#B9AF97;
+    --red:#B03A2E; --green:#3E7C4F;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Montserrat',sans-serif; color:var(--cream);
+    background: radial-gradient(ellipse 1200px 800px at 50% -10%, var(--navy-mid) 0%, var(--navy) 45%, var(--navy-deep) 100%) fixed;
+    min-height:100vh;
+  }
+  .wrap { max-width:860px; margin:0 auto; padding:34px 20px 90px; }
+
+  h1 { font-family:'Archivo Black',sans-serif; font-size:30px; letter-spacing:2px; text-transform:uppercase; }
+  h1 .accent { color:var(--gold); }
+  .sub { color:var(--cream-dimmer); font-size:13px; margin-top:6px; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  .topbar a { color:var(--gold); font-size:13px; text-decoration:none; font-weight:700; letter-spacing:1px; }
+
+  .panel {
+    margin-top:26px; border:2px solid var(--gold-soft); border-radius:10px;
+    background:rgba(255,255,255,.035); padding:24px;
+  }
+  .panel h2 {
+    font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--gold);
+    font-weight:800; margin-bottom:18px;
+  }
+  label { font-size:11px; letter-spacing:2px; font-weight:700; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:6px; }
+  input[type=text], input[type=email], input[type=password], input[type=url], select {
+    width:100%; padding:11px 12px; border-radius:7px; font-family:'Montserrat'; font-size:14px;
+    background:rgba(255,255,255,.07); border:1.5px solid var(--gold-soft); color:var(--cream); outline:none;
+  }
+  input:focus, select:focus { border-color:var(--gold); }
+  select option { background:var(--navy); }
+  .row { display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap; }
+  .row > div { flex:1; min-width:170px; }
+
+  button {
+    font-family:'Montserrat'; font-weight:800; letter-spacing:1.5px; font-size:12.5px; text-transform:uppercase;
+    border:none; border-radius:7px; cursor:pointer; padding:11px 20px; transition:all .12s;
+  }
+  .btn-gold { background:var(--gold); color:var(--navy-deep); }
+  .btn-gold:hover { box-shadow:0 4px 14px rgba(201,162,75,.4); }
+  .btn-ghost { background:transparent; color:var(--gold); border:1.5px solid var(--gold-soft); }
+  .btn-ghost:hover { border-color:var(--gold); }
+  .btn-danger { background:transparent; color:#E8A49C; border:1.5px solid rgba(176,58,46,.6); padding:7px 12px; font-size:11px; }
+  .btn-danger:hover { background:rgba(176,58,46,.25); }
+
+  .saved { display:inline-block; margin-left:12px; color:#9FD4AC; font-size:12.5px; opacity:0; transition:opacity .2s; }
+  .saved.show { opacity:1; }
+
+  /* toggle switches */
+  .tgl-row {
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:13px 4px; border-bottom:1px solid rgba(201,162,75,.18);
+  }
+  .tgl-row:last-of-type { border-bottom:none; }
+  .tgl-row .ttl { font-weight:700; font-size:14px; }
+  .tgl-row .desc { font-size:12px; color:var(--cream-dimmer); margin-top:3px; }
+  .switch { position:relative; width:52px; height:28px; flex:none; cursor:pointer; }
+  .switch input { opacity:0; width:0; height:0; }
+  .slider {
+    position:absolute; inset:0; border-radius:28px; transition:.2s;
+    background:rgba(255,255,255,.12); border:1.5px solid var(--gold-soft);
+  }
+  .slider::before {
+    content:''; position:absolute; width:20px; height:20px; border-radius:50%;
+    left:3px; top:2.5px; background:var(--cream-dim); transition:.2s;
+  }
+  .switch input:checked + .slider { background:var(--gold); border-color:var(--gold); }
+  .switch input:checked + .slider::before { transform:translateX(23px); background:var(--navy-deep); }
+
+  /* registry rows */
+  .reg-row { display:flex; gap:10px; margin-bottom:10px; align-items:center; }
+  .reg-row input { flex:1; }
+  .reg-row .icon-in { flex:0 0 64px; text-align:center; }
+
+  /* stats + table */
+  .statline { display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+  .chip {
+    background:rgba(255,255,255,.06); border:1.5px solid var(--gold-soft); border-radius:8px;
+    padding:10px 18px; font-size:13px;
+  }
+  .chip b { color:var(--gold); font-size:17px; }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; }
+  th {
+    text-align:left; font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:var(--gold);
+    padding:8px 10px; border-bottom:1.5px solid var(--gold-soft);
+  }
+  td { padding:10px; border-bottom:1px solid rgba(201,162,75,.18); vertical-align:top; }
+  td .note { color:var(--cream-dimmer); font-size:12px; font-style:italic; margin-top:3px; }
+  .pill { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:800; letter-spacing:1px; }
+  .pill.yes { background:rgba(62,124,79,.3); color:#9FD4AC; }
+  .pill.maybe { background:rgba(201,162,75,.25); color:var(--gold); }
+  .pill.no { background:rgba(176,58,46,.3); color:#E8A49C; }
+  .empty { color:var(--cream-dimmer); font-style:italic; padding:18px 10px; }
+
+  /* login gate */
+  #gate { max-width:420px; margin:12vh auto 0; text-align:center; }
+  #gate .panel { padding:34px 28px; }
+  #gate input { text-align:center; font-size:18px; letter-spacing:4px; }
+  #gate .err { color:#E8A49C; font-size:13px; margin-top:10px; display:none; }
+  #app { display:none; }
+
+  .mock-banner {
+    position:fixed; bottom:0; left:0; right:0; z-index:9;
+    background:var(--red); color:#fff; text-align:center; font-size:12px; padding:7px; letter-spacing:1px;
+  }
+  .tablewrap { overflow-x:auto; }
+</style>
+</head>
+<body>
+
+<!-- passcode gate -->
+<div id="gate">
+  <div class="panel">
+    <h1 style="font-size:22px">Admin <span class="accent">Access</span></h1>
+    <p class="sub" style="margin:10px 0 20px">Management personnel only</p>
+    <input type="password" id="pass" placeholder="passcode" autocomplete="off">
+    <div class="err" id="passErr">Incorrect passcode.</div>
+    <div style="margin-top:18px"><button class="btn-gold" id="loginBtn">Enter →</button></div>
+  </div>
+</div>
+
+<!-- admin app -->
+<div id="app">
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <h1>Shower <span class="accent">Admin</span></h1>
+      <div class="sub">Boss Baby 2 — Nov 26 · manage event details, registry &amp; guest list</div>
+    </div>
+    <div>
+      <a href="index.html" target="_blank">view invite ↗</a> &nbsp;·&nbsp;
+      <a href="guests.html" target="_blank">view roster ↗</a> &nbsp;·&nbsp;
+      <a href="#" id="logoutBtn">log out</a>
+    </div>
+  </div>
+
+  <!-- Event details -->
+  <div class="panel">
+    <h2>Event Details</h2>
+    <div class="row">
+      <div>
+        <label>Time text</label>
+        <input type="text" id="cfgTime" placeholder="5:30 PM onwards">
+      </div>
+      <div>
+        <label>Venue address</label>
+        <input type="text" id="cfgVenue" placeholder="street, city, state zip">
+      </div>
+    </div>
+    <button class="btn-gold" id="saveCfg">Save Details</button><span class="saved" id="cfgSaved">✓ saved</span>
+  </div>
+
+  <!-- Visibility settings -->
+  <div class="panel">
+    <h2>Visibility — what guests can see</h2>
+    <div class="tgl-row">
+      <div><div class="ttl">🎁 Gift Registry</div><div class="desc">registry section + links on the invite page</div></div>
+      <label class="switch"><input type="checkbox" id="tglRegistry"><span class="slider"></span></label>
+    </div>
+    <div class="tgl-row">
+      <div><div class="ttl">👥 Who's Coming roster</div><div class="desc">public guest list page + the button linking to it</div></div>
+      <label class="switch"><input type="checkbox" id="tglRoster"><span class="slider"></span></label>
+    </div>
+    <div class="tgl-row">
+      <div><div class="ttl">👶 Character avatars</div><div class="desc">Rishaan &amp; Boss Baby pictures on the role cards</div></div>
+      <label class="switch"><input type="checkbox" id="tglChars"><span class="slider"></span></label>
+    </div>
+    <div class="tgl-row">
+      <div><div class="ttl">🎬 Intro slam animation</div><div class="desc">the title slam when the invite first opens</div></div>
+      <label class="switch"><input type="checkbox" id="tglIntro"><span class="slider"></span></label>
+    </div>
+    <div class="tgl-row">
+      <div><div class="ttl">▶ Replay button</div><div class="desc">the floating "replay intro" pill (auto-hidden if intro is off)</div></div>
+      <label class="switch"><input type="checkbox" id="tglReplay"><span class="slider"></span></label>
+    </div>
+    <div class="tgl-row">
+      <div><div class="ttl">⏱ Loading screen hold</div><div class="desc">seconds the "convening the board" screen stays before the title slam (0-10)</div></div>
+      <input type="text" id="cfgLoaderSec" style="width:70px;flex:none;text-align:center" placeholder="3.5">
+    </div>
+    <div style="margin-top:16px"><span class="saved" id="visSaved">✓ saved</span><span style="font-size:12px;color:var(--cream-dimmer)">toggles save automatically; refresh the invite page to see the effect</span></div>
+  </div>
+
+  <!-- Registry -->
+  <div class="panel">
+    <h2>Gift Registry Links</h2>
+    <div id="regRows"></div>
+    <button class="btn-ghost" id="addReg">+ add registry link</button>
+    <div style="margin-top:16px"><button class="btn-gold" id="saveReg">Save Registry</button><span class="saved" id="regSaved">✓ saved</span></div>
+  </div>
+
+  <!-- Guest list -->
+  <div class="panel">
+    <h2>Guest List (full — admin only)</h2>
+    <div class="statline" id="statline"></div>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Family</th><th>Email</th><th>Status</th><th>Adults</th><th>Kids</th><th></th></tr></thead>
+      <tbody id="guestRows"></tbody>
+    </table>
+    </div>
+    <div class="empty" id="noGuests" style="display:none">No RSVPs yet.</div>
+
+    <h2 style="margin-top:28px">Add Guest Manually</h2>
+    <div class="row">
+      <div><label>Family / Name</label><input type="text" id="addName"></div>
+      <div><label>Email</label><input type="email" id="addEmail"></div>
+    </div>
+    <div class="row">
+      <div><label>Status</label>
+        <select id="addStatus">
+          <option value="yes">Yes</option>
+          <option value="maybe">Maybe</option>
+          <option value="no">Can't come</option>
+        </select>
+      </div>
+      <div><label>Adults</label><input type="text" id="addAdults" value="1"></div>
+      <div><label>Kids</label><input type="text" id="addKids" value="0"></div>
+    </div>
+    <button class="btn-gold" id="addGuestBtn">Add Guest</button><span class="saved" id="guestSaved">✓ added</span>
+    <div style="margin-top:16px"><button class="btn-ghost" id="exportBtn">⬇ export CSV</button></div>
+  </div>
+</div>
+</div>
+
+<div class="mock-banner" style="display:none">⚠ DEMO MODE</div>
+
+<script>
+/* ============================================================
+   SUPABASE ADMIN — passcode auth. The passcode is verified
+   SERVER-SIDE by security-definer functions (admin_list_rsvps,
+   admin_delete_rsvp, admin_save_config); without a valid code
+   the database returns nothing. The anon key alone cannot read
+   the rsvps table (RLS).
+   ============================================================ */
+const SB_URL = 'https://ykaojudohdpvkhhvyszv.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrYW9qdWRvaGRwdmtoaHZ5c3p2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3ODI4NzksImV4cCI6MjEwODM1ODg3OX0.LqxKawmtjqxIky36y3I5rKqCM-gAHtSrA2SdCTqu-tI';
+const CODE_KEY = 'bb2_admin_code';
+
+function adminCode() { return sessionStorage.getItem(CODE_KEY) || ''; }
+
+async function sbFetch(path, opts = {}) {
+  const res = await fetch(`${SB_URL}/rest/v1/${path}`, {
+    ...opts,
+    headers: {
+      'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`,
+      'Content-Type': 'application/json', ...(opts.headers || {})
+    }
+  });
+  if (!res.ok) throw new Error(`supabase ${res.status}: ${await res.text()}`);
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
+
+const $ = id => document.getElementById(id);
+function flash(id) { const el = $(id); el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1600); }
+
+/* ---- gate ---- */
+async function tryLogin() {
+  const code = $('pass').value.trim();
+  $('passErr').style.display = 'none';
+  if (!code) { $('passErr').style.display = 'block'; return; }
+  const btn = $('loginBtn'); btn.disabled = true; btn.textContent = 'Checking\u2026';
+  try {
+    /* server-side validation: throws on a bad code */
+    await sbFetch('rpc/admin_list_rsvps', { method: 'POST', body: JSON.stringify({ p_code: code }) });
+    sessionStorage.setItem(CODE_KEY, code);
+    $('gate').style.display = 'none'; $('app').style.display = 'block';
+    boot();
+  } catch {
+    $('passErr').style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enter \u2192';
+  }
+}
+$('loginBtn').addEventListener('click', tryLogin);
+$('pass').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+$('logoutBtn').addEventListener('click', e => { e.preventDefault(); sessionStorage.removeItem(CODE_KEY); location.reload(); });
+
+(async () => {
+  if (!adminCode()) return;
+  try {
+    await sbFetch('rpc/admin_list_rsvps', { method: 'POST', body: JSON.stringify({ p_code: adminCode() }) });
+    $('gate').style.display = 'none'; $('app').style.display = 'block';
+    boot();
+  } catch { sessionStorage.removeItem(CODE_KEY); }
+})();
+
+/* ---- config store (server-side) ---- */
+const DEF_CONFIG = {
+  time_text: '5:30 PM onwards',
+  venue: '22492 E Duncan St, Queen Creek, AZ 85142',
+  registry: [
+    { label: 'Amazon Registry', icon: '🎁', url: 'https://www.amazon.com/baby-reg/' },
+    { label: 'Target Registry', icon: '🎯', url: 'https://www.target.com/gift-registry/' }
+  ],
+  show_registry: true, show_roster: true, show_characters: true, show_intro: true, show_replay: true,
+  loader_seconds: 3.5
+};
+let CFG = { ...DEF_CONFIG };
+
+async function loadConfig() {
+  const rows = await sbFetch('site_config?id=eq.1&select=config');
+  CFG = { ...DEF_CONFIG, ...((rows && rows[0] && rows[0].config) || {}) };
+  return CFG;
+}
+async function saveConfig() {
+  await sbFetch('rpc/admin_save_config', {
+    method: 'POST',
+    body: JSON.stringify({ p_code: adminCode(), p_config: CFG })
+  });
+}
+
+/* ---- app ---- */
+async function boot() {
+  const cfg = await loadConfig();
+  $('cfgTime').value = cfg.time_text;
+  $('cfgVenue').value = cfg.venue;
+  renderRegRows(cfg.registry);
+  renderGuests();
+  $('tglRegistry').checked = cfg.show_registry;
+  $('tglRoster').checked = cfg.show_roster;
+  $('tglChars').checked = cfg.show_characters;
+  $('tglIntro').checked = cfg.show_intro;
+  $('tglReplay').checked = cfg.show_replay;
+  $('cfgLoaderSec').value = cfg.loader_seconds ?? 3.5;
+}
+
+/* loader seconds auto-saves on change */
+$('cfgLoaderSec').addEventListener('change', async () => {
+  const v = Math.max(0, Math.min(10, parseFloat($('cfgLoaderSec').value)));
+  if (isNaN(v)) { $('cfgLoaderSec').value = CFG.loader_seconds ?? 3.5; return; }
+  $('cfgLoaderSec').value = v;
+  CFG.loader_seconds = v;
+  await saveConfig(); flash('visSaved');
+});
+
+/* visibility toggles auto-save on change */
+[['tglRegistry','show_registry'],['tglRoster','show_roster'],['tglChars','show_characters'],['tglIntro','show_intro'],['tglReplay','show_replay']].forEach(([id,key]) => {
+  $(id).addEventListener('change', async () => {
+    CFG[key] = $(id).checked;
+    await saveConfig(); flash('visSaved');
+  });
+});
+
+$('saveCfg').addEventListener('click', async () => {
+  CFG.time_text = $('cfgTime').value.trim() || CFG.time_text;
+  CFG.venue = $('cfgVenue').value.trim() || CFG.venue;
+  await saveConfig(); flash('cfgSaved');
+});
+
+/* registry editor */
+function renderRegRows(regs) {
+  const box = $('regRows'); box.innerHTML = '';
+  regs.forEach((r, i) => {
+    const row = document.createElement('div');
+    row.className = 'reg-row';
+    row.innerHTML = `
+      <input type="text" class="icon-in" value="" placeholder="🎁" title="emoji icon">
+      <input type="text" class="label-in" value="" placeholder="Label (e.g., Amazon Registry)">
+      <input type="url" class="url-in" value="" placeholder="https://...">
+      <button class="btn-danger">✗</button>`;
+    row.querySelector('.icon-in').value = r.icon || '';
+    row.querySelector('.label-in').value = r.label || '';
+    row.querySelector('.url-in').value = r.url || '';
+    row.querySelector('.btn-danger').addEventListener('click', () => row.remove());
+    box.appendChild(row);
+  });
+}
+$('addReg').addEventListener('click', () => {
+  const cfgNow = collectRegs();
+  cfgNow.push({ icon:'', label:'', url:'' });
+  renderRegRows(cfgNow);
+});
+function collectRegs() {
+  return [...document.querySelectorAll('.reg-row')].map(row => ({
+    icon: row.querySelector('.icon-in').value.trim(),
+    label: row.querySelector('.label-in').value.trim(),
+    url: row.querySelector('.url-in').value.trim()
+  })).filter(r => r.label && r.url);
+}
+$('saveReg').addEventListener('click', async () => {
+  CFG.registry = collectRegs();
+  await saveConfig(); flash('regSaved');
+});
+
+/* guest table */
+async function renderGuests() {
+  $('noGuests').textContent = 'Loading guest list…';
+  $('noGuests').style.display = 'block';
+  let all = [];
+  try { all = (await sbFetch('rpc/admin_list_rsvps', { method: 'POST', body: JSON.stringify({ p_code: adminCode() }) })) || []; }
+  catch {
+    $('noGuests').textContent = 'Could not load the guest list. Refresh to retry.';
+    return;
+  }
+  $('noGuests').textContent = 'No RSVPs yet.';
+  const tbody = $('guestRows'); tbody.innerHTML = '';
+  let yesA = 0, yesK = 0, yesF = 0, maybeF = 0, noF = 0;
+  all.forEach(g => {
+    if (g.attending === 'yes') { yesA += +g.adults; yesK += +g.kids; yesF++; }
+    if (g.attending === 'maybe') maybeF++;
+    if (g.attending === 'no') noF++;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="c-name"></td><td class="c-email"></td>
+      <td><span class="pill ${g.attending}">${g.attending.toUpperCase()}</span></td>
+      <td>${+g.adults}</td><td>${+g.kids}</td>
+      <td><button class="btn-danger">delete</button></td>`;
+    tr.querySelector('.c-name').innerHTML = `<b></b>` + (g.note ? `<div class="note"></div>` : '');
+    tr.querySelector('.c-name b').textContent = g.name;
+    if (g.note) tr.querySelector('.c-name .note').textContent = '“' + g.note + '”';
+    tr.querySelector('.c-email').textContent = g.email;
+    tr.querySelector('.btn-danger').addEventListener('click', async () => {
+      if (!confirm(`Delete RSVP for "${g.name}"?`)) return;
+      await sbFetch('rpc/admin_delete_rsvp', { method: 'POST', body: JSON.stringify({ p_code: adminCode(), p_email: g.email }) });
+      renderGuests();
+    });
+    tbody.appendChild(tr);
+  });
+  $('noGuests').style.display = all.length ? 'none' : 'block';
+  $('statline').innerHTML = `
+    <div class="chip">Confirmed: <b>${yesF}</b> families</div>
+    <div class="chip">Headcount: <b>${yesA + yesK}</b> (${yesA} adults + ${yesK} kids)</div>
+    <div class="chip">Maybe: <b>${maybeF}</b></div>
+    <div class="chip">Can't: <b>${noF}</b></div>`;
+}
+
+$('addGuestBtn').addEventListener('click', async () => {
+  const name = $('addName').value.trim(), email = $('addEmail').value.trim().toLowerCase();
+  if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Name + valid email required.'); return; }
+  await sbFetch('rpc/submit_rsvp', {
+    method: 'POST',
+    body: JSON.stringify({
+      p_email: email, p_name: name, p_attending: $('addStatus').value,
+      p_adults: Math.max(0, parseInt($('addAdults').value) || 0),
+      p_kids: Math.max(0, parseInt($('addKids').value) || 0),
+      p_note: '(added by admin)'
+    })
+  });
+  $('addName').value = ''; $('addEmail').value = ''; $('addAdults').value = '1'; $('addKids').value = '0';
+  flash('guestSaved'); renderGuests();
+});
+
+$('exportBtn').addEventListener('click', async () => {
+  const all = (await sbFetch('rpc/admin_list_rsvps', { method: 'POST', body: JSON.stringify({ p_code: adminCode() }) })) || [];
+  const esc = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const csv = ['name,email,attending,adults,kids,note,updated_at',
+    ...all.map(g => [g.name,g.email,g.attending,g.adults,g.kids,g.note,g.updated_at].map(esc).join(','))].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv' }));
+  a.download = 'babyshower-rsvps.csv'; a.click();
+});
+</script>
+</body>
+</html>
