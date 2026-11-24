@@ -160,6 +160,12 @@
     letter-spacing:3px; color:var(--gold); text-transform:uppercase;
   }
   .rsvp .tag { text-align:center; font-size:12.5px; color:var(--cream-dimmer); font-style:italic; margin-top:6px; }
+  .closed-note {
+    margin:18px auto 0; max-width:460px; text-align:center; font-size:13.5px; line-height:1.55;
+    background:rgba(201,162,75,.14); border:1.5px solid var(--gold-soft); border-radius:10px;
+    padding:14px 16px; color:var(--cream-dim);
+  }
+  .closed-note b { color:var(--gold); }
 
   form { margin-top:24px; display:flex; flex-direction:column; gap:18px; }
   label { font-size:12px; letter-spacing:2px; font-weight:700; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:7px; }
@@ -475,26 +481,32 @@ function replayIntro() {
 
     <!-- RSVP -->
     <div class="rsvp" id="rsvpSection">
-      <h2>Submit Your RSVP</h2>
-      <div class="tag">HR requires a response from all departments</div>
+      <h2>Update Your RSVP</h2>
+      <div class="tag">New RSVPs are now closed — updates only for guests who already RSVP'd</div>
 
-      <!-- new vs already-RSVP'd switch -->
-      <div class="mode-switch">
-        <button type="button" class="mode-btn active" id="modeNew">New RSVP</button>
-        <button type="button" class="mode-btn" id="modeUpdate">Already RSVP'd? Update it</button>
+      <div class="closed-note" id="closedNote">
+        <b>New RSVPs are closed.</b><br>
+        Haven't RSVP'd yet? Please contact <b>Prashanth</b> directly.<br>
+        Already RSVP'd? Enter the email you used below to update your response.
+      </div>
+
+      <!-- updates only: new RSVPs are closed -->
+      <div class="mode-switch" style="display:none">
+        <button type="button" class="mode-btn" id="modeNew">New RSVP</button>
+        <button type="button" class="mode-btn active" id="modeUpdate">Already RSVP'd? Update it</button>
       </div>
 
       <!-- update lookup box (shown in update mode) -->
-      <div class="update-box" id="updateBox" style="display:none">
+      <div class="update-box" id="updateBox">
         <label for="lookupEmail">Enter the email you RSVP'd with</label>
         <div class="lookup-row">
           <input type="email" id="lookupEmail" placeholder="you@example.com">
           <button type="button" class="find-btn" id="findBtn">Find my RSVP</button>
         </div>
-        <div class="err" id="lookupErr">No RSVP found under that email. Double-check it, or file a new one.</div>
+        <div class="err" id="lookupErr">No RSVP found under that email. New RSVPs are closed — please contact Prashanth.</div>
       </div>
 
-      <form id="rsvpForm" novalidate>
+      <form id="rsvpForm" novalidate style="display:none">
         <div>
           <label for="email">Email *</label>
           <input type="email" id="email" placeholder="you@example.com" required>
@@ -536,7 +548,7 @@ function replayIntro() {
           <label for="note">Note for management <span style="opacity:.6;text-transform:none;letter-spacing:0">(optional)</span></label>
           <textarea id="note" rows="2" placeholder="Allergies, song requests, excuses..."></textarea>
         </div>
-        <button class="submit" id="submitBtn" type="submit">File RSVP →</button>
+        <button class="submit" id="submitBtn" type="submit">Update RSVP →</button>
         <div class="err" id="submitErr">Something went wrong. Please try again.</div>
       </form>
     </div>
@@ -747,16 +759,26 @@ form.addEventListener('submit', async e => {
     note: $('note').value.trim()
   };
 
+  /* New RSVPs are closed: verify a prior RSVP exists before allowing a submit. */
   const btn = $('submitBtn');
-  btn.disabled = true; btn.textContent = 'Filing…';
+  btn.disabled = true; btn.textContent = 'Checking…';
+  let prior = null;
+  try { prior = await backend.getByEmail(email.toLowerCase()); } catch { prior = null; }
+  if (!prior) {
+    $('submitErr').innerHTML = 'New RSVPs are now closed, and no RSVP was found under that email. Please contact <b>Prashanth</b> directly.';
+    $('submitErr').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Update RSVP →';
+    return;
+  }
+  btn.textContent = 'Updating…';
   try {
     await backend.submit(rsvp);
     showConfirm(rsvp);
   } catch {
-    $('submitErr').innerHTML = 'Hmm, something didn\u2019t work on our end. Please contact or leave a message to <b>Prashanth / Deepti</b> with your RSVP details and we\u2019ll file it for you!';
+    $('submitErr').innerHTML = 'Hmm, something didn\u2019t work on our end. Please contact <b>Prashanth</b> with your RSVP details and we\u2019ll update it for you!';
     $('submitErr').style.display = 'block';
   } finally {
-    btn.disabled = false; btn.textContent = 'File RSVP →';
+    btn.disabled = false; btn.textContent = 'Update RSVP →';
   }
 });
 
@@ -772,7 +794,7 @@ function showConfirm(rsvp) {
     maybe: `Noted, ${rsvp.name}. HR has marked you "pending review." Feel free to update your response when the quarterly outlook improves.`,
     no: `Your absence has been escalated to upper management (the baby). You will be missed, ${rsvp.name}!`
   };
-  $('stampText').textContent = { yes:'RSVP Filed ✓', maybe:'Pending Review ~', no:'Noted ✗' }[rsvp.attending];
+  $('stampText').textContent = { yes:'RSVP Updated ✓', maybe:'Pending Review ~', no:'Noted ✗' }[rsvp.attending];
   $('confirmMsg').textContent = msgs[rsvp.attending];
   window.scrollTo({ top: box.offsetTop - 100, behavior: 'smooth' });
 }
@@ -786,23 +808,18 @@ $('editBtn').addEventListener('click', () => {
 
 /* ---------- RSVP mode switch: new vs update ---------- */
 function setMode(update) {
-  $('modeNew').classList.toggle('active', !update);
-  $('modeUpdate').classList.toggle('active', update);
-  $('updateBox').style.display = update ? 'block' : 'none';
-  $('rsvpForm').style.display = update ? 'none' : 'block';
+  /* Updates only: show the lookup box and keep the form hidden until a prior RSVP is found. */
+  $('modeNew').classList.toggle('active', false);
+  $('modeUpdate').classList.toggle('active', true);
+  $('updateBox').style.display = 'block';
+  if (!$('email').value) $('rsvpForm').style.display = 'none';
   $('lookupErr').style.display = 'none';
-  if (update) $('lookupEmail').focus();
+  $('lookupEmail').focus();
 }
-$('modeNew').addEventListener('click', () => {
-  setMode(false);
-  /* fresh form for a new RSVP */
-  form.reset();
-  $('adults').textContent = 1; $('kids').textContent = 0;
-  $('lookupNote').style.display = 'none'; lastLookedUp = '';
-  const sb = form.querySelector('button[type=submit]');
-  if (sb) sb.textContent = 'File RSVP \u2192';
-});
+/* New RSVPs are closed — the New RSVP mode is disabled. Always stay in update mode. */
+$('modeNew').addEventListener('click', () => setMode(true));
 $('modeUpdate').addEventListener('click', () => setMode(true));
+setMode(true);
 
 async function findRsvp() {
   const email = $('lookupEmail').value.trim().toLowerCase();
@@ -813,10 +830,10 @@ async function findRsvp() {
   catch { failed = true; }
   btn.disabled = false; btn.textContent = 'Find my RSVP';
   if (failed) {
-    $('lookupErr').textContent = 'Something didn\u2019t work on our end. Please contact or leave a message to Prashanth / Deepti with your RSVP details.';
+    $('lookupErr').textContent = 'Something didn\u2019t work on our end. Please contact Prashanth with your RSVP details.';
     $('lookupErr').style.display = 'block'; return;
   }
-  if (!existing) { $('lookupErr').textContent = 'No RSVP found under that email. Double-check it, or file a new one.'; $('lookupErr').style.display = 'block'; return; }
+  if (!existing) { $('lookupErr').textContent = 'No RSVP found under that email. New RSVPs are closed — please contact Prashanth.'; $('lookupErr').style.display = 'block'; return; }
   /* found: load into form, reveal it in update state */
   $('lookupErr').style.display = 'none';
   $('email').value = existing.email; lastLookedUp = existing.email;
@@ -857,8 +874,9 @@ async function lookupEmail() {
     note.style.display = 'block';
     if (sb) sb.textContent = 'Update RSVP →';
   } else {
-    note.style.display = 'none';
-    if (sb) sb.textContent = 'File RSVP →';
+    note.innerHTML = '<b>New RSVPs are closed.</b> No RSVP was found under this email — please contact <b>Prashanth</b> directly.';
+    note.style.display = 'block';
+    if (sb) sb.textContent = 'Update RSVP →';
   }
 }
 $('email').addEventListener('blur', lookupEmail);
