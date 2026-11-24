@@ -147,6 +147,12 @@
 
   .hosts { margin-top:22px; font-family:'Libre Baskerville',serif; font-size:19px; }
 
+  /* ---- agenda ---- */
+  .agenda { margin-top:36px; }
+  .agenda h3 { font-family:'Archivo Black',sans-serif; font-size:18px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; margin-bottom:12px; }
+  .agenda .row { font-size:15px; line-height:1.9; color:var(--cream-dim); }
+  .agenda .row b { color:var(--cream); font-weight:700; }
+
   /* ---- RSVP form ---- */
   .rsvp { margin-top:46px; text-align:left; }
   .rsvp h2 {
@@ -452,11 +458,19 @@ function replayIntro() {
     <div class="when-where">
       <div class="date">NOVEMBER 26TH</div>
       <div class="detail">
-        <b id="cfgTime">5:30 PM onwards</b><br>
+        <b id="cfgTime">5:00 PM onwards</b><br>
         <span id="cfgVenue">22492 E Duncan St, Queen Creek, AZ 85142</span><br>
         <a id="cfgMaps" href="https://maps.google.com/?q=22492+E+Duncan+St,+Queen+Creek,+AZ+85142" target="_blank" rel="noopener">open in maps ↗</a>
       </div>
       <div class="hosts">Deepti, Prashanth &amp; Rishaan</div>
+    </div>
+
+    <div class="agenda">
+      <h3>The Agenda</h3>
+      <div class="row"><b>5:00 – 5:30 PM</b> · Meet &amp; Greet</div>
+      <div class="row"><b>5:30 – 6:45 PM</b> · Games</div>
+      <div class="row"><b>6:45 – 7:00 PM</b> · Cake Cutting</div>
+      <div class="row"><b>7:00 PM onwards</b> · Dinner</div>
     </div>
 
     <!-- RSVP -->
@@ -615,7 +629,7 @@ const backend = SupabaseBackend;
 
 /* ---------- Event config (editable via admin.html) ---------- */
 const DEFAULT_CONFIG = {
-  time_text: '5:30 PM onwards',
+  time_text: '5:00 PM onwards',
   venue: '22492 E Duncan St, Queen Creek, AZ 85142',
   registry: [
     { label: 'Amazon Registry', icon: '\uD83C\uDF81', url: 'https://www.amazon.com/baby-reg/' },
